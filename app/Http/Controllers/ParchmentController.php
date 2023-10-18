@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreParchmentRequest;
 use App\Http\Requests\UpdateParchmentRequest;
 use App\Models\Parchment;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class ParchmentController extends Controller
 {
@@ -13,7 +15,10 @@ class ParchmentController extends Controller
      */
     public function index()
     {
-        //
+        $parchments = Parchment::all();
+        return Inertia::render('Parchment/Index', [
+            'parchments' => $parchments,
+        ]);
     }
 
     /**
