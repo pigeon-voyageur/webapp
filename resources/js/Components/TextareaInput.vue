@@ -9,7 +9,7 @@ const emit = defineEmits<{
     'update:modelValue': string
 }>();
 
-const input = ref<HTMLInputElement | null>(null);
+const input = ref<HTMLTextAreaElement | null>(null);
 
 onMounted(() => {
     if (input.value?.hasAttribute('autofocus')) {
@@ -18,14 +18,14 @@ onMounted(() => {
 });
 
 function handleInput(e: InputEvent) {
-    emit('update:modelValue', (e.target as HTMLInputElement).value)
+    emit('update:modelValue', (e.target as HTMLTextAreaElement).value)
 }
 
 defineExpose({focus: () => input.value?.focus()});
 </script>
 
 <template>
-    <input
+    <textarea
         class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
         :value="modelValue"
         @input="handleInput"
