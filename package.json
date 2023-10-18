@@ -3,7 +3,9 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "setup": "./setup.sh",
+        "sail": "./vendor/bin/sail up -d"
     },
     "devDependencies": {
         "axios": "^1.1.2",
