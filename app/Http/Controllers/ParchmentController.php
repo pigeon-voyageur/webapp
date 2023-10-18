@@ -28,7 +28,7 @@ class ParchmentController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Parchments/Create');
     }
 
     /**
