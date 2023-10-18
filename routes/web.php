@@ -36,6 +36,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource(['parchments' => ParchmentController::class]);
+Route::resource('parchments', ParchmentController::class);
 
 require __DIR__ . '/auth.php';
