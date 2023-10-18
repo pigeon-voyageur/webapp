@@ -12,5 +12,6 @@ class Parchment extends Model
     public $fillable = [
         'title',
         'summary',
+        'video',
     ];
 }

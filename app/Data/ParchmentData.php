@@ -12,6 +12,7 @@ class ParchmentData extends Data
         public int $id,
         public string $title,
         public string $summary,
+        public ?string $video,
     ) {
     }
 }

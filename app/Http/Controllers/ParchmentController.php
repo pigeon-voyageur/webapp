@@ -39,6 +39,7 @@ class ParchmentController extends Controller
         Parchment::create([
             'title' => $request->input('title'),
             'summary' => $request->input('summary'),
+            'video' => $request->input('video'),
         ]);
 
         return Redirect::route('parchments.index');
@@ -72,6 +73,7 @@ class ParchmentController extends Controller
         $parchment->update([
             'title' => $request->input('title'),
             'summary' => $request->input('summary'),
+            'video' => $request->input('video'),
         ]);
 
         return Redirect::route('parchments.index');

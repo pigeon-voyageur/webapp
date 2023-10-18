@@ -17,8 +17,9 @@ class ParchmentFactory extends Factory
     public function definition(): array
     {
         return [
-            'title'=>fake()->sentence(),
-            'summary'=>fake()->paragraph()
+            'title' => fake()->sentence(),
+            'summary' => fake()->paragraph(),
+            'video' => 'https://www.youtube.com/watch?v=DlcGxjtcr3s',
         ];
     }
 }

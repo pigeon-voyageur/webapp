@@ -14,7 +14,8 @@ const props = defineProps<{
 
 const form = useForm({
     title: props.parchment?.title ?? '',
-    summary: props.parchment?.summary ?? ''
+    summary: props.parchment?.summary ?? '',
+    video: props.parchment?.video ?? ''
 });
 
 function handleSubmit() {
@@ -75,6 +76,19 @@ function handleSubmit() {
                 />
 
                 <InputError class="mt-2" :message="form.errors.summary" />
+            </div>
+
+            <div>
+                <InputLabel for="video" value="Vidéo" />
+
+                <TextInput
+                    id="video"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.video"
+                />
+
+                <InputError class="mt-2" :message="form.errors.video" />
             </div>
 
             <div class="flex items-center gap-4">

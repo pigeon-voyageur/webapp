@@ -24,6 +24,7 @@ class StoreParchmentRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'summary' => 'required|string',
+            'video' => 'nullable|string|max:255',
         ];
     }
 }
