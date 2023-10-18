@@ -3,6 +3,6 @@ export type ParchmentData = {
 id: number;
 title: string;
 summary: string;
-video: string;
+video: string | null;
 };
 }
