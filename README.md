@@ -1,5 +1,7 @@
 # Web app - Pigeon voyageur
 
+![Build on main](https://github.com/pigeon-voyageur/webapp/actions/workflows/build-on-main.yml/badge.svg)
+
 ## Before setup
 
 ### Dependencies
