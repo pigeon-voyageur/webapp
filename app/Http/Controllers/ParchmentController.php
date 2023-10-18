@@ -13,10 +13,11 @@ class ParchmentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): Response
     {
         $parchments = Parchment::all();
-        return Inertia::render('Parchment/Index', [
+        
+        return Inertia::render('Parchments/Index', [
             'parchments' => $parchments,
         ]);
     }
