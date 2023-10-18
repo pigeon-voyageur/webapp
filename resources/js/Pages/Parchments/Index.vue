@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import {Head} from '@inertiajs/vue3';
+import ParchmentData = App.Data.ParchmentData;
 
 defineProps<{
-    parchments: Array<Object>;
+    parchments: Array<ParchmentData>;
 }>();
 </script>
 
