@@ -6,7 +6,7 @@ defineProps<{
 }>();
 
 const emit = defineEmits<{
-    'update:modelValue': string
+    'update:modelValue': [value: string]
 }>();
 
 const input = ref<HTMLInputElement | null>(null);
@@ -17,7 +17,7 @@ onMounted(() => {
     }
 });
 
-function handleInput(e: InputEvent) {
+function handleInput(e: Event) {
     emit('update:modelValue', (e.target as HTMLInputElement).value)
 }
 

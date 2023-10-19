@@ -4,7 +4,7 @@
     "scripts": {
         "types": "./vendor/bin/sail artisan typescript:transform",
         "dev": "npm run types && vite",
-        "build": "npm run types && vue-tsc && vite build",
+        "build": "vue-tsc && vite build",
         "setup": "./setup.sh",
         "sail": "./vendor/bin/sail up -d"
     },
