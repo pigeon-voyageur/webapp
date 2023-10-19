@@ -13,6 +13,8 @@ class ParchmentData extends Data
         public string $title,
         public string $summary,
         public ?string $video,
+        public float $lat,
+        public float $lng,
     ) {
     }
 }

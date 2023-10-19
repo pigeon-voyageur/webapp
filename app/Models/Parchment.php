@@ -13,5 +13,7 @@ class Parchment extends Model
         'title',
         'summary',
         'video',
+        'lat',
+        'lng',
     ];
 }

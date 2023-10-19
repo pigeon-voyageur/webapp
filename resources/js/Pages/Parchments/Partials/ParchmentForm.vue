@@ -6,7 +6,14 @@ import TextInput from '@/Components/TextInput.vue';
 import {useForm} from "@inertiajs/vue3";
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextareaInput from "@/Components/TextareaInput.vue";
-
+import MapContainer from "@/Components/Map/MapContainer.vue";
+import {computed} from "vue";
+import {fromLonLat, toLonLat} from 'ol/proj'
+import NumberInput from "@/Components/NumberInput.vue";
+import {Feature} from "ol";
+import {Point} from "ol/geom";
+import {Coordinate} from "ol/coordinate";
+import {MapBrowserEvent} from "openlayers";
 
 const props = defineProps<{
     parchment?: ParchmentData;
@@ -15,8 +22,32 @@ const props = defineProps<{
 const form = useForm({
     title: props.parchment?.title ?? '',
     summary: props.parchment?.summary ?? '',
-    video: props.parchment?.video ?? ''
+    video: props.parchment?.video ?? '',
+    lat: props.parchment?.lat ?? 0,
+    lng: props.parchment?.lng ?? 0,
 });
+
+const features = computed(() => {
+    return [
+        new Feature({
+            geometry: new Point(fromLonLat([form.lng, form.lat])),
+        })
+    ]
+});
+
+const mapCenter = computed(() => {
+    if (!props.parchment) {
+        return [0, 0]
+    }
+
+    return fromLonLat([props.parchment.lng, props.parchment.lat])
+})
+
+function handleClickMap(e: MapBrowserEvent) {
+    const [newLng, newLat] = toLonLat(e.coordinate as Coordinate);
+    form.lng = newLng;
+    form.lat = newLat;
+}
 
 function handleSubmit() {
     if (props.parchment) {
@@ -90,6 +121,34 @@ function handleSubmit() {
 
                 <InputError class="mt-2" :message="form.errors.video" />
             </div>
+
+            <div>
+                <InputLabel for="lat" value="Latitude" />
+
+                <NumberInput
+                    id="lat"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.lat"
+                />
+
+                <InputError class="mt-2" :message="form.errors.lat" />
+            </div>
+
+            <div>
+                <InputLabel for="lng" value="Longitude" />
+
+                <NumberInput
+                    id="lng"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.lng"
+                />
+
+                <InputError class="mt-2" :message="form.errors.lng" />
+            </div>
+
+            <MapContainer class="w-full aspect-video" :features="features" :center="mapCenter" @clickMap="handleClickMap" />
 
             <div class="flex items-center gap-4">
                 <PrimaryButton :disabled="form.processing">{{ parchment ? 'Enregistrer' : 'Publier' }}</PrimaryButton>
