@@ -4,6 +4,8 @@ id: number;
 title: string;
 summary: string;
 video: string | null;
+lat: number;
+lng: number;
 };
 export type UserData = {
 id: number;

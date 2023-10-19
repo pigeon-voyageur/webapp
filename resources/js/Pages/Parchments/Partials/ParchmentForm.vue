@@ -15,7 +15,9 @@ const props = defineProps<{
 const form = useForm({
     title: props.parchment?.title ?? '',
     summary: props.parchment?.summary ?? '',
-    video: props.parchment?.video ?? ''
+    video: props.parchment?.video ?? '',
+    lat: props.parchment?.lat ?? 0,
+    lng: props.parchment?.lng ?? 0,
 });
 
 function handleSubmit() {
@@ -89,6 +91,32 @@ function handleSubmit() {
                 />
 
                 <InputError class="mt-2" :message="form.errors.video" />
+            </div>
+
+            <div>
+                <InputLabel for="lat" value="Latitude" />
+
+                <TextInput
+                    id="lat"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.lat"
+                />
+
+                <InputError class="mt-2" :message="form.errors.lat" />
+            </div>
+
+            <div>
+                <InputLabel for="lng" value="Longitude" />
+
+                <TextInput
+                    id="lng"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.lng"
+                />
+
+                <InputError class="mt-2" :message="form.errors.lng" />
             </div>
 
             <div class="flex items-center gap-4">

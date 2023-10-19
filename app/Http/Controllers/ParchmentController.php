@@ -40,6 +40,8 @@ class ParchmentController extends Controller
             'title' => $request->input('title'),
             'summary' => $request->input('summary'),
             'video' => $request->input('video'),
+            'lng' => $request->input('lng'),
+            'lat' => $request->input('lat'),
         ]);
 
         return Redirect::route('parchments.index');
@@ -74,6 +76,8 @@ class ParchmentController extends Controller
             'title' => $request->input('title'),
             'summary' => $request->input('summary'),
             'video' => $request->input('video'),
+            'lng' => $request->input('lng'),
+            'lat' => $request->input('lat'),
         ]);
 
         return Redirect::route('parchments.index');
