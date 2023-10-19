@@ -21,7 +21,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
     clickMap: [e: MapBrowserEvent],
-    clickFeature: [feature: ol.Feature],
+    clickFeature: [feature: Feature],
 }>();
 
 const vectorLayer = new VectorLayer();
@@ -70,7 +70,7 @@ onMounted(() => {
         })
 
         if (feature) {
-            emit('clickFeature', feature as unknown as ol.Feature);
+            emit('clickFeature', feature as unknown as Feature);
             return;
         }
 

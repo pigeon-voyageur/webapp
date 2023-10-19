@@ -19,7 +19,7 @@ const features = props.parchments.map(parchment => new Feature({
     }
 }))
 
-function handleClickFeature(feature) {
+function handleClickFeature(feature: Feature): void {
     const parchmentId = feature.get('data').parchmentId;
 
     router.visit(route('parchments.show', parchmentId))
