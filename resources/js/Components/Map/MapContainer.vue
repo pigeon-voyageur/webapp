@@ -10,21 +10,23 @@ import 'ol/ol.css'
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 import {Coordinate} from "ol/coordinate";
+import {Collection, Feature} from "ol";
+import {Geometry} from "ol/geom";
 import {MapBrowserEvent} from "openlayers";
 
 const props = defineProps<{
-    features: ol.Feature[],
+    features: Feature<Geometry>[] | Collection<Feature<Geometry>> | undefined,
     center?: Coordinate
 }>();
 
 const emit = defineEmits<{
-    clickMap: [e: ol.events.Event],
+    clickMap: [e: MapBrowserEvent],
     clickFeature: [feature: ol.Feature],
 }>();
 
 const vectorLayer = new VectorLayer();
-const map = ref<Map | null>(null);
-const mapRoot = ref(null);
+const map = ref(new Map());
+const mapRoot = ref<HTMLElement | null>(null);
 
 watch(() => props.features, (value) => {
     vectorLayer.setSource(new VectorSource({
@@ -33,6 +35,10 @@ watch(() => props.features, (value) => {
 });
 
 onMounted(() => {
+    if (!mapRoot.value) {
+        return;
+    }
+
     vectorLayer.setSource(new VectorSource({
         features: props.features
     }))
@@ -53,17 +59,22 @@ onMounted(() => {
         }),
     })
 
-    map.value.on('click', (e: MapBrowserEvent) => {
-        const feature = map.value.forEachFeatureAtPixel(e.pixel, function (feature: ol.Feature) {
+    if (!map.value) {
+        return;
+    }
+
+    map.value.on('click', (e) => {
+        const mapEvent = e as unknown as MapBrowserEvent;
+        const feature = map.value.forEachFeatureAtPixel(mapEvent.pixel, function (feature) {
             return feature
         })
 
         if (feature) {
-            emit('clickFeature', feature);
+            emit('clickFeature', feature as unknown as ol.Feature);
             return;
         }
 
-        emit('clickMap', e);
+        emit('clickMap', mapEvent);
     })
 })
 </script>
