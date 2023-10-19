@@ -5,36 +5,36 @@ import MapContainer from "@/Components/Map/MapContainer.vue";
 import {Feature} from "ol";
 import {Point} from "ol/geom";
 import {fromLonLat} from "ol/proj";
-import ParchmentData = App.Data.ParchmentData;
+import NewsData = App.Data.NewsData;
 
 
 const props = defineProps<{
-    parchments: Array<ParchmentData>;
+    news: Array<NewsData>;
 }>();
 
-const features = props.parchments.map(parchment => new Feature({
-    geometry: new Point(fromLonLat([parchment.lng, parchment.lat])),
+const features = props.news.map(news => new Feature({
+    geometry: new Point(fromLonLat([news.lng, news.lat])),
     data: {
-        parchmentId: parchment.id
+        newsId: news.id
     }
 }))
 
 function handleClickFeature(feature: Feature): void {
-    const parchmentId = feature.get('data').parchmentId;
+    const newsId = feature.get('data').newsId;
 
-    router.visit(route('parchments.show', parchmentId))
+    router.visit(route('news.show', newsId))
 }
 
 </script>
 
 <template>
     <Head>
-        <title>Parchemins</title>
+        <title>Informations</title>
     </Head>
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Parchemins</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Informations</h2>
         </template>
 
         <div class="py-12">

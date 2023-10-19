@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Parchment;
+namespace App\Http\Requests\News;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreParchmentRequest extends FormRequest
+class StoreNewsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

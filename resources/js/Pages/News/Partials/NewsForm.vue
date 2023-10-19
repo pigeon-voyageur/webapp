@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ParchmentData = App.Data.ParchmentData;
+import NewsData = App.Data.NewsData;
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
@@ -16,15 +16,15 @@ import {Coordinate} from "ol/coordinate";
 import {MapBrowserEvent} from "openlayers";
 
 const props = defineProps<{
-    parchment?: ParchmentData;
+    news?: NewsData;
 }>();
 
 const form = useForm({
-    title: props.parchment?.title ?? '',
-    summary: props.parchment?.summary ?? '',
-    video: props.parchment?.video ?? '',
-    lat: props.parchment?.lat ?? 0,
-    lng: props.parchment?.lng ?? 0,
+    title: props.news?.title ?? '',
+    summary: props.news?.summary ?? '',
+    video: props.news?.video ?? '',
+    lat: props.news?.lat ?? 0,
+    lng: props.news?.lng ?? 0,
 });
 
 const features = computed(() => {
@@ -36,11 +36,11 @@ const features = computed(() => {
 });
 
 const mapCenter = computed(() => {
-    if (!props.parchment) {
+    if (!props.news) {
         return [0, 0]
     }
 
-    return fromLonLat([props.parchment.lng, props.parchment.lat])
+    return fromLonLat([props.news.lng, props.news.lat])
 })
 
 function handleClickMap(e: MapBrowserEvent) {
@@ -50,12 +50,12 @@ function handleClickMap(e: MapBrowserEvent) {
 }
 
 function handleSubmit() {
-    if (props.parchment) {
-        form.patch(route('parchments.update', props.parchment))
+    if (props.news) {
+        form.patch(route('news.update', props.news))
         return;
     }
 
-    form.post(route('parchments.store'));
+    form.post(route('news.store'));
 }
 
 </script>
@@ -63,7 +63,7 @@ function handleSubmit() {
 <template>
     <section>
         <header>
-            <template v-if="parchment">
+            <template v-if="news">
                 <h2 class="text-lg font-medium text-gray-900">Modifier un parchemin</h2>
 
                 <p class="mt-1 text-sm text-gray-600">
@@ -151,7 +151,7 @@ function handleSubmit() {
             <MapContainer class="w-full aspect-video" :features="features" :center="mapCenter" @clickMap="handleClickMap" />
 
             <div class="flex items-center gap-4">
-                <PrimaryButton :disabled="form.processing">{{ parchment ? 'Enregistrer' : 'Publier' }}</PrimaryButton>
+                <PrimaryButton :disabled="form.processing">{{ news ? 'Enregistrer' : 'Publier' }}</PrimaryButton>
 
                 <Transition
                     enter-active-class="transition ease-in-out"

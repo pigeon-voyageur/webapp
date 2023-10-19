@@ -10,9 +10,14 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('parchments', function (Blueprint $table) {
+        Schema::create('news', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->mediumText('summary');
+            $table->string('video')->nullable();
             $table->double('lat');
             $table->double('lng');
+            $table->timestamps();
         });
     }
 
@@ -21,9 +26,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('parchments', function (Blueprint $table) {
-            $table->dropColumn('lat');
-            $table->dropColumn('lng');
-        });
+        Schema::dropIfExists('news');
     }
 };

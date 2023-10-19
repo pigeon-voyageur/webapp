@@ -2,17 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\Parchment;
+use App\Models\News;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class ParchmentSeeder extends Seeder
+class NewsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Parchment::factory()->count(50)->create();
+        News::factory()->count(50)->create();
     }
 }

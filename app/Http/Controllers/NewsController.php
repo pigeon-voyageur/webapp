@@ -2,24 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Data\ParchmentData;
-use App\Http\Requests\Parchment\StoreParchmentRequest;
-use App\Http\Requests\Parchment\UpdateParchmentRequest;
-use App\Models\Parchment;
+use App\Data\NewsData;
+use App\Http\Requests\News\StoreNewsRequest;
+use App\Http\Requests\News\UpdateNewsRequest;
+use App\Models\News;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class ParchmentController extends Controller
+class NewsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(): Response
     {
-        return Inertia::render('Parchments/Index', [
-            'parchments' => ParchmentData::collection(Parchment::all()),
+        return Inertia::render('News/Index', [
+            'news' => NewsData::collection(News::all()),
         ]);
     }
 
@@ -28,15 +28,15 @@ class ParchmentController extends Controller
      */
     public function create(): Response
     {
-        return Inertia::render('Parchments/Create');
+        return Inertia::render('News/Create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreParchmentRequest $request): RedirectResponse
+    public function store(StoreNewsRequest $request): RedirectResponse
     {
-        Parchment::create([
+        News::create([
             'title' => $request->input('title'),
             'summary' => $request->input('summary'),
             'video' => $request->input('video'),
@@ -44,35 +44,35 @@ class ParchmentController extends Controller
             'lat' => $request->input('lat'),
         ]);
 
-        return Redirect::route('parchments.index');
+        return Redirect::route('news.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Parchment $parchment): Response
+    public function show(News $news): Response
     {
-        return Inertia::render('Parchments/Show', [
-            'parchment' => ParchmentData::from($parchment),
+        return Inertia::render('News/Show', [
+            'news' => NewsData::from($news),
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Parchment $parchment): Response
+    public function edit(News $news): Response
     {
-        return Inertia::render('Parchments/Edit', [
-            'parchment' => $parchment,
+        return Inertia::render('News/Edit', [
+            'news' => $news,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateParchmentRequest $request, Parchment $parchment): RedirectResponse
+    public function update(UpdateNewsRequest $request, News $news): RedirectResponse
     {
-        $parchment->update([
+        $news->update([
             'title' => $request->input('title'),
             'summary' => $request->input('summary'),
             'video' => $request->input('video'),
@@ -80,13 +80,13 @@ class ParchmentController extends Controller
             'lat' => $request->input('lat'),
         ]);
 
-        return Redirect::route('parchments.index');
+        return Redirect::route('news.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Parchment $parchment): void
+    public function destroy(News $news): void
     {
         //
     }
