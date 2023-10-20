@@ -117,6 +117,7 @@ function handleSubmit() {
 
                 <TextListInput
                     id="summary"
+                    placeholder="Ex: https://lemonde.com"
                     class="mt-1 block w-full"
                     v-model="form.sources"
                 />
