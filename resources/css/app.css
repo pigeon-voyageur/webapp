@@ -26,12 +26,24 @@
         @apply font-sans text-lg font-normal;
     }
 
-    .text-cta {
+    .text-quote {
+        @apply font-display text-xl font-normal italic;
+    }
+
+    .text-link {
         @apply font-sans text-lg font-bold;
     }
 
-    .text-quote {
-        @apply font-display text-xl font-normal italic;
+    .text-button {
+        @apply font-display text-lg font-bold;
+    }
+
+    .text-meta {
+        @apply font-sans text-sm font-normal;
+    }
+
+    .text-meta-link {
+        @apply font-sans text-sm font-normal italic;
     }
 
     h1 {
@@ -50,12 +62,20 @@
         @apply text-h3;
     }
 
-    p {
+    p, span, li, td {
         @apply text-body;
     }
 
     a {
-        @apply text-cta text-blue underline;
+        @apply text-link text-blue underline;
+    }
+
+    button {
+        @apply text-button;
+    }
+
+    a, button {
+        @apply focus:outline-2 focus:outline-blue focus:outline-dashed;
     }
 
     blockquote, q {
@@ -70,7 +90,11 @@
         content: ' ”'
     }
 
-    a, button {
-        @apply focus:outline-2 focus:outline-blue focus:outline-dashed;
+
+}
+
+@layer components {
+    .input-field {
+        @apply border border-black;
     }
 }

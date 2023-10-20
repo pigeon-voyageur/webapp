@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import NewsData = App.Data.NewsData;
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import TextInput from '@/Components/TextInput.vue';
+import InputError from '@/Components/Form/InputError.vue';
+import InputLabel from '@/Components/Form/InputLabel.vue';
+import TextInput from '@/Components/Form/TextInput.vue';
 import {useForm} from "@inertiajs/vue3";
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextareaInput from "@/Components/TextareaInput.vue";
+import TextareaInput from "@/Components/Form/TextareaInput.vue";
 import MapContainer from "@/Components/Map/MapContainer.vue";
 import {computed} from "vue";
 import {fromLonLat, toLonLat} from 'ol/proj'
-import NumberInput from "@/Components/NumberInput.vue";
+import NumberInput from "@/Components/Form/NumberInput.vue";
 import {Feature} from "ol";
 import {Point} from "ol/geom";
 import {Coordinate} from "ol/coordinate";
