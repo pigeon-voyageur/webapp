@@ -23,7 +23,7 @@ function handleNewLine() {
     emit('update:modelValue', newModelValue)
 }
 
-function handleDeleteLine(index) {
+function handleDeleteLine(index: number) {
     const newModelValue = [...props.modelValue];
     newModelValue.splice(index, 1);
 
