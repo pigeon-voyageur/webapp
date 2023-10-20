@@ -15,6 +15,8 @@ class NewsData extends Data
         public ?string $video,
         public float $lat,
         public float $lng,
+        /** @var String[] */
+        public ?array $sources,
     ) {
     }
 }

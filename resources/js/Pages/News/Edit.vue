@@ -12,12 +12,12 @@ defineProps<{
 
 <template>
     <Head>
-        <title>Modifier un parchemin</title>
+        <title>Modifier une information</title>
     </Head>
 
     <AuthenticatedLayout>
         <template #header>
-            <H2>Modifier un parchemin</H2>
+            <H2>Modifier une information</H2>
         </template>
 
         <div class="py-12">
