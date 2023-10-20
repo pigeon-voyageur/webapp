@@ -717,23 +717,6 @@
 										},
 										{
 											"_type": "UMLAttributeView",
-											"_id": "AAAAAAGLR/8NWMvSZSA=",
-											"_parent": {
-												"$ref": "AAAAAAGLR/6PUMul+bo="
-											},
-											"model": {
-												"$ref": "AAAAAAGLR/8NVMvPeD8="
-											},
-											"font": "Arial;13;0",
-											"left": 813,
-											"top": 669,
-											"width": 142.70166015625,
-											"height": 13,
-											"text": "+user_id: Bigint",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLAttributeView",
 											"_id": "AAAAAAGLR/9cL8vZKHQ=",
 											"_parent": {
 												"$ref": "AAAAAAGLR/6PUMul+bo="
@@ -743,7 +726,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 813,
-											"top": 684,
+											"top": 669,
 											"width": 142.70166015625,
 											"height": 13,
 											"text": "+news_id: Bigint",
@@ -760,10 +743,27 @@
 											},
 											"font": "Arial;13;0",
 											"left": 813,
-											"top": 699,
+											"top": 684,
 											"width": 142.70166015625,
 											"height": 13,
 											"text": "+arrival_date: timestamp",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAGLTG1VAQmIWzY=",
+											"_parent": {
+												"$ref": "AAAAAAGLR/6PUMul+bo="
+											},
+											"model": {
+												"$ref": "AAAAAAGLTG1U5gmFzlE="
+											},
+											"font": "Arial;13;0",
+											"left": 813,
+											"top": 699,
+											"width": 142.70166015625,
+											"height": 13,
+											"text": "+pigeon_id: Bigint",
 											"horizontalAlignment": 0
 										}
 									],
@@ -977,30 +977,13 @@
 											"height": 13,
 											"text": "+user_id: Bigint",
 											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAGLSCgaxvX9OMg=",
-											"_parent": {
-												"$ref": "AAAAAAGLSBSi5NR9U/0="
-											},
-											"model": {
-												"$ref": "AAAAAAGLSCgavfX6uoU="
-											},
-											"font": "Arial;13;0",
-											"left": 349,
-											"top": 772,
-											"width": 163.69970703125,
-											"height": 13,
-											"text": "+pigeon_message_id: Bigint",
-											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 344,
 									"top": 737,
 									"width": 173.69970703125,
-									"height": 53
+									"height": 38
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -1013,7 +996,7 @@
 									},
 									"font": "Arial;13;0",
 									"left": 344,
-									"top": 790,
+									"top": 775,
 									"width": 173.69970703125,
 									"height": 10
 								},
@@ -1742,7 +1725,6 @@
 									"model": {
 										"$ref": "AAAAAAGLSBea6tih7X0="
 									},
-									"visible": false,
 									"font": "Arial;13;0",
 									"left": 940,
 									"top": 608,
@@ -1754,7 +1736,7 @@
 										"$ref": "AAAAAAGLSBea6tikuIg="
 									},
 									"edgePosition": 2,
-									"text": "1..*"
+									"text": "0..*"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -2162,7 +2144,8 @@
 								},
 								"reference": {
 									"$ref": "AAAAAAGLR/6PT8udLYE="
-								}
+								},
+								"multiplicity": "0..*"
 							},
 							"end2": {
 								"_type": "UMLAssociationEnd",
@@ -2190,15 +2173,6 @@
 						},
 						{
 							"_type": "UMLAttribute",
-							"_id": "AAAAAAGLR/8NVMvPeD8=",
-							"_parent": {
-								"$ref": "AAAAAAGLR/6PT8udLYE="
-							},
-							"name": "user_id",
-							"type": "Bigint"
-						},
-						{
-							"_type": "UMLAttribute",
 							"_id": "AAAAAAGLR/9cKMvWVW8=",
 							"_parent": {
 								"$ref": "AAAAAAGLR/6PT8udLYE="
@@ -2214,6 +2188,15 @@
 							},
 							"name": "arrival_date",
 							"type": "timestamp"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAGLTG1U5gmFzlE=",
+							"_parent": {
+								"$ref": "AAAAAAGLR/6PT8udLYE="
+							},
+							"name": "pigeon_id",
+							"type": "Bigint"
 						}
 					]
 				},
@@ -2273,15 +2256,6 @@
 								"$ref": "AAAAAAGLSBSi49R1KIM="
 							},
 							"name": "user_id",
-							"type": "Bigint"
-						},
-						{
-							"_type": "UMLAttribute",
-							"_id": "AAAAAAGLSCgavfX6uoU=",
-							"_parent": {
-								"$ref": "AAAAAAGLSBSi49R1KIM="
-							},
-							"name": "pigeon_message_id",
 							"type": "Bigint"
 						}
 					]
