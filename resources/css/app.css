@@ -1,3 +1,100 @@
+@import "fonts.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    .text-logo {
+        @apply font-display text-6xl font-black;
+    }
+
+    .text-h1 {
+        @apply font-display text-4xl font-black;
+
+    }
+
+    .text-h2 {
+        @apply font-display text-3xl font-bold;
+    }
+
+    .text-h3 {
+        @apply font-display text-2xl font-bold;
+    }
+
+    .text-body {
+        @apply font-sans text-lg font-normal;
+    }
+
+    .text-quote {
+        @apply font-display text-xl font-normal italic;
+    }
+
+    .text-link {
+        @apply font-sans text-lg font-bold;
+    }
+
+    .text-button {
+        @apply font-display text-lg font-bold;
+    }
+
+    .text-meta {
+        @apply font-sans text-sm font-normal;
+    }
+
+    .text-meta-link {
+        @apply font-sans text-sm font-normal italic;
+    }
+
+    h1 {
+        @apply text-h1;
+    }
+
+    h2 {
+        @apply text-h2;
+    }
+
+    h2 span {
+        @apply bg-pink;
+    }
+
+    h3 {
+        @apply text-h3;
+    }
+
+    p, span, li, td {
+        @apply text-body;
+    }
+
+    a {
+        @apply text-link text-blue underline;
+    }
+
+    button {
+        @apply text-button;
+    }
+
+    blockquote, q {
+        @apply text-quote;
+    }
+
+    q::before, blockquote::before {
+        content: '“ - '
+    }
+
+    q::after, blockquote::after {
+        content: ' ”'
+    }
+
+    a:focus, button:focus, [type='text']:focus, input:where(:not([type])):focus, [type='email']:focus, [type='url']:focus, [type='password']:focus, [type='number']:focus, [type='date']:focus, [type='datetime-local']:focus, [type='month']:focus, [type='search']:focus, [type='tel']:focus, [type='time']:focus, [type='week']:focus, [multiple]:focus, [type='checkbox']:focus, [type='radio']:focus, textarea:focus, select:focus {
+        @apply ring-0 outline-2 outline-blue outline-dashed outline-offset-2;
+    }
+}
+
+@layer components {
+
+
+    .input-field {
+        @apply border border-black;
+    }
+}

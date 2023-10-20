@@ -2,6 +2,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import {Head} from '@inertiajs/vue3';
 import NewsForm from "@/Pages/News/Partials/NewsForm.vue";
+import H2 from "@/Components/Primitives/H2.vue";
 import NewsData = App.Data.NewsData;
 
 defineProps<{
@@ -16,7 +17,7 @@ defineProps<{
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Modifier un parchemin</h2>
+            <H2>Modifier un parchemin</H2>
         </template>
 
         <div class="py-12">

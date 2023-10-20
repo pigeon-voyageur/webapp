@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
+import InputError from '@/Components/Form/InputError.vue';
+import InputLabel from '@/Components/Form/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
-import { Link, useForm, usePage } from '@inertiajs/vue3';
+import TextInput from '@/Components/Form/TextInput.vue';
+import {Link, useForm, usePage} from '@inertiajs/vue3';
+import H2 from "@/Components/Primitives/H2.vue";
+import Text from "@/Components/Primitives/Text.vue";
 
 defineProps<{
     mustVerifyEmail?: Boolean;
@@ -21,11 +23,11 @@ const form = useForm({
 <template>
     <section>
         <header>
-            <h2 class="text-lg font-medium text-gray-900">Profile Information</h2>
+            <H2>Profile Information</H2>
 
-            <p class="mt-1 text-sm text-gray-600">
+            <Text class="mt-1 text-sm text-gray-600">
                 Update your account's profile information and email address.
-            </p>
+            </Text>
         </header>
 
         <form @submit.prevent="form.patch(route('profile.update'))" class="mt-6 space-y-6">
@@ -67,7 +69,7 @@ const form = useForm({
                         :href="route('verification.send')"
                         method="post"
                         as="button"
-                        class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md  focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                         Click here to re-send the verification email.
                     </Link>

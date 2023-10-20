@@ -2,11 +2,11 @@
 import {computed, onMounted, ref} from 'vue';
 
 const props = defineProps<{
-    modelValue: number;
+    modelValue: string;
 }>();
 
 const emit = defineEmits<{
-    'update:modelValue': [value: number]
+    'update:modelValue': [value: string]
 }>();
 
 const input = ref<HTMLInputElement | null>(null);
@@ -19,6 +19,11 @@ onMounted(() => {
 
 defineExpose({focus: () => input.value?.focus()});
 
+
+function handleInput(e: Event) {
+    emit('update:modelValue', (e.target as HTMLInputElement).value)
+}
+
 const value = computed({
     get() {
         return props.modelValue
@@ -27,13 +32,12 @@ const value = computed({
         emit('update:modelValue', value)
     }
 })
-
 </script>
 
 <template>
     <input
-        class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-        v-model.number="value"
+        class="input-field"
+        v-model="value"
         ref="input"
     />
 </template>

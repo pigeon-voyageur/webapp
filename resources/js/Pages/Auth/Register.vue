@@ -1,17 +1,21 @@
 <script setup lang="ts">
 import GuestLayout from '@/Layouts/GuestLayout.vue';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
+import InputError from '@/Components/Form/InputError.vue';
+import InputLabel from '@/Components/Form/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import TextInput from '@/Components/Form/TextInput.vue';
+import {Head, Link, useForm} from '@inertiajs/vue3';
+import {computed, ref} from "vue";
 
+const step = ref<1 | 2>(1);
 const form = useForm({
     name: '',
     email: '',
     password: '',
     password_confirmation: '',
 });
+
+const canGoStep2 = computed(() => form.name && form.email)
 
 const submit = () => {
     form.post(route('register'), {
@@ -24,82 +28,121 @@ const submit = () => {
 
 <template>
     <GuestLayout>
-        <Head title="Register" />
+        <Head>
+            <title>M'inscrire</title>
+        </Head>
 
-        <form @submit.prevent="submit">
-            <div>
-                <InputLabel for="name" value="Name" />
+        <img src="/assets/images/auth-bg.png" alt="" class="absolute top-0 left-0 w-full -z-10" />
 
-                <TextInput
-                    id="name"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.name"
-                    required
-                    autofocus
-                    autocomplete="name"
-                />
+        <div class="grid grid-cols-6 gap-5">
+            <template v-if="step===1">
+                <h1 class="col-span-full text-blue">Salut toi...</h1>
 
-                <InputError class="mt-2" :message="form.errors.name" />
-            </div>
+                <p class="col-span-full">Tu veux des infos à vol d’oiseau ? Rejoins-nous ! </p>
+            </template>
 
-            <div class="mt-4">
-                <InputLabel for="email" value="Email" />
+            <template v-else-if="step===2">
+                <button class="col-span-full text-blue text-left" type="button" @click="step=1">Retour à l'étape 1</button>
+            </template>
 
-                <TextInput
-                    id="email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    v-model="form.email"
-                    required
-                    autocomplete="username"
-                />
+            <h2 class="col-span-full text-center mt-4">Étape {{ step }}/2</h2>
 
-                <InputError class="mt-2" :message="form.errors.email" />
-            </div>
+            <form class="col-span-full" @submit.prevent="submit">
+                <div v-show="step===1">
+                    <div>
+                        <InputLabel for="name" value="Nom" />
 
-            <div class="mt-4">
-                <InputLabel for="password" value="Password" />
+                        <TextInput
+                            id="name"
+                            type="text"
+                            class="mt-1 block w-full"
+                            v-model="form.name"
+                            required
+                            autofocus
+                            placeholder="Ex: Jean Dujardin"
+                            autocomplete="name"
+                        />
 
-                <TextInput
-                    id="password"
-                    type="password"
-                    class="mt-1 block w-full"
-                    v-model="form.password"
-                    required
-                    autocomplete="new-password"
-                />
+                        <InputError class="mt-2" :message="form.errors.name" />
+                    </div>
 
-                <InputError class="mt-2" :message="form.errors.password" />
-            </div>
+                    <div class="mt-4">
+                        <InputLabel for="email" value="E-mail" />
 
-            <div class="mt-4">
-                <InputLabel for="password_confirmation" value="Confirm Password" />
+                        <TextInput
+                            id="email"
+                            type="email"
+                            class="mt-1 block w-full"
+                            v-model="form.email"
+                            required
+                            placeholder="Ex: jean.dujardin@email.com"
+                            autocomplete="username"
+                        />
 
-                <TextInput
-                    id="password_confirmation"
-                    type="password"
-                    class="mt-1 block w-full"
-                    v-model="form.password_confirmation"
-                    required
-                    autocomplete="new-password"
-                />
+                        <InputError class="mt-2" :message="form.errors.email" />
+                    </div>
 
-                <InputError class="mt-2" :message="form.errors.password_confirmation" />
-            </div>
+                    <PrimaryButton :disabled="!canGoStep2" class="mt-8" type="button" @click="step=2">
+                        Suivant
+                    </PrimaryButton>
+                </div>
 
-            <div class="flex items-center justify-end mt-4">
-                <Link
-                    :href="route('login')"
-                    class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                    Already registered?
-                </Link>
+                <div v-show="step===2">
+                    <div>
+                        <InputLabel for="password" value="Mot de passe" />
 
-                <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Register
-                </PrimaryButton>
-            </div>
-        </form>
+                        <TextInput
+                            id="password"
+                            type="password"
+                            class="mt-1 block w-full"
+                            v-model="form.password"
+                            required
+                            autocomplete="new-password"
+                        />
+
+                        <InputError class="mt-2" :message="form.errors.password" />
+                    </div>
+
+                    <div class="mt-4">
+                        <InputLabel for="password_confirmation" value="Confirmer le mot de passe" />
+
+                        <TextInput
+                            id="password_confirmation"
+                            type="password"
+                            class="mt-1 block w-full"
+                            v-model="form.password_confirmation"
+                            required
+                            autocomplete="new-password"
+                        />
+
+                        <InputError class="mt-2" :message="form.errors.password_confirmation" />
+                    </div>
+
+                    <p class="text-meta mt-8">
+                        En vous inscrivant vous acceptez nos
+                        <a href="/#" target="_blank" class="text-meta-link">Conditions générales d’utilisation</a>
+                    </p>
+
+                    <PrimaryButton class="mt-8" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        M'inscrire
+                    </PrimaryButton>
+                </div>
+            </form>
+
+            <template v-if="step===1">
+                <div class="col-span-full text-center">
+                    <Link class="text-meta-link" :href="route('login')">
+                        Déjà pigeon ?<br>
+                        Connecte-toi !
+                    </Link>
+                </div>
+
+                <img class="absolute -z-10 bottom-0 left-1/2 w-1/2 -translate-x-1/2" src="/assets/images/pigeon-face-cut-up.svg" alt="" />
+            </template>
+
+            <template v-else-if="step===2">
+                <img class="absolute -z-10 bottom-0 right-0" src="/assets/images/pigeon-detective.svg" alt="" />
+            </template>
+        </div>
     </GuestLayout>
 </template>

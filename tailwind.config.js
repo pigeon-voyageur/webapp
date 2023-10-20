@@ -11,9 +11,22 @@ export default {
     ],
 
     theme: {
+        colors: {
+            'beige': '#FCF1DD',
+            'black': '#000000',
+            'white': '#FFFFFF',
+            'pink': '#F5CEE9',
+            'blue': '#322FCD',
+            'red': '#CD2F38',
+        },
+        container: {
+            center: true,
+            padding: '1.5rem',
+        },
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Inter', ...defaultTheme.fontFamily.sans],
+                display: ['FivoSansModern'],
             },
         },
     },
