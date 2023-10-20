@@ -3,13 +3,11 @@ import DangerButton from '@/Components/DangerButton.vue';
 import InputError from '@/Components/Form/InputError.vue';
 import InputLabel from '@/Components/Form/InputLabel.vue';
 import Modal from '@/Components/Modal.vue';
-import SecondaryButton from '@/Components/SecondaryButton.vue';
 import TextInput from '@/Components/Form/TextInput.vue';
 import {useForm} from '@inertiajs/vue3';
 import {nextTick, ref} from 'vue';
 import H2 from "@/Components/Primitives/H2.vue";
 import H3 from "@/Components/Primitives/H3.vue";
-import Text from "@/Components/Primitives/Text.vue";
 
 const confirmingUserDeletion = ref(false);
 const passwordInput = ref<HTMLInputElement | null>(null);
@@ -46,28 +44,18 @@ const closeModal = () => {
     <section class="space-y-6">
         <header>
             <H2>Supprimer le compte</H2>
-
-            <Text>
-                Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting
-                your account, please download any data or information that you wish to retain.
-            </Text>
         </header>
 
-        <DangerButton @click="confirmUserDeletion">Delete Account</DangerButton>
+        <DangerButton @click="confirmUserDeletion" class="text-meta">Supprimer le compte</DangerButton>
 
         <Modal :show="confirmingUserDeletion" @close="closeModal">
-            <div class="p-6">
+            <div class="relative p-6">
                 <H3>
-                    Are you sure you want to delete your account?
+                    Tu veux déjà voler de tes propres ailes ?
                 </H3>
 
-                <Text>
-                    Once your account is deleted, all of its resources and data will be permanently deleted. Please
-                    enter your password to confirm you would like to permanently delete your account.
-                </Text>
-
-                <div class="mt-6">
-                    <InputLabel for="password" value="Password" class="sr-only" />
+                <div class=" mt-6">
+                    <InputLabel for="password" value="Mot de passe" />
 
                     <TextInput
                         id="password"
@@ -75,25 +63,26 @@ const closeModal = () => {
                         v-model="form.password"
                         type="password"
                         class="mt-1 block w-3/4"
-                        placeholder="Password"
                         @keyup.enter="deleteUser"
                     />
 
                     <InputError :message="form.errors.password" class="mt-2" />
+
                 </div>
 
-                <div class="mt-6 flex justify-end">
-                    <SecondaryButton @click="closeModal"> Cancel</SecondaryButton>
+                <img class="absolute -z-10 bottom-0 right-0 w-20" src="/assets/images/pigeon-detective-tall.svg" alt="" />
+            </div>
 
-                    <DangerButton
-                        class="ml-3"
-                        :class="{ 'opacity-25': form.processing }"
-                        :disabled="form.processing"
-                        @click="deleteUser"
-                    >
-                        Delete Account
-                    </DangerButton>
-                </div>
+            <div class="flex flex-col border-t">
+                <button
+                    class="text-meta text-red py-4"
+                    :class="{ 'opacity-25': form.processing }"
+                    :disabled="form.processing"
+                    @click="deleteUser">
+                    Oui, supprimer mon compte
+                </button>
+
+                <button class="text-meta border-t py-4" @click="closeModal">Non, annuler</button>
             </div>
         </Modal>
     </section>

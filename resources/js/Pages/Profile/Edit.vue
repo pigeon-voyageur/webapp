@@ -13,32 +13,26 @@ defineProps<{
 
 <template>
     <Head>
-        <title>Modifier le profil</title>
+        <title>Modifier mon profil</title>
     </Head>
 
     <AuthenticatedLayout>
-        <template #header>
-            <h2>Modifier le profil</h2>
-        </template>
+        <div class="container pt-8">
+            <h2>Modifier mon profil</h2>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+            <div class="py-12">
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-24">
                     <UpdateProfileInformationForm
                         :must-verify-email="mustVerifyEmail"
                         :status="status"
-                        class="max-w-xl"
                     />
-                </div>
 
-                <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                    <UpdatePasswordForm class="max-w-xl" />
-                </div>
+                    <UpdatePasswordForm />
 
-                <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                    <DeleteUserForm class="max-w-xl" />
+                    <DeleteUserForm />
                 </div>
             </div>
         </div>
+
     </AuthenticatedLayout>
 </template>

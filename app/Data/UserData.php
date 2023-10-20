@@ -2,6 +2,7 @@
 
 namespace App\Data;
 
+use Carbon\Carbon;
 use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
@@ -12,7 +13,7 @@ class UserData extends Data
         public int $id,
         public string $name,
         public string $email,
-        public string $email_verified_at,
+        public ?Carbon $email_verified_at,
     ) {
     }
 }
