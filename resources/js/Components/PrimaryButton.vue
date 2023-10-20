@@ -1,11 +1,14 @@
 <script setup lang="ts">
-defineProps<{
+withDefaults(defineProps<{
     disabled: boolean
-}>();
+}>(), {
+    disabled: false
+});
 
 </script>
 <template>
     <button
+        :disabled="disabled"
         ref="btn"
         class="relative z-0 w-full inline-flex items-center justify-center px-4 py-3 bg-black text-white"
         :class="{'opacity-50': disabled}"

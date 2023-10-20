@@ -47,13 +47,8 @@ const submit = () => {
 
             <h2 class="col-span-full text-center mt-4">Étape {{ step }}/2</h2>
 
-            <div v-if="status" class="col-span-full">
-                {{ status }}
-            </div>
-
             <form class="col-span-full" @submit.prevent="submit">
-                <template v-if="step===1">
-
+                <div v-show="step===1">
                     <div>
                         <InputLabel for="name" value="Nom" />
 
@@ -90,9 +85,9 @@ const submit = () => {
                     <PrimaryButton :disabled="!canGoStep2" class="mt-8" type="button" @click="step=2">
                         Suivant
                     </PrimaryButton>
-                </template>
+                </div>
 
-                <template v-else-if="step===2">
+                <div v-show="step===2">
                     <div>
                         <InputLabel for="password" value="Mot de passe" />
 
@@ -131,7 +126,7 @@ const submit = () => {
                     <PrimaryButton class="mt-8" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                         M'inscrire
                     </PrimaryButton>
-                </template>
+                </div>
             </form>
 
             <template v-if="step===1">
@@ -142,11 +137,11 @@ const submit = () => {
                     </Link>
                 </div>
 
-                <img class="absolute bottom-0 left-1/2 w-1/2 -translate-x-1/2" src="/assets/images/pigeon-face-cut-up.svg" alt="" />
+                <img class="absolute -z-10 bottom-0 left-1/2 w-1/2 -translate-x-1/2" src="/assets/images/pigeon-face-cut-up.svg" alt="" />
             </template>
 
             <template v-else-if="step===2">
-                <img class="absolute bottom-0 right-0" src="/assets/images/pigeon-detective.svg" alt="" />
+                <img class="absolute -z-10 bottom-0 right-0" src="/assets/images/pigeon-detective.svg" alt="" />
             </template>
         </div>
     </GuestLayout>

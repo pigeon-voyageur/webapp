@@ -101,7 +101,7 @@ const submit = () => {
                 </Link>
             </div>
 
-            <img class="absolute bottom-0 left-1/2 w-1/2 -translate-x-1/2" src="/assets/images/pigeon-face-cut-up.svg" alt="" />
+            <img class="absolute -z-10 bottom-0 left-1/2 w-1/2 -translate-x-1/2" src="/assets/images/pigeon-face-cut-up.svg" alt="" />
         </div>
 
     </GuestLayout>
