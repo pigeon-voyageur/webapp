@@ -1,6 +1,7 @@
 # Web app - Pigeon voyageur
 
 ![Build on main](https://github.com/pigeon-voyageur/webapp/actions/workflows/build-on-main.yml/badge.svg)
+[![Maintainability](https://api.codeclimate.com/v1/badges/28044aaedf1a25200a28/maintainability)](https://codeclimate.com/github/pigeon-voyageur/webapp/maintainability)
 
 ## Before setup
 
