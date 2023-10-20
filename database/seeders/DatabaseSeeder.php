@@ -21,13 +21,6 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        // Pigeon::factory()
-        //     ->for(User::factory())
-        //     ->hasAttached(News::factory()->count(3),[
-        //         'arrival_date' => fake()->dateTimeBetween('now', '+1 month')
-        //     ])
-        //     ->create();
-
         $this->call([
             NewsSeeder::class,
         ]);

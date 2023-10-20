@@ -23,12 +23,4 @@ class Pigeon extends Model
         return $this->belongsToMany(News::class, 'pigeon_messages')->using(PigeonMessage::class);
     }    
 
-        /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'user_id'
-    ];
 }
