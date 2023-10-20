@@ -1,3 +1,76 @@
+@import "fonts.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    .text-logo {
+        @apply font-display text-6xl font-black;
+    }
+
+    .text-h1 {
+        @apply font-display text-4xl font-black;
+
+    }
+
+    .text-h2 {
+        @apply font-display text-3xl font-bold;
+    }
+
+    .text-h3 {
+        @apply font-display text-2xl font-bold;
+    }
+
+    .text-body {
+        @apply font-sans text-lg font-normal;
+    }
+
+    .text-cta {
+        @apply font-sans text-lg font-bold;
+    }
+
+    .text-quote {
+        @apply font-display text-xl font-normal italic;
+    }
+
+    h1 {
+        @apply text-h1;
+    }
+
+    h2 {
+        @apply text-h2;
+    }
+
+    h2 span {
+        @apply bg-pink;
+    }
+
+    h3 {
+        @apply text-h3;
+    }
+
+    p {
+        @apply text-body;
+    }
+
+    a {
+        @apply text-cta text-blue underline;
+    }
+
+    blockquote, q {
+        @apply text-quote;
+    }
+
+    q::before, blockquote::before {
+        content: '“ - '
+    }
+
+    q::after, blockquote::after {
+        content: ' ”'
+    }
+
+    a, button {
+        @apply focus:outline-2 focus:outline-blue focus:outline-dashed;
+    }
+}

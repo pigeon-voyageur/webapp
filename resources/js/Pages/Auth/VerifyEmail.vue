@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import {computed} from 'vue';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import {Head, Link, useForm} from '@inertiajs/vue3';
 
 const props = defineProps<{
     status?: string;
@@ -40,8 +40,9 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
                     :href="route('logout')"
                     method="post"
                     as="button"
-                    class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    >Log Out</Link
+                    class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md  focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >Log Out
+                </Link
                 >
             </div>
         </form>

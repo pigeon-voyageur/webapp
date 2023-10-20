@@ -3,8 +3,10 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-import { useForm } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import {useForm} from '@inertiajs/vue3';
+import {ref} from 'vue';
+import H2 from "@/Components/Primitives/H2.vue";
+import Text from "@/Components/Primitives/Text.vue";
 
 const passwordInput = ref<HTMLInputElement | null>(null);
 const currentPasswordInput = ref<HTMLInputElement | null>(null);
@@ -38,11 +40,11 @@ const updatePassword = () => {
 <template>
     <section>
         <header>
-            <h2 class="text-lg font-medium text-gray-900">Update Password</h2>
+            <H2>Update Password</H2>
 
-            <p class="mt-1 text-sm text-gray-600">
+            <Text>
                 Ensure your account is using a long, random password to stay secure.
-            </p>
+            </Text>
         </header>
 
         <form @submit.prevent="updatePassword" class="mt-6 space-y-6">

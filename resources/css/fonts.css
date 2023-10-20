@@ -1,0 +1,18 @@
+@font-face {
+    font-family: "FivoSansModern";
+    src: url("/assets/fonts/FivoSansModern/FivoSansModern-ExtBlack.otf");
+    font-weight: 900;
+}
+
+@font-face {
+    font-family: "FivoSansModern";
+    src: url("/assets/fonts/FivoSansModern/FivoSansModern-Bold.otf");
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: "FivoSansModern";
+    src: url("/assets/fonts/FivoSansModern/FivoSansModern-Regular-Oblique.otf");
+    font-weight: 400;
+    font-style: italic;
+}
