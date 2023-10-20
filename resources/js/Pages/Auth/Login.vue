@@ -30,7 +30,7 @@ const submit = () => {
 <template>
     <GuestLayout>
         <Head>
-            <title>Se connecter</title>
+            <title>Me connecter</title>
         </Head>
 
         <img src="/assets/images/auth-bg.png" alt="" class="absolute top-0 left-0 w-full -z-10" />

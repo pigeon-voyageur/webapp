@@ -74,10 +74,6 @@
         @apply text-button;
     }
 
-    a, button {
-        @apply focus:outline-2 focus:outline-blue focus:outline-dashed;
-    }
-
     blockquote, q {
         @apply text-quote;
     }
@@ -90,10 +86,14 @@
         content: ' ”'
     }
 
-
+    a:focus, button:focus, [type='text']:focus, input:where(:not([type])):focus, [type='email']:focus, [type='url']:focus, [type='password']:focus, [type='number']:focus, [type='date']:focus, [type='datetime-local']:focus, [type='month']:focus, [type='search']:focus, [type='tel']:focus, [type='time']:focus, [type='week']:focus, [multiple]:focus, [type='checkbox']:focus, [type='radio']:focus, textarea:focus, select:focus {
+        @apply ring-0 outline-2 outline-blue outline-dashed outline-offset-2;
+    }
 }
 
 @layer components {
+
+
     .input-field {
         @apply border border-black;
     }
