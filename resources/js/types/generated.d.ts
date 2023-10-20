@@ -6,6 +6,7 @@ summary: string;
 video: string | null;
 lat: number;
 lng: number;
+sources: Array<string> | null;
 };
 export type UserData = {
 id: number;

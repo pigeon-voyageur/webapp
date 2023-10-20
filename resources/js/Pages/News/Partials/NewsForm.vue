@@ -14,6 +14,7 @@ import {Feature} from "ol";
 import {Point} from "ol/geom";
 import {Coordinate} from "ol/coordinate";
 import {MapBrowserEvent} from "openlayers";
+import TextListInput from "@/Components/Form/TextListInput.vue";
 
 const props = defineProps<{
     news?: NewsData;
@@ -25,6 +26,7 @@ const form = useForm({
     video: props.news?.video ?? '',
     lat: props.news?.lat ?? 0,
     lng: props.news?.lng ?? 0,
+    sources: props.news?.sources ?? [],
 });
 
 const features = computed(() => {
@@ -64,14 +66,14 @@ function handleSubmit() {
     <section>
         <header>
             <template v-if="news">
-                <h2 class="text-lg font-medium text-gray-900">Modifier un parchemin</h2>
+                <h2 class="text-lg font-medium text-gray-900">Modifier une information</h2>
 
                 <p class="mt-1 text-sm text-gray-600">
                     Modifiez une information ou contribuez à son amélioration.
                 </p>
             </template>
             <template v-else>
-                <h2 class="text-lg font-medium text-gray-900">Publier un parchemin</h2>
+                <h2 class="text-lg font-medium text-gray-900">Publier une information</h2>
 
                 <p class="mt-1 text-sm text-gray-600">
                     Ajoutez une information.
@@ -102,11 +104,24 @@ function handleSubmit() {
                     id="summary"
                     type="text"
                     class="mt-1 block w-full"
+                    rows="6"
                     v-model="form.summary"
                     required
                 />
 
                 <InputError class="mt-2" :message="form.errors.summary" />
+            </div>
+
+            <div>
+                <InputLabel for="sources" value="Sources du résumé" />
+
+                <TextListInput
+                    id="summary"
+                    class="mt-1 block w-full"
+                    v-model="form.sources"
+                />
+
+                <InputError class="mt-2" :message="form.errors.sources" />
             </div>
 
             <div>

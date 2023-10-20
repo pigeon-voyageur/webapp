@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->string('video')->nullable();
             $table->double('lat');
             $table->double('lng');
+            $table->json('sources')->nullable();
             $table->timestamps();
         });
     }

@@ -6,12 +6,12 @@ import H2 from "@/Components/Primitives/H2.vue";</script>
 
 <template>
     <Head>
-        <title>Créer un parchemin</title>
+        <title>Créer une information</title>
     </Head>
 
     <AuthenticatedLayout>
         <template #header>
-            <H2>Créer un parchemin</H2>
+            <H2>Créer une information</H2>
         </template>
 
         <div class="py-12">

@@ -15,5 +15,10 @@ class News extends Model
         'video',
         'lat',
         'lng',
+        'sources',
+    ];
+
+    protected $casts = [
+        'sources' => 'array'
     ];
 }

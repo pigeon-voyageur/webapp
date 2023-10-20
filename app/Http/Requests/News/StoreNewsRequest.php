@@ -27,6 +27,7 @@ class StoreNewsRequest extends FormRequest
             'video' => 'nullable|string|max:255',
             'lat' => 'required|numeric',
             'lng' => 'required|numeric',
+            'sources' => 'required|array',
         ];
     }
 }

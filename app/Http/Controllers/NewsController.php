@@ -42,6 +42,7 @@ class NewsController extends Controller
             'video' => $request->input('video'),
             'lng' => $request->input('lng'),
             'lat' => $request->input('lat'),
+            'sources' => $request->input('sources'),
         ]);
 
         return Redirect::route('news.index');
@@ -78,6 +79,7 @@ class NewsController extends Controller
             'video' => $request->input('video'),
             'lng' => $request->input('lng'),
             'lat' => $request->input('lat'),
+            'sources' => $request->input('sources'),
         ]);
 
         return Redirect::route('news.index');

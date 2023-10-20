@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import {Head} from '@inertiajs/vue3';
+import {Head, Link} from '@inertiajs/vue3';
 import H2 from "@/Components/Primitives/H2.vue";
 import NewsData = App.Data.NewsData;
 
@@ -17,6 +17,9 @@ defineProps<{
     <AuthenticatedLayout>
         <template #header>
             <H2>Information</H2>
+            <Link :href="route('news.edit', news)">
+                Éditer
+            </Link>
         </template>
 
         <div class="py-12">
