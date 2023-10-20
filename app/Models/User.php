@@ -56,4 +56,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    protected static function booted()
+    {
+        static::created(function (User $user) {
+            Pigeon::create([
+                'user_id' => $user->id,
+            ]);
+        });
+    }
 }
