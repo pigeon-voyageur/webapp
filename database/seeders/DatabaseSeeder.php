@@ -3,7 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\News;
 use App\Models\User;
+use App\Models\Pigeon;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,14 +16,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(10)->create();
-        User::factory()->create([
-            'name' => 'Testman',
-            'email' => 'test@example.com',
-        ]);
+        // User::factory()->create([
+        //     'name' => 'Testman',
+        //     'email' => 'test@example.com',
+        // ]);
 
-        $this->call([
-            NewsSeeder::class,
-        ]);
+        Pigeon::factory()
+            ->for(User::factory())
+            ->hasAttached(News::factory()->count(3),[
+                'arrival_date' => fake()->dateTimeBetween('now', '+1 month')
+            ])
+            ->create();
+
+        // $this->call([
+        //     NewsSeeder::class,
+        // ]);
     }
 }
