@@ -12,11 +12,13 @@ defineProps<{
 </script>
 
 <template>
-    <Head title="Profile" />
+    <Head>
+        <title>Modifier le profil</title>
+    </Head>
 
     <AuthenticatedLayout>
         <template #header>
-            <h2>Profile</h2>
+            <h2>Modifier le profil</h2>
         </template>
 
         <div class="py-12">

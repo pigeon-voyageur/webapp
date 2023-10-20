@@ -5,12 +5,21 @@ import MapContainer from "@/Components/Map/MapContainer.vue";
 import {Feature} from "ol";
 import {Point} from "ol/geom";
 import {fromLonLat} from "ol/proj";
-import H2 from "@/Components/Primitives/H2.vue";
+import {onMounted, ref} from "vue";
+import {useElementSize, useParentElement} from "@vueuse/core";
 import NewsData = App.Data.NewsData;
 
 const props = defineProps<{
     news: Array<NewsData>;
 }>();
+
+const map = ref<HTMLElement>();
+const parentElement = useParentElement(map);
+const parentElementSize = useElementSize(parentElement);
+
+onMounted(() => {
+    console.log(parentElementSize)
+})
 
 const features = props.news.map(news => new Feature({
     geometry: new Point(fromLonLat([news.lng, news.lat])),
@@ -33,16 +42,7 @@ function handleClickFeature(feature: Feature): void {
     </Head>
 
     <AuthenticatedLayout>
-        <template #header>
-            <H2>Informations</H2>
-        </template>
-
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <MapContainer class="w-full aspect-video" :features="features" @clickFeature="handleClickFeature" />
-                </div>
-            </div>
-        </div>
+        <MapContainer ref="map" class="h-full" :style="`height: ${parentElementSize.height.value}px`" :features="features"
+                      @clickFeature="handleClickFeature" />
     </AuthenticatedLayout>
 </template>

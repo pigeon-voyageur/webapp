@@ -13,6 +13,7 @@ import {Coordinate} from "ol/coordinate";
 import {Collection, Feature} from "ol";
 import {Geometry} from "ol/geom";
 import {MapBrowserEvent} from "openlayers";
+import {newsStyle} from "@/Components/Map/Styles/news.style";
 
 const props = defineProps<{
     features: Feature<Geometry>[] | Collection<Feature<Geometry>> | undefined,
@@ -24,7 +25,9 @@ const emit = defineEmits<{
     clickFeature: [feature: Feature],
 }>();
 
-const vectorLayer = new VectorLayer();
+const vectorLayer = new VectorLayer({
+    style: newsStyle
+});
 const map = ref(new Map());
 const mapRoot = ref<HTMLElement | null>(null);
 
