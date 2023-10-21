@@ -13,6 +13,11 @@ use Inertia\Response;
 
 class NewsController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(News::class, 'news');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -90,6 +95,5 @@ class NewsController extends Controller
      */
     public function destroy(News $news): void
     {
-        //
     }
 }
