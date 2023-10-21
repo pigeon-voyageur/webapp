@@ -5,7 +5,7 @@ import MapContainer from "@/Components/Map/MapContainer.vue";
 import {Feature} from "ol";
 import {Point} from "ol/geom";
 import {fromLonLat} from "ol/proj";
-import {onMounted, ref} from "vue";
+import {ref} from "vue";
 import {useElementSize, useParentElement} from "@vueuse/core";
 import NewsData = App.Data.NewsData;
 
@@ -16,10 +16,6 @@ const props = defineProps<{
 const map = ref<HTMLElement>();
 const parentElement = useParentElement(map);
 const parentElementSize = useElementSize(parentElement);
-
-onMounted(() => {
-    console.log(parentElementSize)
-})
 
 const features = props.news.map(news => new Feature({
     geometry: new Point(fromLonLat([news.lng, news.lat])),

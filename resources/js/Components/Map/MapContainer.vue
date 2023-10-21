@@ -11,6 +11,7 @@ import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 import {Coordinate} from "ol/coordinate";
 import {Collection, Feature} from "ol";
+import {defaults as defaultControls} from 'ol/control.js';
 import {Geometry} from "ol/geom";
 import {MapBrowserEvent} from "openlayers";
 import {newsStyle} from "@/Components/Map/Styles/news.style";
@@ -47,6 +48,10 @@ onMounted(() => {
     }))
 
     map.value = new Map({
+        controls: defaultControls({
+            zoom: false,
+            attribution: false
+        }),
         target: mapRoot.value,
         layers: [
             new TileLayer({
@@ -58,7 +63,8 @@ onMounted(() => {
         view: new View({
             zoom: 0,
             center: props.center ?? [0, 0],
-            constrainResolution: true
+            constrainResolution: true,
+            enableRotation: false
         }),
     })
 
