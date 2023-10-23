@@ -5,7 +5,11 @@ import H1 from "@/Components/Primitives/H1.vue";
 import H2 from "@/Components/Primitives/H2.vue";
 import H3 from "@/Components/Primitives/H3.vue";
 import Text from "@/Components/Primitives/Text.vue";
-import Quote from "@/Components/Primitives/Quote.vue";</script>
+import Quote from "@/Components/Primitives/Quote.vue";
+import SecondaryButton from "@/Components/Primitives/SecondaryButton.vue";
+import TertiaryButton from "@/Components/Primitives/TertiaryButton.vue";
+import PrimaryButton from "@/Components/Primitives/PrimaryButton.vue";
+import DangerButton from "@/Components/Primitives/DangerButton.vue";</script>
 
 <template>
     <Head>
@@ -23,6 +27,11 @@ import Quote from "@/Components/Primitives/Quote.vue";</script>
             </Text>
             <a href="#">Lien</a>
             <Quote>Ça fond de plus en plus vite dit le pingouin sur la banquise, les pieds à moitié dans l'eau ...</Quote>
+
+            <PrimaryButton>Button primary</PrimaryButton>
+            <SecondaryButton>Button secondary</SecondaryButton>
+            <TertiaryButton>Button tertiary</TertiaryButton>
+            <DangerButton>Button danger</DangerButton>
         </div>
     </GuestLayout>
 </template>

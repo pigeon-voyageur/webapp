@@ -4,6 +4,8 @@ import DeleteUserForm from './Partials/DeleteUserForm.vue';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';
 import {Head} from '@inertiajs/vue3';
+import LogoutForm from "@/Pages/Profile/Partials/LogoutForm.vue";
+import H1 from "@/Components/Primitives/H1.vue";
 
 defineProps<{
     mustVerifyEmail?: boolean;
@@ -18,7 +20,7 @@ defineProps<{
 
     <AuthenticatedLayout>
         <div class="container pt-8">
-            <h2>Modifier mon profil</h2>
+            <H1>Modifier mon profil</H1>
 
             <div class="py-12">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-24">
@@ -29,7 +31,10 @@ defineProps<{
 
                     <UpdatePasswordForm />
 
-                    <DeleteUserForm />
+                    <div class="space-y-2">
+                        <LogoutForm />
+                        <DeleteUserForm />
+                    </div>
                 </div>
             </div>
         </div>

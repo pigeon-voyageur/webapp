@@ -14,7 +14,10 @@ class News extends Model
 
     public function pigeon(): BelongsToMany
     {
-        return $this->belongsToMany(Pigeon::class, 'pigeon_messages')->using(PigeonMessage::class);
+        return $this->belongsToMany(Pigeon::class, 'pigeon_messages')
+            ->as('message')
+            ->withPivot(['id', 'arrival_date'])
+            ->using(PigeonMessage::class);
     }
 
     public $fillable = [
@@ -27,6 +30,6 @@ class News extends Model
     ];
 
     protected $casts = [
-        'sources' => 'array'
+        'sources' => 'array',
     ];
 }

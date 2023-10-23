@@ -26,7 +26,7 @@ defineExpose({focus: () => input.value?.focus()});
 
 <template>
     <textarea
-        class="input-field"
+        class="input-field h-auto"
         :value="modelValue"
         @input="handleInput"
         ref="input"
