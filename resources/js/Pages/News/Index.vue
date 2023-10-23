@@ -7,6 +7,7 @@ import {Point} from "ol/geom";
 import {fromLonLat} from "ol/proj";
 import {ref} from "vue";
 import {useElementSize, useParentElement} from "@vueuse/core";
+import PigeonPerch from "@/Components/Pigeon/PigeonPerch.vue";
 import NewsData = App.Data.NewsData;
 import PigeonData = App.Data.PigeonData;
 
@@ -42,5 +43,9 @@ function handleClickFeature(feature: Feature): void {
     <AuthenticatedLayout>
         <MapContainer ref="map" class="h-full" :style="`height: ${parentElementSize.height.value}px`" :features="features"
                       @clickFeature="handleClickFeature" />
+
+        <div class="absolute right-0 bottom-24 pointer-events-none">
+            <PigeonPerch :pigeon="pigeon" />
+        </div>
     </AuthenticatedLayout>
 </template>
