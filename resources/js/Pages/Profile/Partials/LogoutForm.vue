@@ -1,8 +1,10 @@
 <script setup lang="ts">import {Link} from '@inertiajs/vue3';
-</script>
+import TertiaryButton from "@/Components/Primitives/TertiaryButton.vue";</script>
 
 <template>
     <section>
-        <Link class="text-meta" :href="route('logout')" as="button" method="post">Déconnexion</Link>
+        <Link :href="route('logout')" as="div" method="post">
+            <TertiaryButton>Déconnexion</TertiaryButton>
+        </Link>
     </section>
 </template>

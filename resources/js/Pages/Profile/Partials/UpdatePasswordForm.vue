@@ -46,6 +46,7 @@ const updatePassword = () => {
 
         <form @submit.prevent="updatePassword" class="mt-6 space-y-6">
             <input type="text" class="hidden" :value="user.name" name="username" autocomplete="username" />
+
             <div>
                 <InputLabel for="current_password" value="Mot de passe actuel" />
 
