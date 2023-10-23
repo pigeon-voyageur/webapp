@@ -1,9 +1,10 @@
 <?php
 
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
+use App\Http\Controllers\Pigeon\PigeonGetNewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,5 +29,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('news', NewsController::class);
 });
+
+
+//Routing qui ne marche pas pour l'instant
+Route::post('/pigeon/get/{news}', PigeonGetNewsController::class)->name('pigeon.get-news');
 
 require __DIR__ . '/auth.php';

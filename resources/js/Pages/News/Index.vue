@@ -27,7 +27,7 @@ const features = props.news.map(news => new Feature({
 function handleClickFeature(feature: Feature): void {
     const newsId = feature.get('data').newsId;
 
-    router.visit(route('news.show', newsId))
+    router.post(route('pigeon.get-news', newsId))
 }
 
 </script>
