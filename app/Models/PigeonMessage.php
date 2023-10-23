@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\Pivot;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class PigeonMessage extends Pivot
 {
     use HasFactory;
+
+    protected $table = 'pigeon_messages';
 
     // public function pigeon(): BelongsTo
     // {
