@@ -92,9 +92,7 @@
 }
 
 @layer components {
-
-
     .input-field {
-        @apply border border-black;
+        @apply h-11 p-2 border border-black text-meta;
     }
 }

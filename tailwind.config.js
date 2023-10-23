@@ -14,6 +14,10 @@ export default {
         colors: {
             'beige': '#FCF1DD',
             'black': '#000000',
+            'gray': {
+                dark: '#252525',
+                light: '#625F5F',
+            },
             'white': '#FFFFFF',
             'pink': '#F5CEE9',
             'blue': '#322FCD',
