@@ -8,10 +8,26 @@ lat: number;
 lng: number;
 sources: Array<string> | null;
 };
+export type PigeonData = {
+id: number;
+user_id: number;
+created_at: string;
+updated_at: string;
+is_travelling: boolean;
+};
+export type PigeonMessageData = {
+id: number;
+pigeon_id: number;
+news_id: number;
+arrival_date: string;
+pigeon?: App.Data.PigeonData;
+news?: App.Data.NewsData;
+};
 export type UserData = {
 id: number;
 name: string;
 email: string;
 email_verified_at: string | null;
+pigeon?: App.Data.PigeonData;
 };
 }
