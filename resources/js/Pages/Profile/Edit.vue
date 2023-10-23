@@ -4,6 +4,7 @@ import DeleteUserForm from './Partials/DeleteUserForm.vue';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';
 import {Head} from '@inertiajs/vue3';
+import LogoutForm from "@/Pages/Profile/Partials/LogoutForm.vue";
 
 defineProps<{
     mustVerifyEmail?: boolean;
@@ -29,7 +30,10 @@ defineProps<{
 
                     <UpdatePasswordForm />
 
-                    <DeleteUserForm />
+                    <div class="space-y-2">
+                        <LogoutForm />
+                        <DeleteUserForm />
+                    </div>
                 </div>
             </div>
         </div>

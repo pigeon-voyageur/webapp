@@ -6,7 +6,6 @@ import Modal from '@/Components/Modal.vue';
 import TextInput from '@/Components/Form/TextInput.vue';
 import {useForm} from '@inertiajs/vue3';
 import {nextTick, ref} from 'vue';
-import H2 from "@/Components/Primitives/H2.vue";
 import H3 from "@/Components/Primitives/H3.vue";
 
 const confirmingUserDeletion = ref(false);
@@ -41,12 +40,8 @@ const closeModal = () => {
 </script>
 
 <template>
-    <section class="space-y-6">
-        <header>
-            <H2>Supprimer le compte</H2>
-        </header>
-
-        <DangerButton @click="confirmUserDeletion" class="text-meta">Supprimer le compte</DangerButton>
+    <section>
+        <DangerButton @click="confirmUserDeletion" class="text-meta">Supprimer mon compte</DangerButton>
 
         <Modal :show="confirmingUserDeletion" @close="closeModal">
             <div class="relative p-6">
