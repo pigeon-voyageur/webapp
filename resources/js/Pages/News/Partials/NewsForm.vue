@@ -4,7 +4,7 @@ import InputError from '@/Components/Form/InputError.vue';
 import InputLabel from '@/Components/Form/InputLabel.vue';
 import TextInput from '@/Components/Form/TextInput.vue';
 import {useForm} from "@inertiajs/vue3";
-import PrimaryButton from '@/Components/PrimaryButton.vue';
+import PrimaryButton from '@/Components/Primitives/PrimaryButton.vue';
 import TextareaInput from "@/Components/Form/TextareaInput.vue";
 import MapContainer from "@/Components/Map/MapContainer.vue";
 import {computed} from "vue";
@@ -164,7 +164,7 @@ function handleSubmit() {
                 <InputError class="mt-2" :message="form.errors.lng" />
             </div>
 
-            <MapContainer class="w-full aspect-video" :features="features" :center="mapCenter" @clickMap="handleClickMap" />
+            <MapContainer class="w-full border aspect-video" :features="features" :center="mapCenter" @clickMap="handleClickMap" />
 
             <div class="flex items-center gap-4">
                 <PrimaryButton :disabled="form.processing">{{ news ? 'Enregistrer' : 'Publier' }}</PrimaryButton>

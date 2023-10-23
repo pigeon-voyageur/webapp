@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import InputError from '@/Components/Form/InputError.vue';
 import InputLabel from '@/Components/Form/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
+import PrimaryButton from '@/Components/Primitives/PrimaryButton.vue';
 import TextInput from '@/Components/Form/TextInput.vue';
-import {useForm} from '@inertiajs/vue3';
+import {useForm, usePage} from '@inertiajs/vue3';
 import {ref} from 'vue';
 import H2 from "@/Components/Primitives/H2.vue";
 
 const passwordInput = ref<HTMLInputElement | null>(null);
 const currentPasswordInput = ref<HTMLInputElement | null>(null);
+
+const user = usePage().props.auth.user;
 
 const form = useForm({
     current_password: '',
@@ -43,6 +45,8 @@ const updatePassword = () => {
         </header>
 
         <form @submit.prevent="updatePassword" class="mt-6 space-y-6">
+            <input type="text" class="hidden" :value="user.name" name="username" autocomplete="username" />
+
             <div>
                 <InputLabel for="current_password" value="Mot de passe actuel" />
 
