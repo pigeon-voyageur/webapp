@@ -4,7 +4,9 @@ namespace App\Data;
 
 use App\Models\Pigeon;
 use Carbon\Carbon;
+use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Data;
+use Spatie\LaravelData\DataCollection;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
 #[TypeScript]
@@ -15,7 +17,9 @@ class PigeonData extends Data
         public int $user_id,
         public Carbon $created_at,
         public Carbon $updated_at,
-        public bool $is_travelling,
+        #[DataCollectionOf(NewsData::class)]
+        public DataCollection $news,
+        public bool $isTravelling,
     ) {
     }
 
@@ -26,6 +30,7 @@ class PigeonData extends Data
             $pigeon->user_id,
             $pigeon->created_at,
             $pigeon->updated_at,
+            NewsData::collection($pigeon->news),
             $pigeon->isTravelling(),
         );
     }

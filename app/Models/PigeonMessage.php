@@ -11,18 +11,12 @@ class PigeonMessage extends Pivot
 
     protected $table = 'pigeon_messages';
 
-    // public function pigeon(): BelongsTo
-    // {
-    //     return $this->belongsTo(Pigeon::class);
-    // }
-
-    // public function news(): BelongsTo
-    // {
-    //     return $this->belongsTo(News::class);
-    // }
-
     public $fillable = [
-        'arrival_date'
+        'arrival_date',
+    ];
+
+    protected $casts = [
+        'arrival_date' => 'date',
     ];
 
     public $incrementing = true;

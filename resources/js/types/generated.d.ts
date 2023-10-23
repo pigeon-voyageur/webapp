@@ -7,21 +7,21 @@ video: string | null;
 lat: number;
 lng: number;
 sources: Array<string> | null;
+message: App.Data.PigeonMessageData | null;
 };
 export type PigeonData = {
 id: number;
 user_id: number;
 created_at: string;
 updated_at: string;
-is_travelling: boolean;
+news: Array<App.Data.NewsData>;
+isTravelling: boolean;
 };
 export type PigeonMessageData = {
 id: number;
 pigeon_id: number;
 news_id: number;
 arrival_date: string;
-pigeon?: App.Data.PigeonData;
-news?: App.Data.NewsData;
 };
 export type UserData = {
 id: number;

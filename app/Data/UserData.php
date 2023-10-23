@@ -27,7 +27,7 @@ class UserData extends Data
             $user->name,
             $user->email,
             $user->email_verified_at,
-            PigeonData::fromModel($user->pigeon)
+            PigeonData::from($user->pigeon)
         );
     }
 }

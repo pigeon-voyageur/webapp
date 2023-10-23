@@ -8,9 +8,11 @@ import {fromLonLat} from "ol/proj";
 import {ref} from "vue";
 import {useElementSize, useParentElement} from "@vueuse/core";
 import NewsData = App.Data.NewsData;
+import PigeonData = App.Data.PigeonData;
 
 const props = defineProps<{
     news: Array<NewsData>;
+    pigeon: PigeonData;
 }>();
 
 const map = ref<HTMLElement>();

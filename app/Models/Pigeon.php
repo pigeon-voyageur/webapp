@@ -18,7 +18,10 @@ class Pigeon extends Model
 
     public function news(): BelongsToMany
     {
-        return $this->belongsToMany(News::class, 'pigeon_messages')->using(PigeonMessage::class);
+        return $this->belongsToMany(News::class, 'pigeon_messages')
+            ->as('message')
+            ->withPivot(['id', 'arrival_date'])
+            ->using(PigeonMessage::class);
     }
 
     public function isTravelling(): bool
@@ -32,6 +35,6 @@ class Pigeon extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'user_id'
+        'user_id',
     ];
 }
