@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Pigeon;
 
-use App\Models\News;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\News;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class PigeonGetNewsController extends Controller
 {
@@ -13,10 +13,10 @@ class PigeonGetNewsController extends Controller
     {
 
         $request->user()->pigeon->news()->attach($news, [
-            'arrival_date' => now(),
+            'arrival_date' => now()->addMinutes(1),
         ]);
 
-        return redirect()->route('news.show', $news);
+        return redirect()->route('news.index');
     }
-    
+
 }

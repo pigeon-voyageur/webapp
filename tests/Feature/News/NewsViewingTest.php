@@ -37,7 +37,8 @@ class NewsViewingTest extends TestCase
         $response->assertRedirect(route('login'));
     }
 
-    public function test_cannot_view_when_logged_but_pigeon_not_got_the_news(): void
+    public function test_user_cannot_view_the_news_if_the_pigeon_didnt_came_back(): void
+
     {
         $news = News::factory()->create();
         $user = User::factory()->create();

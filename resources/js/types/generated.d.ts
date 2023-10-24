@@ -23,6 +23,12 @@ pigeon_id: number;
 news_id: number;
 arrival_date: string;
 };
+export type PigeonData = {
+id: number;
+user_id: number;
+created_at: string;
+update_at: string;
+};
 export type UserData = {
 id: number;
 name: string;

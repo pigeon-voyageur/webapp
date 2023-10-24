@@ -4,6 +4,7 @@ namespace Tests\Feature\Pigeon;
 
 use App\Models\News;
 use App\Models\User;
+use App\Models\Pigeon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -24,12 +25,14 @@ class PigeonTest extends TestCase
     {
         $news = News::factory()->create();
         $user = User::factory()->create();
-
+    
         $response = $this
             ->actingAs($user)
             ->post(route('pigeon.get-news', $news));
-
+    
         $response->assertRedirect(route('news.index'));
-        $this->assertTrue($user->pigeon()->isTravelling());
+    
+        $this->assertTrue($user->pigeon->isTravelling());
+
     }
 }

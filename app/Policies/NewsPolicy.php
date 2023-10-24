@@ -20,8 +20,16 @@ class NewsPolicy
      */
     public function view(User $user, News $news): bool
     {
-        return true;
+
+        $newsClickedIds = $user->pigeon->news()
+            ->wherePivot('arrival_date', '<=', now())
+            ->pluck('news.id');
+
+        return $newsClickedIds->contains($news->id);
+        
     }
+
+
 
     /**
      * Determine whether the user can create models.

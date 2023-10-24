@@ -18,6 +18,6 @@ class PigeonMessage extends Pivot
     protected $casts = [
         'arrival_date' => 'date',
     ];
-
+    
     public $incrementing = true;
 }

@@ -28,10 +28,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('news', NewsController::class);
+
+    Route::post('/pigeon/get/{news}', PigeonGetNewsController::class)->name('pigeon.get-news');
 });
 
 
-//Routing qui ne marche pas pour l'instant
-Route::post('/pigeon/get/{news}', PigeonGetNewsController::class)->name('pigeon.get-news');
 
 require __DIR__ . '/auth.php';
