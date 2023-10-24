@@ -5,7 +5,7 @@ import MapContainer from "@/Components/Map/MapContainer.vue";
 import {Feature} from "ol";
 import {Point} from "ol/geom";
 import {fromLonLat} from "ol/proj";
-import {computed, ref} from "vue";
+import {computed, onMounted, onUnmounted, ref} from "vue";
 import {useElementSize, useParentElement} from "@vueuse/core";
 import PigeonPerch from "@/Components/Pigeon/PigeonPerch.vue";
 import Modal from '@/Components/Modal.vue';
@@ -25,6 +25,16 @@ const props = defineProps<{
 const map = ref<HTMLElement>();
 const parentElement = useParentElement(map);
 const parentElementSize = useElementSize(parentElement);
+
+let newsStatePollingInterval = null;
+
+onMounted(() => {
+    newsStatePollingInterval = setInterval(() => router.reload({only: ['news']}), 10_000);
+})
+
+onUnmounted(() => {
+    clearInterval(newsStatePollingInterval);
+})
 
 const features = computed(() => props.news.map(news => {
     let e = new Feature({

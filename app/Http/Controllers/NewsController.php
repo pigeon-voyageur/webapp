@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Data\LightNewsData;
 use App\Data\NewsData;
 use App\Data\PigeonData;
 use App\Http\Requests\News\StoreNewsRequest;
@@ -26,7 +27,7 @@ class NewsController extends Controller
     public function index(Request $request): Response
     {
         return Inertia::render('News/Index', [
-            'news' => NewsData::collection(News::all()),
+            'news' => LightNewsData::collection(News::all()),
             'pigeon' => PigeonData::from($request->user()->pigeon),
         ]);
     }
