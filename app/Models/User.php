@@ -3,28 +3,15 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Models\Pigeon;
-use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-
-    
-    public function pigeon(): HasOne
-    {
-        return $this->hasOne(Pigeon::class);
-    }
-
-    public function news(): HasManyThrough
-    {
-        return $this->hasManyThrough(News::class, Pigeon::class);
-    }    
 
     /**
      * The attributes that are mass assignable.
@@ -57,12 +44,17 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    protected static function booted()
+    protected static function booted(): void
     {
-        static::created(function (User $user) {
+        static::created(static function (User $user) {
             Pigeon::create([
                 'user_id' => $user->id,
             ]);
         });
+    }
+
+    public function pigeon(): HasOne
+    {
+        return $this->hasOne(Pigeon::class);
     }
 }

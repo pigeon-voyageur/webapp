@@ -24,6 +24,12 @@ class Pigeon extends Model
             ->using(PigeonMessage::class);
     }
 
+    public function newsInChest(): BelongsToMany
+    {
+        return $this->news()
+            ->wherePivot('arrival_date', '<=', now());
+    }
+
     public function isTravelling(): bool
     {
         return $this->news()->wherePivot('arrival_date', '>=', now())->count();
@@ -37,5 +43,5 @@ class Pigeon extends Model
     protected $fillable = [
         'user_id',
     ];
-    
+
 }
