@@ -13,7 +13,8 @@ import {Coordinate} from "ol/coordinate";
 import {Collection, Feature} from "ol";
 import {defaults as defaultControls} from 'ol/control.js';
 import {Geometry} from "ol/geom";
-import {MapBrowserEvent} from "openlayers";
+import {Select} from "ol/interaction";
+import {SelectEvent} from "ol/interaction/Select";
 
 const props = defineProps<{
     features: Feature<Geometry>[] | Collection<Feature<Geometry>> | undefined,
@@ -21,11 +22,11 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-    clickMap: [e: MapBrowserEvent],
     clickFeature: [feature: Feature],
 }>();
 
 const vectorLayer = new VectorLayer();
+const selectSingleClick = new Select({style: null});
 const map = ref(new Map());
 const mapRoot = ref<HTMLElement | null>(null);
 
@@ -69,18 +70,14 @@ onMounted(() => {
         return;
     }
 
-    map.value.on('click', (e) => {
-        const mapEvent = e as unknown as MapBrowserEvent;
-        const feature = map.value.forEachFeatureAtPixel(mapEvent.pixel, function (feature) {
-            return feature
-        })
-
-        if (feature) {
-            emit('clickFeature', feature as unknown as Feature);
-            return;
+    map.value.addInteraction(selectSingleClick);
+    selectSingleClick.on('select', function (e) {
+        const selectEvent = e as unknown as SelectEvent;
+        console.log('select', e)
+        if (selectEvent.selected[0]) {
+            emit('clickFeature', selectEvent.selected[0]);
+            selectSingleClick.getFeatures().clear();
         }
-
-        emit('clickMap', mapEvent);
     })
 })
 </script>
