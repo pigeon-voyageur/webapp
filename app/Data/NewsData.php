@@ -2,6 +2,7 @@
 
 namespace App\Data;
 
+use App\Models\News;
 use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
@@ -17,6 +18,21 @@ class NewsData extends Data
         public float $lng,
         /** @var String[] */
         public ?array $sources,
+        public ?PigeonMessageData $message,
     ) {
+    }
+
+    public static function fromModel(News $news): self
+    {
+        return new self(
+            $news->id,
+            $news->title,
+            $news->summary,
+            $news->video,
+            $news->lat,
+            $news->lng,
+            $news->sources,
+            PigeonMessageData::optional($news->message),
+        );
     }
 }

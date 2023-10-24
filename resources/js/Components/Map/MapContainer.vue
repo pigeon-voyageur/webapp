@@ -14,7 +14,6 @@ import {Collection, Feature} from "ol";
 import {defaults as defaultControls} from 'ol/control.js';
 import {Geometry} from "ol/geom";
 import {MapBrowserEvent} from "openlayers";
-import {newsStyle} from "@/Components/Map/Styles/news.style";
 
 const props = defineProps<{
     features: Feature<Geometry>[] | Collection<Feature<Geometry>> | undefined,
@@ -26,9 +25,7 @@ const emit = defineEmits<{
     clickFeature: [feature: Feature],
 }>();
 
-const vectorLayer = new VectorLayer({
-    style: newsStyle
-});
+const vectorLayer = new VectorLayer();
 const map = ref(new Map());
 const mapRoot = ref<HTMLElement | null>(null);
 

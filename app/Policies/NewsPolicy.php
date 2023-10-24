@@ -20,7 +20,10 @@ class NewsPolicy
      */
     public function view(User $user, News $news): bool
     {
-        return true;
+        return $user->pigeon
+            ->newsInChest()
+            ->pluck('news.id')
+            ->contains($news->id);
     }
 
     /**

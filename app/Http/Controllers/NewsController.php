@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Data\NewsData;
+use App\Data\PigeonData;
 use App\Http\Requests\News\StoreNewsRequest;
 use App\Http\Requests\News\UpdateNewsRequest;
 use App\Models\News;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -21,10 +23,11 @@ class NewsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
         return Inertia::render('News/Index', [
             'news' => NewsData::collection(News::all()),
+            'pigeon' => PigeonData::from($request->user()->pigeon),
         ]);
     }
 

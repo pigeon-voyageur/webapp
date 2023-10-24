@@ -37,10 +37,22 @@ class NewsViewingTest extends TestCase
         $response->assertRedirect(route('login'));
     }
 
-    public function test_can_view_when_logged(): void
+    public function test_user_cannot_view_the_news_if_the_pigeon_didnt_came_back(): void
+
     {
         $news = News::factory()->create();
         $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get(route('news.show', $news));
+
+        $response->assertStatus(Response::HTTP_FORBIDDEN);
+    }
+
+    public function test_can_view_when_logged_and_pigeon_got_the_news(): void
+    {
+        $news = News::factory()->create();
+        $user = User::factory()->create();
+        $user->pigeon->news()->attach($news, ['arrival_date' => now()->subSecond()]);
 
         $response = $this->actingAs($user)->get(route('news.show', $news));
 
