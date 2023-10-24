@@ -5,7 +5,7 @@ defineProps<{
 </script>
 
 <template>
-    <div v-show="message">
+    <div v-show="message" class="mt-2">
         <p class="text-meta text-red">
             {{ message }}
         </p>

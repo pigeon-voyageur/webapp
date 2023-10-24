@@ -5,10 +5,10 @@ defineProps<{
 </script>
 
 <template>
-    <label class="block text-body">
+    <p class="text-meta mt-2">
         <template v-if="value">{{ value }}</template>
         <template v-else>
             <slot />
         </template>
-    </label>
+    </p>
 </template>
