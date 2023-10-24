@@ -15,9 +15,11 @@ import {defaults as defaultControls} from 'ol/control.js';
 import {Geometry} from "ol/geom";
 import {MapBrowserEvent} from "openlayers";
 import {newsStyle} from "@/Components/Map/Styles/news.style";
+import {Style} from "ol/style";
 
 const props = defineProps<{
     features: Feature<Geometry>[] | Collection<Feature<Geometry>> | undefined,
+    vectorStyle?: Style
     center?: Coordinate
 }>();
 
@@ -27,7 +29,7 @@ const emit = defineEmits<{
 }>();
 
 const vectorLayer = new VectorLayer({
-    style: newsStyle
+    style: props.vectorStyle ?? newsStyle
 });
 const map = ref(new Map());
 const mapRoot = ref<HTMLElement | null>(null);
@@ -36,6 +38,10 @@ watch(() => props.features, (value) => {
     vectorLayer.setSource(new VectorSource({
         features: value
     }))
+});
+
+watch(() => props.vectorStyle, (value) => {
+    vectorLayer.setStyle(value)
 });
 
 onMounted(() => {

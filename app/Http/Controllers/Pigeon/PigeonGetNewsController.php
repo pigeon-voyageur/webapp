@@ -3,17 +3,16 @@
 namespace App\Http\Controllers\Pigeon;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Pigeon\GetNewsRequest;
 use App\Models\News;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class PigeonGetNewsController extends Controller
 {
-    public function __invoke(Request $request, News $news): RedirectResponse
+    public function __invoke(GetNewsRequest $request, News $news): RedirectResponse
     {
-
         $request->user()->pigeon->news()->attach($news, [
-            'arrival_date' => now()->addMinutes(1),
+            'arrival_date' => now()->addMinutes(config('pigeon.flight_minutes')),
         ]);
 
         return redirect()->route('news.index');

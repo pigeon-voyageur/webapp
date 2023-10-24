@@ -4,6 +4,10 @@ import PigeonData = App.Data.PigeonData;
 defineProps<{
     pigeon: PigeonData
 }>();
+
+const emit = defineEmits<{
+    click: []
+}>()
 </script>
 <template>
     <div class="relative w-36 h-40 overflow-hidden">
@@ -15,5 +19,11 @@ defineProps<{
         </div>
         <img v-if="!pigeon.isTravelling" class="absolute bottom-2.5 right-5 h-32 w-auto" src="/assets/images/pigeon-face.svg" width="240" height="406"
              alt="" />
+
+        <button @click="emit('click')" class="absolute top-0 left-0 h-full w-full pointer-events-auto">
+            <span class="sr-only">
+            {{ pigeon.isTravelling ? 'Voir le perchoir' : 'Voir le pigeon' }}
+            </span>
+        </button>
     </div>
 </template>
