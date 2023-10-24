@@ -2,7 +2,7 @@ import {Circle, Fill, Icon, Stroke, Style} from "ol/style";
 import NewsData = App.Data.NewsData;
 import PigeonData = App.Data.PigeonData;
 
-const width = 5;
+const size = 32;
 
 export function getNewsStyle(news: NewsData, pigeon: PigeonData): Style {
     const message = pigeon.news.find((pigeonNews) => pigeonNews.id === news.id)?.message;
@@ -25,12 +25,13 @@ export function getNewsStyle(news: NewsData, pigeon: PigeonData): Style {
 
 export const newsArrivedStyle: Style = new Style({
     image: new Circle({
-        radius: width * 2,
+        radius: size / 3,
         fill: new Fill({
-            color: "#FCF1DD",
+            color: "#F5CEE9",
         }),
         stroke: new Stroke({
-            color: "#252525"
+            color: "#FFFFFF",
+            width: size / 4
         })
     }),
     zIndex: Infinity,
@@ -38,9 +39,8 @@ export const newsArrivedStyle: Style = new Style({
 
 export const newsTravellingStyle: Style = new Style({
     image: new Icon({
-        // offset: [52, 0],
-        // opacity: 0.5,
-        scale: 0.2,
+        width: size,
+        height: size,
         src: '/assets/images/pigeon-icon.png'
     }),
     zIndex: Infinity,
@@ -48,13 +48,13 @@ export const newsTravellingStyle: Style = new Style({
 
 export const newsToGetStyle: Style = new Style({
     image: new Circle({
-        radius: width * 1.5,
+        radius: size / 3,
         fill: new Fill({
             color: "#322FCD",
         }),
         stroke: new Stroke({
             color: "#FFFFFF",
-            width: width
+            width: size / 4
         })
     }),
     zIndex: Infinity,
@@ -62,13 +62,13 @@ export const newsToGetStyle: Style = new Style({
 
 export const newsDisabledStyle: Style = new Style({
     image: new Circle({
-        radius: width * 1.5,
+        radius: size / 3,
         fill: new Fill({
             color: "#625F5F",
         }),
         stroke: new Stroke({
             color: "#ABABAB",
-            width: width
+            width: size / 4
         })
     }),
     zIndex: Infinity,
