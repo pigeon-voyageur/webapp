@@ -5,7 +5,7 @@ defineProps<{
 </script>
 
 <template>
-    <p class="text-meta mt-2">
+    <p class="text-meta my-1.5">
         <template v-if="value">{{ value }}</template>
         <template v-else>
             <slot />

@@ -15,6 +15,7 @@ import {Point} from "ol/geom";
 import {Coordinate} from "ol/coordinate";
 import {MapBrowserEvent} from "openlayers";
 import TextListInput from "@/Components/Form/TextListInput.vue";
+import LinkListInput from "@/Components/Form/LinkListInput.vue";
 import InputHint from "@/Components/Form/InputHint.vue";
 
 const props = defineProps<{
@@ -65,7 +66,7 @@ function handleSubmit() {
 
 <template>
     <form @submit.prevent="handleSubmit" class="relative z-0 space-y-6 bg-yellow -m-3 p-3 rounded-xl">
-        <img src="/assets/images/bg.png" alt="" height="719" width="1000" class="absolute h-full w-full top-0 left-0 -z-10" />
+        <img src="/assets/images/bg.png" alt="" height="719" width="1000" class="absolute h-full w-full top-0 left-0 -z-10 rounded-xl" />
 
         <div>
             <InputLabel for="title" value="Titre" />
@@ -73,6 +74,7 @@ function handleSubmit() {
             <TextInput
                 id="title"
                 type="text"
+                placeholder=""
                 v-model="form.title"
                 required
                 autofocus
@@ -98,9 +100,9 @@ function handleSubmit() {
         </div>
 
         <div>
-            <InputLabel for="sources" value="Sources du résumé" />
+            <InputLabel for="sources" value="Lien de la source" />
 
-            <TextListInput
+            <LinkListInput
                 id="sources"
                 placeholder="Ex: https://lemonde.com"
                 class="mt-1 block w-full"

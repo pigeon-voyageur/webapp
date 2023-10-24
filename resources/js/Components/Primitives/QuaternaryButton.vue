@@ -11,7 +11,7 @@ withDefaults(defineProps<{
     <button
         :disabled="disabled"
         ref="btn"
-        class="relative z-0 w-full h-11 inline-flex items-center justify-center text-dark bg-white"
+        class="w-full h-11 inline-flex items-center justify-center text-dark bg-white"
         :class="{'opacity-50': disabled}"
     >
         <slot />

@@ -39,7 +39,9 @@ function handleDeleteLine(index: number) {
         <ul class="mb-2 flex flex-col gap-2">
             <li class="flex gap-2" v-for="(str, index) in modelValue" :key="index">
                 <TextInput class="w-full" :model-value="str" @update:modelValue="(value)=>handleInput(index, value)" :placeholder="placeholder" />
-                <TertiaryButton type="button" class="w-11 shrink-0" @click="handleDeleteLine(index)">X</TertiaryButton>
+                <div class="w-11 shrink-0">
+                    <TertiaryButton type="button" @click="handleDeleteLine(index)">X</TertiaryButton>
+                </div>
             </li>
         </ul>
 
