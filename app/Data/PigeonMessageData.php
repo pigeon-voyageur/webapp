@@ -15,6 +15,7 @@ class PigeonMessageData extends Data
         public int $pigeon_id,
         public int $news_id,
         public Carbon $arrival_date,
+        public bool $is_arrived,
     ) {
     }
 
@@ -24,7 +25,8 @@ class PigeonMessageData extends Data
             $pigeonMessage->id,
             $pigeonMessage->id,
             $pigeonMessage->news_id,
-            $pigeonMessage->arrival_date
+            $pigeonMessage->arrival_date,
+            $pigeonMessage->isArrived()
         );
     }
 }

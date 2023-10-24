@@ -16,8 +16,13 @@ class PigeonMessage extends Pivot
     ];
 
     protected $casts = [
-        'arrival_date' => 'date',
+        'arrival_date' => 'datetime',
     ];
-    
+
     public $incrementing = true;
+
+    public function isArrived(): bool
+    {
+        return $this->arrival_date <= now();
+    }
 }

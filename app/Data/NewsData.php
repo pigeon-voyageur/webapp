@@ -32,7 +32,7 @@ class NewsData extends Data
             $news->lat,
             $news->lng,
             $news->sources,
-            PigeonMessageData::optional($news->pivot),
+            PigeonMessageData::optional($news->message),
         );
     }
 }

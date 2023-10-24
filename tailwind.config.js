@@ -16,7 +16,8 @@ export default {
             'black': '#000000',
             'gray': {
                 dark: '#252525',
-                light: '#625F5F',
+                DEFAULT: '#625F5F',
+                light: '#ABABAB',
             },
             'white': '#FFFFFF',
             'pink': '#F5CEE9',

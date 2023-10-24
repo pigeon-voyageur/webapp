@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import {Head, useForm} from '@inertiajs/vue3';
+import {Head, router, useForm} from '@inertiajs/vue3';
 import MapContainer from "@/Components/Map/MapContainer.vue";
 import {Feature} from "ol";
 import {Point} from "ol/geom";
 import {fromLonLat} from "ol/proj";
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import {useElementSize, useParentElement} from "@vueuse/core";
 import PigeonPerch from "@/Components/Pigeon/PigeonPerch.vue";
 import Modal from '@/Components/Modal.vue';
 import PrimaryButton from "@/Components/Primitives/PrimaryButton.vue";
 import QuaternaryButton from "@/Components/Primitives/QuaternaryButton.vue";
-import {disabledNewsStyle, newsStyle} from "@/Components/Map/Styles/news.style";
+import {getNewsStyle} from "@/Components/Map/Styles/news.style";
 import H3 from "@/Components/Primitives/H3.vue";
 import PigeonSentModal from "@/Components/Pigeon/PigeonSentModal.vue";
 import NewsData = App.Data.NewsData;
@@ -26,22 +26,37 @@ const map = ref<HTMLElement>();
 const parentElement = useParentElement(map);
 const parentElementSize = useElementSize(parentElement);
 
-const features = props.news.map(news => new Feature({
-    geometry: new Point(fromLonLat([news.lng, news.lat])),
-    data: {
-        newsId: news.id
-    },
-    style: newsStyle
+const features = computed(() => props.news.map(news => {
+    let e = new Feature({
+        geometry: new Point(fromLonLat([news.lng, news.lat])),
+        data: {
+            newsId: news.id,
+        },
+    })
+    e.setStyle(getNewsStyle(news, props.pigeon))
+    return e;
 }))
 
 function handleClickFeature(feature: Feature): void {
-    if (props.pigeon.isTravelling) {
+    const newsId = feature.get('data').newsId;
+
+    const arrivedNews = props.pigeon.news.find((pigeonNews) => pigeonNews.id === newsId);
+
+    if (arrivedNews?.message?.is_arrived) {
+        router.visit(route('news.show', newsId));
         return;
     }
 
-    const newsId = feature.get('data').newsId;
+    if (props.pigeon.isTravelling) {
+        pigeonSentModalOpened.value = true;
+        return;
+    }
 
     const news = props.news.find((news => news.id === newsId))
+
+    if (!news) {
+        return;
+    }
 
     confirmGetNews(news)
 }
@@ -56,7 +71,11 @@ function confirmGetNews(news: NewsData) {
 }
 
 function getNews() {
-    form.post(route('pigeon.get-news', newsToGet.value), {
+    if (!newsToGet.value) {
+        return;
+    }
+
+    form.post(route('pigeon.get-news', newsToGet.value?.id), {
         preserveScroll: true,
         onSuccess: () => {
             closeModal()
@@ -64,6 +83,7 @@ function getNews() {
         },
         onFinish: () => {
             form.reset();
+            router.reload()
         },
     });
 }
@@ -94,7 +114,6 @@ function handlePerchClick() {
             class="h-full"
             :style="`height: ${parentElementSize.height.value}px`"
             :features="features"
-            :vector-style="pigeon.isTravelling ? disabledNewsStyle : newsStyle"
             @clickFeature="handleClickFeature"
         />
 

@@ -6,7 +6,6 @@ namespace Database\Seeders;
 
 use App\Models\News;
 use App\Models\User;
-use App\Models\Pigeon;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,15 +20,12 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        // Pigeon::factory()
-        //     ->for(User::factory())
-        //     ->hasAttached(News::factory()->count(3),[
-        //         'arrival_date' => fake()->dateTimeBetween('now', '+1 month')
-        //     ])
-        //     ->create();
-
         $this->call([
             NewsSeeder::class,
         ]);
+
+        $news = News::all();
+        User::first()->pigeon->news()->attach($news[0], ['arrival_date' => now()->subDay()]);
+        User::first()->pigeon->news()->attach($news[1], ['arrival_date' => now()->subYear()]);
     }
 }
