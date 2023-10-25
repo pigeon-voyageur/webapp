@@ -25,7 +25,7 @@ const selectedLine = computed(() => props.lines.find((line) => line.value === pr
 <template>
     <Listbox as="div" class="relative" :model-value="modelValue" @update:modelValue="(value)=>emit('update:modelValue', value)">
         <ListboxButton class="relative input-field text-left">
-            <span class="text-meta">{{ selectedLine.label }}</span>
+            <span class="text-meta">{{ selectedLine?.label ?? 'Choisir' }}</span>
             <ChevronDownIcon class="absolute right-2 top-1/2 -translate-y-1/2 h-6 ui-open:rotate-180 transition-transform duration-200" />
         </ListboxButton>
         <transition
