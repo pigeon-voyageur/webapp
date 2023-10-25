@@ -39,27 +39,30 @@ const newsCount = computed<number>(() => {
 })
 </script>
 <template>
-    <div class="relative w-36 h-40 overflow-hidden">
-        <img class="absolute w-full bottom-0 -right-2" src="/assets/images/perch-back.png" width="236" height="97" alt="" />
-        <div class="absolute bottom-10 left-0 flex items-center justify-center h-10 w-10 bg-pink rounded-full border">
-            <span class=" text-button -mb-1">
-            {{ newsCount }}
-            </span>
-        </div>
-        <template v-if="!pigeon.isTravelling">
+    <div class="relative w-14 h-14">
+        <img v-if="pigeon.isTravelling"
+             class="h-full w-full"
+             src="/assets/images/pigeon-icon-travelling.svg"
+             alt="" />
+        <template v-else>
+
             <img v-if="pigeon.news.length === 0"
-                 class="absolute bottom-2.5 right-5 h-32 w-auto"
-                 src="/assets/images/pigeon-face.svg"
-                 width="240"
-                 height="406"
+                 class="h-full w-full"
+                 src="/assets/images/pigeon-icon-no-message.svg"
                  alt="" />
 
-            <img v-else
-                 class="absolute bottom-2.5 right-5 h-32 w-auto"
-                 src="/assets/images/pigeon-face-message.svg"
-                 width="240"
-                 height="406"
-                 alt="" />
+            <template v-else>
+                <img
+                    class="h-full w-full"
+                    src="/assets/images/pigeon-icon-message.svg"
+                    alt="" />
+
+                <div class="absolute -top-2.5 -right-2.5 flex items-center justify-center h-8 w-8 bg-red rounded-full">
+                    <span class="text-button text-white -mb-1">
+                        {{ newsCount }}
+                    </span>
+                </div>
+            </template>
         </template>
 
         <button @click="handlePerchClick" class="absolute top-0 left-0 h-full w-full pointer-events-auto">
