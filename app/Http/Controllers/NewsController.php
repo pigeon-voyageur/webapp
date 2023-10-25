@@ -48,7 +48,6 @@ class NewsController extends Controller
         News::create([
             'title' => $request->input('title'),
             'summary' => $request->input('summary'),
-            'video' => $request->input('video'),
             'lng' => $request->input('lng'),
             'lat' => $request->input('lat'),
             'sources' => $request->input('sources'),
@@ -85,7 +84,6 @@ class NewsController extends Controller
         $news->update([
             'title' => $request->input('title'),
             'summary' => $request->input('summary'),
-            'video' => $request->input('video'),
             'lng' => $request->input('lng'),
             'lat' => $request->input('lat'),
             'sources' => $request->input('sources'),
