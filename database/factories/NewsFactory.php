@@ -21,6 +21,18 @@ class NewsFactory extends Factory
             'summary' => fake()->paragraph(),
             'lat' => fake()->latitude(),
             'lng' => fake()->longitude(),
+            'sources' => [
+                [
+                    'url' => fake()->url(),
+                    'label' => fake()->word(),
+                ],
+            ],
+            'resources' => [
+                [
+                    'url' => fake()->url(),
+                    'label' => fake()->word(),
+                ],
+            ],
         ];
     }
 }

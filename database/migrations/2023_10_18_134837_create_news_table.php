@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->double('lat');
             $table->double('lng');
             $table->json('sources')->nullable();
+            $table->json('resources')->nullable();
             $table->timestamps();
         });
     }

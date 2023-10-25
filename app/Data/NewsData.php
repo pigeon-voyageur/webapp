@@ -20,6 +20,8 @@ class NewsData extends Data
         public float $lng,
         #[DataCollectionOf(LinkRowData::class)]
         public DataCollection $sources,
+        #[DataCollectionOf(LinkRowData::class)]
+        public DataCollection $resources,
         public ?PigeonMessageData $message,
     ) {
     }
@@ -33,6 +35,7 @@ class NewsData extends Data
             $news->lat,
             $news->lng,
             LinkRowData::collection($news->sources),
+            LinkRowData::collection($news->resources),
             PigeonMessageData::optional($news->message),
         );
     }

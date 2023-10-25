@@ -27,6 +27,7 @@ class UpdateNewsRequest extends FormRequest
             'lat' => 'required|numeric',
             'lng' => 'required|numeric',
             'sources' => 'required|array',
+            'resources' => 'nullable|array',
         ];
     }
 }

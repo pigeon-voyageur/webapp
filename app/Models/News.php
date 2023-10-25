@@ -16,10 +16,12 @@ class News extends Model
         'lat',
         'lng',
         'sources',
+        'resources',
     ];
     
     protected $casts = [
         'sources' => 'array',
+        'resources' => 'array',
     ];
 
     public function pigeon(): BelongsToMany
