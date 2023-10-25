@@ -2,7 +2,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import {Head} from '@inertiajs/vue3';
 import NewsForm from "@/Pages/News/Partials/NewsForm.vue";
-import H2 from "@/Components/Primitives/H2.vue";
+import H1 from "@/Components/Primitives/H1.vue";
 import NewsData = App.Data.NewsData;
 
 defineProps<{
@@ -16,16 +16,10 @@ defineProps<{
     </Head>
 
     <AuthenticatedLayout>
-        <template #header>
-            <H2>Modifier une information</H2>
-        </template>
+        <div class="container py-6">
+            <H1 class="text-blue">Modifier une information</H1>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                    <NewsForm :news="news" />
-                </div>
-            </div>
+            <NewsForm class="mt-16" :news="news" />
         </div>
     </AuthenticatedLayout>
 </template>

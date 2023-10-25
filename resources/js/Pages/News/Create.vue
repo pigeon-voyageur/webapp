@@ -2,24 +2,19 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import {Head} from '@inertiajs/vue3';
 import NewsForm from "@/Pages/News/Partials/NewsForm.vue";
-import H2 from "@/Components/Primitives/H2.vue";</script>
+import H1 from "@/Components/Primitives/H1.vue";</script>
 
 <template>
     <Head>
-        <title>Créer une information</title>
+        <title>Publier une information</title>
     </Head>
 
     <AuthenticatedLayout>
-        <template #header>
-            <H2>Créer une information</H2>
-        </template>
+        <div class="container py-6">
+            <H1 class="text-blue">Publier une information</H1>
+            <p class="mt-6 text-meta">Envie de faire parler votre plume ? Écrivez votre message ici...</p>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                    <NewsForm />
-                </div>
-            </div>
+            <NewsForm class="mt-16" />
         </div>
     </AuthenticatedLayout>
 </template>

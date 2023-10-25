@@ -10,11 +10,13 @@ import 'ol/ol.css'
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 import {Coordinate} from "ol/coordinate";
+import {MapBrowserEvent} from "openlayers";
 import {Collection, Feature} from "ol";
 import {defaults as defaultControls} from 'ol/control.js';
 import {Geometry} from "ol/geom";
 import {Select} from "ol/interaction";
 import {SelectEvent} from "ol/interaction/Select";
+import {newsToGetStyle} from "@/Components/Map/Styles/news.style";
 
 const props = defineProps<{
     features: Feature<Geometry>[] | Collection<Feature<Geometry>> | undefined,
@@ -22,10 +24,13 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
+    clickMap: [e: MapBrowserEvent],
     clickFeature: [feature: Feature],
 }>();
 
-const vectorLayer = new VectorLayer();
+const vectorLayer = new VectorLayer({
+    style: newsToGetStyle
+});
 const selectSingleClick = new Select({style: null});
 const map = ref(new Map());
 const mapRoot = ref<HTMLElement | null>(null);
@@ -78,6 +83,12 @@ onMounted(() => {
             emit('clickFeature', selectEvent.selected[0]);
             selectSingleClick.getFeatures().clear();
         }
+    })
+
+    map.value.on('click', (e) => {
+        const mapEvent = e as unknown as MapBrowserEvent;
+
+        emit('clickMap', mapEvent);
     })
 })
 </script>

@@ -19,7 +19,6 @@ class NewsFactory extends Factory
         return [
             'title' => fake()->sentence(),
             'summary' => fake()->paragraph(),
-            'video' => 'https://www.youtube.com/watch?v=DlcGxjtcr3s',
             'lat' => fake()->latitude(),
             'lng' => fake()->longitude(),
         ];

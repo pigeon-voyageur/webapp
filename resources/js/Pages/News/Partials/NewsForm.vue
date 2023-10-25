@@ -15,6 +15,8 @@ import {Point} from "ol/geom";
 import {Coordinate} from "ol/coordinate";
 import {MapBrowserEvent} from "openlayers";
 import TextListInput from "@/Components/Form/TextListInput.vue";
+import LinkListInput from "@/Components/Form/LinkListInput.vue";
+import InputHint from "@/Components/Form/InputHint.vue";
 
 const props = defineProps<{
     news?: NewsData;
@@ -23,7 +25,6 @@ const props = defineProps<{
 const form = useForm({
     title: props.news?.title ?? '',
     summary: props.news?.summary ?? '',
-    video: props.news?.video ?? '',
     lat: props.news?.lat ?? 0,
     lng: props.news?.lng ?? 0,
     sources: props.news?.sources ?? [],
@@ -63,121 +64,97 @@ function handleSubmit() {
 </script>
 
 <template>
-    <section>
-        <header>
-            <template v-if="news">
-                <h2 class="text-lg font-medium text-gray-900">Modifier une information</h2>
+    <form @submit.prevent="handleSubmit" class="relative z-0 space-y-6 bg-yellow -m-3 p-3 rounded-xl">
+        <img src="/assets/images/bg.png" alt="" height="719" width="1000" class="absolute h-full w-full top-0 left-0 -z-10 rounded-xl" />
 
-                <p class="mt-1 text-sm text-gray-600">
-                    Modifiez une information ou contribuez à son amélioration.
-                </p>
-            </template>
-            <template v-else>
-                <h2 class="text-lg font-medium text-gray-900">Publier une information</h2>
+        <div>
+            <InputLabel for="title" value="Titre" />
 
-                <p class="mt-1 text-sm text-gray-600">
-                    Ajoutez une information.
-                </p>
-            </template>
-        </header>
+            <TextInput
+                id="title"
+                type="text"
+                placeholder=""
+                v-model="form.title"
+                required
+                autofocus
+            />
 
-        <form @submit.prevent="handleSubmit" class="mt-6 space-y-6">
-            <div>
-                <InputLabel for="title" value="Titre" />
+            <InputError :message="form.errors.title" />
+        </div>
 
-                <TextInput
-                    id="title"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.title"
-                    required
-                    autofocus
-                />
+        <div>
+            <InputLabel for="summary" value="Résumé de la situation" />
 
-                <InputError class="mt-2" :message="form.errors.title" />
-            </div>
+            <InputHint value="Soyez objectif, essayez de conserver un ton neutre" />
 
-            <div>
-                <InputLabel for="summary" value="Résumé" />
+            <TextareaInput
+                id="summary"
+                type="text"
+                rows="6"
+                v-model="form.summary"
+                required
+            />
 
-                <TextareaInput
-                    id="summary"
-                    type="text"
-                    class="mt-1 block w-full"
-                    rows="6"
-                    v-model="form.summary"
-                    required
-                />
+            <InputError class="mt-2" :message="form.errors.summary" />
+        </div>
 
-                <InputError class="mt-2" :message="form.errors.summary" />
-            </div>
+        <div>
+            <InputLabel for="sources" value="Lien de la source" />
 
-            <div>
-                <InputLabel for="sources" value="Sources du résumé" />
+            <LinkListInput
+                id="sources"
+                placeholder="Ex: https://lemonde.com"
+                class="mt-1 block w-full"
+                v-model="form.sources"           
+            />
 
-                <TextListInput
-                    id="summary"
-                    placeholder="Ex: https://lemonde.com"
-                    class="mt-1 block w-full"
-                    v-model="form.sources"
-                />
+            <InputError class="mt-2" :message="form.errors.sources" />
+        </div>
 
-                <InputError class="mt-2" :message="form.errors.sources" />
-            </div>
 
-            <div>
-                <InputLabel for="video" value="Vidéo" />
+        <div>
+            <InputLabel value="Emplacement" />
 
-                <TextInput
-                    id="video"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.video"
-                />
+            <MapContainer class="mt-2 w-full border aspect-video" :features="features" :center="mapCenter" @clickMap="handleClickMap" />
+        </div>
 
-                <InputError class="mt-2" :message="form.errors.video" />
-            </div>
+        <div>
+            <InputLabel for="lat" value="Latitude" />
 
-            <div>
-                <InputLabel for="lat" value="Latitude" />
+            <NumberInput
+                id="lat"
+                type="text"
+                class="mt-1 block w-full"
+                v-model="form.lat"
+            />
 
-                <NumberInput
-                    id="lat"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.lat"
-                />
+            <InputError class="mt-2" :message="form.errors.lat" />
+        </div>
 
-                <InputError class="mt-2" :message="form.errors.lat" />
-            </div>
+        <div>
+            <InputLabel for="lng" value="Longitude" />
 
-            <div>
-                <InputLabel for="lng" value="Longitude" />
+            <NumberInput
+                id="lng"
+                type="text"
+                class="mt-1 block w-full"
+                v-model="form.lng"
+            />
 
-                <NumberInput
-                    id="lng"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.lng"
-                />
+            <InputError class="mt-2" :message="form.errors.lng" />
+        </div>
 
-                <InputError class="mt-2" :message="form.errors.lng" />
-            </div>
+        <div class="flex items-center gap-4">
+            <PrimaryButton :disabled="form.processing">{{ news ? 'Enregistrer' : 'Publier' }}</PrimaryButton>
 
-            <MapContainer class="w-full border aspect-video" :features="features" :center="mapCenter" @clickMap="handleClickMap" />
-
-            <div class="flex items-center gap-4">
-                <PrimaryButton :disabled="form.processing">{{ news ? 'Enregistrer' : 'Publier' }}</PrimaryButton>
-
-                <Transition
-                    enter-active-class="transition ease-in-out"
-                    enter-from-class="opacity-0"
-                    leave-active-class="transition ease-in-out"
-                    leave-to-class="opacity-0"
-                >
-                    <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">Enregistré.</p>
-                </Transition>
-            </div>
-        </form>
-    </section>
+            <Transition
+                enter-active-class="transition ease-in-out"
+                enter-from-class="opacity-0"
+                leave-active-class="transition ease-in-out"
+                leave-to-class="opacity-0"
+            >
+                <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">Enregistré.</p>
+            </Transition>
+        </div>
+    </form>
 </template>
