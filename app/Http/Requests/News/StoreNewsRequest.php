@@ -35,6 +35,27 @@ class StoreNewsRequest extends FormRequest
             'sources' => 'required|array',
             'sources.*.label' => 'required|string',
             'sources.*.url' => 'required|string',
+            'resources' => 'nullable|array',
+            'resources.*.label' => 'required|string',
+            'resources.*.url' => 'required|string',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'sources.*.label' => [
+                'required' => 'Le champs est requis',
+            ],
+            'sources.*.url' => [
+                'required' => 'Le champs est requis',
+            ],
+            'resources.*.label' => [
+                'required' => 'Le champs est requis',
+            ],
+            'resources.*.url' => [
+                'required' => 'Le champs est requis',
+            ],
         ];
     }
 }
