@@ -14,7 +14,6 @@ return new class extends Migration {
             $table->id();
             $table->string('title');
             $table->mediumText('summary');
-            $table->string('video')->nullable();
             $table->double('lat');
             $table->double('lng');
             $table->json('sources')->nullable();

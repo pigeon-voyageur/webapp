@@ -3,7 +3,10 @@
 namespace App\Data;
 
 use App\Models\News;
+use App\Data\LinkRowData;
 use Spatie\LaravelData\Data;
+use Spatie\LaravelData\DataCollection;
+use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
 #[TypeScript]
@@ -13,11 +16,10 @@ class NewsData extends Data
         public int $id,
         public string $title,
         public string $summary,
-        public ?string $video,
         public float $lat,
         public float $lng,
-        /** @var Array[] */
-        public ?array $sources,
+        #[DataCollectionOf(LinkRowData::class)]
+        public DataCollection $sources,
         public ?PigeonMessageData $message,
     ) {
     }
@@ -28,10 +30,9 @@ class NewsData extends Data
             $news->id,
             $news->title,
             $news->summary,
-            $news->video,
             $news->lat,
             $news->lng,
-            $news->sources,
+            LinkRowData::collection($news->sources),
             PigeonMessageData::optional($news->message),
         );
     }

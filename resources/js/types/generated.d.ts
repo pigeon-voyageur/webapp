@@ -1,12 +1,21 @@
 declare namespace App.Data {
+export type LightNewsData = {
+id: number;
+lat: number;
+lng: number;
+};
+export type LinkRowData = {
+label: string;
+url: string;
+};
 export type NewsData = {
 id: number;
 title: string;
 summary: string;
-video: string | null;
 lat: number;
 lng: number;
-sources: Array<Array<any>> | null;
+sources: Array<App.Data.LinkRowData>;
+message: App.Data.PigeonMessageData | null;
 };
 export type PigeonData = {
 id: number;

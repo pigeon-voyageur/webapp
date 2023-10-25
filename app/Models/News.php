@@ -13,7 +13,6 @@ class News extends Model
     public $fillable = [
         'title',
         'summary',
-        'video',
         'lat',
         'lng',
         'sources',
