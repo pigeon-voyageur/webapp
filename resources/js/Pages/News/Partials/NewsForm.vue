@@ -106,7 +106,7 @@ function handleSubmit() {
                 id="sources"
                 placeholder="Ex: https://lemonde.com"
                 class="mt-1 block w-full"
-                v-model="form.sources"
+                v-model="form.sources"           
             />
 
             <InputError class="mt-2" :message="form.errors.sources" />

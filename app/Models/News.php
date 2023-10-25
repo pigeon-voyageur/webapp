@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class News extends Model
@@ -18,7 +18,7 @@ class News extends Model
         'lng',
         'sources',
     ];
-
+    
     protected $casts = [
         'sources' => 'array',
     ];
@@ -30,4 +30,5 @@ class News extends Model
             ->withPivot(['id', 'arrival_date'])
             ->using(PigeonMessage::class);
     }
+
 }

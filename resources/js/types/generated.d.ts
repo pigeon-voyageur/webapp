@@ -6,8 +6,7 @@ summary: string;
 video: string | null;
 lat: number;
 lng: number;
-sources: Array<string> | null;
-message: App.Data.PigeonMessageData | null;
+sources: Array<Array<any>> | null;
 };
 export type PigeonData = {
 id: number;

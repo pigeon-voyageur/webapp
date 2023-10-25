@@ -7,6 +7,7 @@ import NewsData = App.Data.NewsData;
 defineProps<{
     news: NewsData;
 }>();
+
 </script>
 
 <template>
@@ -31,7 +32,7 @@ defineProps<{
                     <h3 class="mt-2">Sources</h3>
                     <ul>
                         <li v-for="(source, index) in news.sources" :key="index">
-                            <a :href="source" target="_blank" rel="noreferrer">{{ source }}</a>
+                            <a :href="source.url" target="_blank" rel="noreferrer">{{ source.label}}</a>
                         </li>
                         <li v-if="!news.sources?.length">
                             Aucune source pour l'instant.
