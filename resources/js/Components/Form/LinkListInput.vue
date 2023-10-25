@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import TextInput from "@/Components/Form/TextInput.vue";
 import QuaternaryButton from "@/Components/Primitives/QuaternaryButton.vue";
-import SecondaryButton from "@/Components/Primitives/SecondaryButton.vue";
 import InputLabel from '@/Components/Form/InputLabel.vue';
-import { onMounted } from "vue";
+import {onMounted} from "vue";
+import TertiaryButton from "@/Components/Primitives/TertiaryButton.vue";
+import InputError from "@/Components/Form/InputError.vue";
+import {XMarkIcon} from '@heroicons/vue/24/outline';
 
 type LinkRow = {
     label: string;
@@ -11,7 +13,9 @@ type LinkRow = {
 }
 
 const props = defineProps<{
+    id?: string;
     modelValue: Array<LinkRow>;
+    errors: { [key: string]: string };
 }>();
 
 const emit = defineEmits<{
@@ -34,7 +38,7 @@ function handleInputUrl(lineIndex: number, url: string) {
 
 function handleNewLine() {
     const newModelValue = [...props.modelValue];
-    newModelValue.push({ label: '', url: '' });
+    newModelValue.push({label: '', url: ''});
 
     emit('update:modelValue', newModelValue)
 }
@@ -46,8 +50,8 @@ function handleDeleteLine(index: number) {
     emit('update:modelValue', newModelValue)
 }
 
-onMounted(()=>{
-    if(props.modelValue.length === 0){
+onMounted(() => {
+    if (props.modelValue.length === 0) {
         handleNewLine();
     }
 })
@@ -56,27 +60,46 @@ onMounted(()=>{
 
 <template>
     <div>
-        <div v-if="modelValue.length" class="mb-2 flex flex-col gap-2 ">
-            <article class="flex flex-col gap-2 px-2 py-3 mb-1 border relative bg-white"
-                v-for="(linkRow, index) in modelValue" :key="index">
-                <div class="absolute top-0 right-0 !w-11">
+        <div v-if="modelValue.length" class="flex flex-col gap-2 ">
+            <article
+                v-for="(linkRow, index) in modelValue"
+                :key="index"
+                class="flex flex-col gap-2 px-2 py-3 mb-1 border relative bg-white"
+            >
+                <div v-if="index>0" class="absolute top-0 right-0 !w-11">
                     <QuaternaryButton class="" type="button" @click="handleDeleteLine(index)">
-                        <img src="/assets/images/cross.svg" alt="Croix">
+                        <span class="sr-only">Supprimer le lien</span>
+                        <XMarkIcon class="h-8" />
                     </QuaternaryButton>
                 </div>
-                <div class="flex flex-col">
+
+                <div>
                     <InputLabel for="linkRow_url" value="Lien" />
-                    <TextInput class="w-full" :model-value="linkRow.url"
-                        @update:modelValue="(value) => handleInputUrl(index, value)" />
+
+                    <TextInput
+                        class="w-full"
+                        :model-value="linkRow.url"
+                        @update:modelValue="(value) => handleInputUrl(index, value)"
+                        placeholder="Ex: https://youtube/..."
+                    />
+
+                    <InputError :message="errors[`${id}.${index}.url`] ?? null" />
                 </div>
-                <div class="flex flex-col">
+
+                <div>
                     <InputLabel for="linkRow_label" value="Label affiché" />
-                    <TextInput class="w-full" :model-value="linkRow.label"
-                        @update:modelValue="(value) => handleInputLabel(index, value)" />
+
+                    <TextInput
+                        class="w-full"
+                        :model-value="linkRow.label"
+                        @update:modelValue="(value) => handleInputLabel(index, value)"
+                        placeholder="Ex: Vidéo youtube"
+                    />
+                    <InputError :message="errors[`${id}.${index}.label`] ?? null" />
                 </div>
             </article>
         </div>
 
-        <SecondaryButton type="button" @click="handleNewLine">Ajouter un lien</SecondaryButton>
+        <TertiaryButton class="mt-1" type="button" @click="handleNewLine">Ajouter un lien</TertiaryButton>
     </div>
 </template>
