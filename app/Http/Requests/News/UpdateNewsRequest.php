@@ -36,6 +36,8 @@ class UpdateNewsRequest extends FormRequest
             'sources.*.label' => 'required|string',
             'sources.*.url' => 'required|string',
             'resources' => 'nullable|array',
+            'resources.*.label' => 'required|string',
+            'resources.*.url' => 'required|string',
         ];
     }
 
@@ -46,6 +48,12 @@ class UpdateNewsRequest extends FormRequest
                 'required' => 'Le champs est requis',
             ],
             'sources.*.url' => [
+                'required' => 'Le champs est requis',
+            ],
+            'resources.*.label' => [
+                'required' => 'Le champs est requis',
+            ],
+            'resources.*.url' => [
                 'required' => 'Le champs est requis',
             ],
         ];
