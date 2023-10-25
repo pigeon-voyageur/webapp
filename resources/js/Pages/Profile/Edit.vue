@@ -6,6 +6,7 @@ import UpdateProfileInformationForm from './Partials/UpdateProfileInformationFor
 import {Head} from '@inertiajs/vue3';
 import LogoutForm from "@/Pages/Profile/Partials/LogoutForm.vue";
 import H1 from "@/Components/Primitives/H1.vue";
+import H2 from "@/Components/Primitives/H2.vue";
 
 defineProps<{
     mustVerifyEmail?: boolean;
@@ -31,10 +32,14 @@ defineProps<{
 
                     <UpdatePasswordForm />
 
-                    <div class="space-y-2">
+                    <section class="space-y-2">
+                        <header>
+                            <H2>Partir</H2>
+                        </header>
+
                         <LogoutForm />
                         <DeleteUserForm />
-                    </div>
+                    </section>
                 </div>
             </div>
         </div>
