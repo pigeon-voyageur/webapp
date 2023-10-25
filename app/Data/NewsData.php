@@ -3,10 +3,9 @@
 namespace App\Data;
 
 use App\Models\News;
-use App\Data\LinkRowData;
+use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\DataCollection;
-use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
 #[TypeScript]
@@ -15,6 +14,8 @@ class NewsData extends Data
     public function __construct(
         public int $id,
         public string $title,
+        public int $news_category_id,
+        public NewsCategoryData $category,
         public string $summary,
         public float $lat,
         public float $lng,
@@ -29,6 +30,8 @@ class NewsData extends Data
         return new self(
             $news->id,
             $news->title,
+            $news->news_category_id,
+            NewsCategoryData::from($news->newsCategory),
             $news->summary,
             $news->lat,
             $news->lng,

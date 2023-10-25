@@ -8,9 +8,16 @@ export type LinkRowData = {
 label: string;
 url: string;
 };
+export type NewsCategoryData = {
+id: number;
+name: string;
+title: string;
+};
 export type NewsData = {
 id: number;
 title: string;
+news_category_id: number;
+category: App.Data.NewsCategoryData;
 summary: string;
 lat: number;
 lng: number;

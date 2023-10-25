@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\News;
 
+use App\Models\NewsCategory;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreNewsRequest extends FormRequest
 {
@@ -23,10 +25,16 @@ class StoreNewsRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:255',
+            'news_category_id' => [
+                'required',
+                Rule::exists(NewsCategory::class, 'id'),
+            ],
             'summary' => 'required|string',
             'lat' => 'required|numeric',
             'lng' => 'required|numeric',
             'sources' => 'required|array',
+            'sources.*.label' => 'required|string',
+            'sources.*.url' => 'required|string',
         ];
     }
 }

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import NewsData = App.Data.NewsData;
+import NewsCategoryData = App.Data.NewsCategoryData;
 import InputError from '@/Components/Form/InputError.vue';
 import InputLabel from '@/Components/Form/InputLabel.vue';
 import TextInput from '@/Components/Form/TextInput.vue';
@@ -14,16 +15,18 @@ import {Feature} from "ol";
 import {Point} from "ol/geom";
 import {Coordinate} from "ol/coordinate";
 import {MapBrowserEvent} from "openlayers";
-import TextListInput from "@/Components/Form/TextListInput.vue";
 import LinkListInput from "@/Components/Form/LinkListInput.vue";
 import InputHint from "@/Components/Form/InputHint.vue";
+import SelectInput from "@/Components/Form/SelectInput.vue";
 
 const props = defineProps<{
     news?: NewsData;
+    newsCategories: Array<NewsCategoryData>;
 }>();
 
 const form = useForm({
     title: props.news?.title ?? '',
+    news_category_id: props.news?.news_category_id ?? props.newsCategories[0].id,
     summary: props.news?.summary ?? '',
     lat: props.news?.lat ?? 0,
     lng: props.news?.lng ?? 0,
@@ -37,6 +40,11 @@ const features = computed(() => {
         })
     ]
 });
+
+const newsCategoriesLines = computed(() => props.newsCategories.map((category) => ({
+    value: category.id,
+    label: category.title
+})))
 
 const mapCenter = computed(() => {
     if (!props.news) {
@@ -83,6 +91,19 @@ function handleSubmit() {
         </div>
 
         <div>
+            <InputLabel for="news_category_id" value="Catégorie" />
+
+            <SelectInput
+                id="news_category_id"
+                v-model="form.news_category_id"
+                required
+                :lines="newsCategoriesLines"
+            />
+
+            <InputError :message="form.errors.title" />
+        </div>
+
+        <div>
             <InputLabel for="summary" value="Résumé de la situation" />
 
             <InputHint value="Soyez objectif, essayez de conserver un ton neutre" />
@@ -99,18 +120,17 @@ function handleSubmit() {
         </div>
 
         <div>
-            <InputLabel for="sources" value="Lien de la source" />
+            <InputLabel for="sources" value="Liens vers des sources" />
 
             <LinkListInput
                 id="sources"
-                placeholder="Ex: https://lemonde.com"
                 class="mt-1 block w-full"
-                v-model="form.sources"           
+                v-model="form.sources"
+                :errors="form.errors"
             />
 
             <InputError class="mt-2" :message="form.errors.sources" />
         </div>
-
 
         <div>
             <InputLabel value="Emplacement" />

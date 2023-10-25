@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Data\LightNewsData;
+use App\Data\NewsCategoryData;
 use App\Data\NewsData;
 use App\Data\PigeonData;
 use App\Http\Requests\News\StoreNewsRequest;
 use App\Http\Requests\News\UpdateNewsRequest;
 use App\Models\News;
+use App\Models\NewsCategory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -37,7 +39,9 @@ class NewsController extends Controller
      */
     public function create(): Response
     {
-        return Inertia::render('News/Create');
+        return Inertia::render('News/Create', [
+            'newsCategories' => NewsCategoryData::collection(NewsCategory::all()),
+        ]);
     }
 
     /**
@@ -47,6 +51,7 @@ class NewsController extends Controller
     {
         News::create([
             'title' => $request->input('title'),
+            'news_category_id' => $request->input('news_category_id'),
             'summary' => $request->input('summary'),
             'lng' => $request->input('lng'),
             'lat' => $request->input('lat'),
@@ -73,6 +78,7 @@ class NewsController extends Controller
     {
         return Inertia::render('News/Edit', [
             'news' => $news,
+            'newsCategories' => NewsCategoryData::collection(NewsCategory::all()),
         ]);
     }
 
@@ -83,6 +89,7 @@ class NewsController extends Controller
     {
         $news->update([
             'title' => $request->input('title'),
+            'news_category_id' => $request->input('news_category_id'),
             'summary' => $request->input('summary'),
             'lng' => $request->input('lng'),
             'lat' => $request->input('lat'),
