@@ -6,7 +6,6 @@ import Modal from '@/Components/Modal.vue';
 import TextInput from '@/Components/Form/TextInput.vue';
 import {useForm, usePage} from '@inertiajs/vue3';
 import {nextTick, ref} from 'vue';
-import H3 from "@/Components/Primitives/H3.vue";
 import QuaternaryButton from "@/Components/Primitives/QuaternaryButton.vue";
 
 const confirmingUserDeletion = ref(false);
@@ -47,42 +46,37 @@ const closeModal = () => {
         <DangerButton @click="confirmUserDeletion">Supprimer mon compte</DangerButton>
 
         <Modal :show="confirmingUserDeletion" @close="closeModal">
+            <template #header>
+                Tu veux déjà voler de tes propres ailes ?
+            </template>
+
             <form @submit.prevent="deleteUser">
-                <div class="relative p-6">
+                <input type="text" class="hidden" :value="user.name" name="username" autocomplete="username" />
 
-                    <H3>
-                        Tu veux déjà voler de tes propres ailes ?
-                    </H3>
+                <div>
+                    <InputLabel for="password" value="Mot de passe" />
 
-                    <input type="text" class="hidden" :value="user.name" name="username" autocomplete="username" />
+                    <TextInput
+                        id="password"
+                        ref="passwordInput"
+                        v-model="form.password"
+                        type="password"
+                        @keyup.enter="deleteUser"
+                        autocomplete="false"
+                    />
 
-                    <div class=" mt-6">
-                        <InputLabel for="password" value="Mot de passe" />
+                    <InputError :message="form.errors.password" />
 
-                        <TextInput
-                            id="password"
-                            ref="passwordInput"
-                            v-model="form.password"
-                            type="password"
-                            class="mt-1 block w-3/4"
-                            @keyup.enter="deleteUser"
-                            autocomplete="false"
-                        />
-
-                        <InputError :message="form.errors.password" class="mt-2" />
-
-                    </div>
-
-                    <img class="absolute -z-10 bottom-0 right-0 w-20" src="/assets/images/pigeon-detective-tall.svg" alt="" />
                 </div>
 
-                <div class="flex flex-col">
-                    <DangerButton
+                <div class="mt-6 space-y-2">
+                    <QuaternaryButton
+                        class="text-red"
                         :class="{ 'opacity-25': form.processing }"
                         :disabled="form.processing"
                     >
                         Oui, supprimer mon compte
-                    </DangerButton>
+                    </QuaternaryButton>
 
                     <QuaternaryButton type="button" @click="closeModal">
                         Non, annuler
