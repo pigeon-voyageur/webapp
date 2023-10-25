@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\NewsCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,6 +19,7 @@ class NewsFactory extends Factory
     {
         return [
             'title' => fake()->sentence(),
+            'news_category_id' => NewsCategory::inRandomOrder()->first()->id,
             'summary' => fake()->paragraph(),
             'lat' => fake()->latitude(),
             'lng' => fake()->longitude(),
