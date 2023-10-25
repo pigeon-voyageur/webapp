@@ -26,7 +26,7 @@ const map = ref<HTMLElement>();
 const parentElement = useParentElement(map);
 const parentElementSize = useElementSize(parentElement);
 
-let newsStatePollingInterval = null;
+let newsStatePollingInterval: number;
 
 onMounted(() => {
     newsStatePollingInterval = setInterval(() => router.reload({only: ['news', 'pigeon']}), 10_000);
