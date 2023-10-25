@@ -73,7 +73,7 @@ onMounted(() => {
     map.value.addInteraction(selectSingleClick);
     selectSingleClick.on('select', function (e) {
         const selectEvent = e as unknown as SelectEvent;
-        console.log('select', e)
+
         if (selectEvent.selected[0]) {
             emit('clickFeature', selectEvent.selected[0]);
             selectSingleClick.getFeatures().clear();

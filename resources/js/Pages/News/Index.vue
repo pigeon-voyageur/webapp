@@ -29,7 +29,7 @@ const parentElementSize = useElementSize(parentElement);
 let newsStatePollingInterval = null;
 
 onMounted(() => {
-    newsStatePollingInterval = setInterval(() => router.reload({only: ['news']}), 10_000);
+    newsStatePollingInterval = setInterval(() => router.reload({only: ['news', 'pigeon']}), 10_000);
 })
 
 onUnmounted(() => {
@@ -127,7 +127,7 @@ function handlePerchClick() {
             @clickFeature="handleClickFeature"
         />
 
-        <div class="absolute right-0 bottom-24 pointer-events-none">
+        <div class="absolute right-4 bottom-24 pointer-events-none">
             <PigeonPerch :pigeon="pigeon" @click="handlePerchClick" />
         </div>
 
