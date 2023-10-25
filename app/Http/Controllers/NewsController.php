@@ -56,6 +56,7 @@ class NewsController extends Controller
             'lng' => $request->input('lng'),
             'lat' => $request->input('lat'),
             'sources' => $request->input('sources'),
+            'resources' => $request->input('resources'),
         ]);
 
         return Redirect::route('news.index');
@@ -94,6 +95,7 @@ class NewsController extends Controller
             'lng' => $request->input('lng'),
             'lat' => $request->input('lat'),
             'sources' => $request->input('sources'),
+            'resources' => $request->input('resources'),
         ]);
 
         return Redirect::route('news.index');
