@@ -35,6 +35,7 @@ class StoreNewsRequest extends FormRequest
             'sources' => 'required|array',
             'sources.*.label' => 'required|string',
             'sources.*.url' => 'required|string',
+            'resources' => 'nullable|array',
         ];
     }
 }
