@@ -25,7 +25,6 @@ const props = defineProps<{
 const form = useForm({
     title: props.news?.title ?? '',
     summary: props.news?.summary ?? '',
-    video: props.news?.video ?? '',
     lat: props.news?.lat ?? 0,
     lng: props.news?.lng ?? 0,
     sources: props.news?.sources ?? [],
@@ -112,18 +111,6 @@ function handleSubmit() {
             <InputError class="mt-2" :message="form.errors.sources" />
         </div>
 
-        <div>
-            <InputLabel for="video" value="Vidéo" />
-
-            <TextInput
-                id="video"
-                type="text"
-                class="mt-1 block w-full"
-                v-model="form.video"
-            />
-
-            <InputError class="mt-2" :message="form.errors.video" />
-        </div>
 
         <div>
             <InputLabel value="Emplacement" />

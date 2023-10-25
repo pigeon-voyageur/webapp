@@ -41,7 +41,6 @@ defineProps<{
                     </ul>
 
                     <hr class="mt-4 mb-2">
-                    <a v-if="news.video" :href="news.video">Voir la vidéo</a>
                 </div>
             </div>
         </div>
