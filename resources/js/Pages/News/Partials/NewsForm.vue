@@ -31,6 +31,7 @@ const form = useForm({
     lat: props.news?.lat ?? 0,
     lng: props.news?.lng ?? 0,
     sources: props.news?.sources ?? [],
+    resources: props.news?.resources ?? [],
 });
 
 const features = computed(() => {
@@ -120,16 +121,30 @@ function handleSubmit() {
         </div>
 
         <div>
-            <InputLabel for="sources" value="Liens vers des sources" />
+            <InputLabel for="sources" value="Source(s)" />
 
             <LinkListInput
                 id="sources"
                 class="mt-1 block w-full"
                 v-model="form.sources"
                 :errors="form.errors"
+                required
             />
 
             <InputError class="mt-2" :message="form.errors.sources" />
+        </div>
+
+        <div>
+            <InputLabel for="resources" value="Ressource(s)" />
+
+            <LinkListInput
+                id="resources"
+                class="mt-1 block w-full"
+                v-model="form.resources"
+                :errors="form.errors"
+            />
+
+            <InputError class="mt-2" :message="form.errors.resources" />
         </div>
 
         <div>

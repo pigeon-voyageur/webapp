@@ -16,6 +16,7 @@ const props = defineProps<{
     id?: string;
     modelValue: Array<LinkRow>;
     errors: { [key: string]: string };
+    required?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -51,10 +52,11 @@ function handleDeleteLine(index: number) {
 }
 
 onMounted(() => {
-    if (props.modelValue.length === 0) {
+    if (props.modelValue.length === 0 && props.required) {
         handleNewLine();
     }
 })
+
 
 </script>
 
@@ -66,7 +68,7 @@ onMounted(() => {
                 :key="index"
                 class="flex flex-col gap-2 px-2 py-3 mb-1 border relative bg-white"
             >
-                <div v-if="index>0" class="absolute top-0 right-0 !w-11">
+                <div v-if="!required || (required && index>0)" class="absolute top-0 right-0 !w-11">
                     <QuaternaryButton class="" type="button" @click="handleDeleteLine(index)">
                         <span class="sr-only">Supprimer le lien</span>
                         <XMarkIcon class="h-8" />

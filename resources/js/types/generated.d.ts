@@ -22,6 +22,7 @@ summary: string;
 lat: number;
 lng: number;
 sources: Array<App.Data.LinkRowData>;
+resources: Array<App.Data.LinkRowData>;
 message: App.Data.PigeonMessageData | null;
 };
 export type PigeonData = {

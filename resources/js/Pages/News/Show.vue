@@ -40,6 +40,17 @@ defineProps<{
                         </li>
                     </ul>
 
+                    <h3 class="mt-2">Ressources</h3>
+                    <ul>
+                        <li v-for="(resource, index) in news.resources" :key="index">
+                            <a :href="resource.url" target="_blank" rel="noreferrer">{{ resource.label}}</a>
+                        </li>
+                        <li v-if="!news.resources?.length">
+                            Aucune source pour l'instant.
+                            <Link :href="route('news.edit', news)">Rajoutez-en une</Link>
+                        </li>
+                    </ul>
+
                     <hr class="mt-4 mb-2">
                 </div>
             </div>
