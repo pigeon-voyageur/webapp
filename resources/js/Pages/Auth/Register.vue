@@ -14,7 +14,7 @@ const form = useForm({
     email: '',
     password: '',
     password_confirmation: '',
-    accept_cgu: false,
+    accept_tos: false,
 });
 
 const canGoStep2 = computed(() => form.name && form.email)
@@ -118,17 +118,17 @@ const submit = () => {
 
                     <div class="block mt-8">
                         <label class="flex items-start">
-                            <Checkbox name="accept_cgu" required class="mt-1.5" v-model:checked="form.accept_cgu" />
+                            <Checkbox name="accept_tos" required class="mt-1.5" v-model:checked="form.accept_tos" />
                             <span class="ml-2">
                                 Je reconnais avoir lu et compris les
-                                <a :href="route('informations.cgu')" target="_blank" class="">
+                                <a :href="route('informations.tos')" target="_blank" class="">
                                     Conditions Générales d'Utilisation
                                 </a>
                                 et je les accepte.
                             </span>
 
                         </label>
-                        <InputError :message="form.errors.accept_cgu" />
+                        <InputError :message="form.errors.accept_tos" />
                     </div>
 
                     <PrimaryButton class="mt-8" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">

@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import H1 from '@/Components/Primitives/H1.vue';
 import InformationsLayout from "@/Layouts/InformationsLayout.vue";
-import H2 from "@/Components/Primitives/H2.vue";</script>
+import H2 from "@/Components/Primitives/H2.vue";
+import {Link} from "@inertiajs/vue3";</script>
 <template>
     <InformationsLayout>
         <H1>Mentions légales</H1>
@@ -40,6 +41,20 @@ import H2 from "@/Components/Primitives/H2.vue";</script>
                 <li>Tel: 04 44 44 60 40</li>
                 <li>E-mail: support@o2switch.fr</li>
             </ul>
+        </div>
+
+        <div>
+            <H2>Conditions d'utilisation</H2>
+            <p>
+                <Link :href="route('informations.tos')">Voir les conditions d'utilisation</Link>
+            </p>
+        </div>
+
+        <div>
+            <H2>Protection des données</H2>
+            <p>
+                <Link :href="route('informations.gdpr')">Voir le Règlement Général de la Protection des données</Link>
+            </p>
         </div>
     </InformationsLayout>
 </template>

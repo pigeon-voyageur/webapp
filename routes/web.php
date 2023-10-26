@@ -23,9 +23,13 @@ Route::get('/example', static function () {
     return Inertia::render('Example');
 })->name('example');
 
-Route::get('/informations/cgu', static function () {
-    return Inertia::render('Informations/Cgu');
-})->name('informations.cgu');
+Route::get('/informations/tos', static function () {
+    return Inertia::render('Informations/Tos');
+})->name('informations.tos');
+
+Route::get('/informations/gdpr', static function () {
+    return Inertia::render('Informations/Gdpr');
+})->name('informations.gdpr');
 
 Route::get('/informations/legal-notice', static function () {
     return Inertia::render('Informations/LegalNotice');

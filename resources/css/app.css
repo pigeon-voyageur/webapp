@@ -22,6 +22,10 @@
         @apply font-display text-2xl font-bold;
     }
 
+    .text-h4 {
+        @apply font-display text-xl italic;
+    }
+
     .text-body {
         @apply font-sans text-lg font-normal;
     }
@@ -60,6 +64,10 @@
 
     h3 {
         @apply text-h3;
+    }
+
+    h4 {
+        @apply text-h4;
     }
 
     p, span, li, td {
