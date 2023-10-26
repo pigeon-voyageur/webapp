@@ -26,7 +26,8 @@ class GetNewsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'lat' => 'numeric|required',
+            'lng' => 'numeric|required',
         ];
     }
 }

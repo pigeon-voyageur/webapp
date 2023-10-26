@@ -11,6 +11,8 @@ class PigeonGetNewsController extends Controller
 {
     public function __invoke(GetNewsRequest $request, News $news): RedirectResponse
     {
+        dd($request->input('lat'), $request->input('lng'));
+        
         $request->user()->pigeon->news()->attach($news, [
             'arrival_date' => now()->addMinutes(config('pigeon.flight_minutes')),
         ]);

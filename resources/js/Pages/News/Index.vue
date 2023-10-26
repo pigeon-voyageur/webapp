@@ -6,7 +6,8 @@ import {Feature} from "ol";
 import {Point} from "ol/geom";
 import {fromLonLat} from "ol/proj";
 import {computed, onMounted, onUnmounted, ref} from "vue";
-import {useElementSize, useParentElement} from "@vueuse/core";
+import {UseGeolocation} from "@vueuse/components";
+import {useElementSize, useGeolocation, useParentElement} from "@vueuse/core";
 import PigeonPerch from "@/Components/Pigeon/PigeonPerch.vue";
 import Modal from '@/Components/Modal.vue';
 import PrimaryButton from "@/Components/Primitives/PrimaryButton.vue";
@@ -56,7 +57,7 @@ function handleClickFeature(feature: Feature): void {
 
     const arrivedNews = props.pigeon.news.find((pigeonNews) => pigeonNews.id === newsId);
 
-    if (arrivedNews?.message?.is_arrived || newsUserId === props.pigeon.user_id ) {
+    if (arrivedNews?.message?.is_arrived || newsUserId === props.pigeon.user_id) {
         router.visit(route('news.show', newsId));
         return;
     }
@@ -79,7 +80,14 @@ function handleClickFeature(feature: Feature): void {
 const newsToGet = ref<NewsData | null>(null);
 const pigeonSentModalOpened = ref<boolean>(false);
 const legendModalOpened = ref<boolean>(false);
-const form = useForm({});
+const form = useForm<{
+    lat: number | null,
+    lng: number | null,
+}>({
+    lat: null,
+    lng: null,
+});
+const {coords, locatedAt, error} = useGeolocation()
 
 function confirmGetNews(news: NewsData) {
     newsToGet.value = news;
@@ -89,6 +97,9 @@ function getNews() {
     if (!newsToGet.value) {
         return;
     }
+
+    form.lng = coords.value.longitude;
+    form.lat = coords.value.latitude;
 
     form.post(route('pigeon.get-news', newsToGet.value?.id), {
         preserveScroll: true,
@@ -116,9 +127,9 @@ function handlePerchClick() {
     }
 }
 
-function getLegend(){
+function getLegend() {
     legendModalOpened.value = true
-    
+
 }
 
 </script>
@@ -129,7 +140,7 @@ function getLegend(){
     </Head>
 
     <AuthenticatedLayout>
-        <button class="absolute m-3 z-50 h-9 w-9 bg-pink border flex justify-center content-center rounded-full" @click="getLegend" >
+        <button class="absolute m-3 z-50 h-9 w-9 bg-pink border flex justify-center content-center rounded-full" @click="getLegend">
             <span class="not-sr-only text-button p-1">?</span>
             <span class="sr-only">Voir la légende de la carte</span>
         </button>
@@ -148,24 +159,31 @@ function getLegend(){
         </div>
 
         <Modal :show="!!newsToGet" @close="closeModal">
-            <form @submit.prevent="getNews" class="p-6">
-                <H3 class="mb-4">
-                    Je dois aller chercher cette information ?
-                </H3>
+            <UseGeolocation v-slot="{ coords: { latitude, longitude } }">
+                <form @submit.prevent="getNews" class="p-6 space-y-2">
+                    <H3>
+                        Je dois aller chercher cette information ?
+                    </H3>
 
-                <div class="flex flex-col gap-2">
-                    <PrimaryButton
-                        :class="{ 'opacity-25': form.processing }"
-                        :disabled="form.processing"
-                    >
-                        Oui, celle là !
-                    </PrimaryButton>
+                    <p v-if="form.errors.lat || form.errors.lng" class="text-red">
+                        Votre position est requise pour que je puisse partir.<br>
+                        Autorisez la géolocalisation pour que je sache où vous retrouver !
+                    </p>
 
-                    <QuaternaryButton type="button" @click="closeModal">
-                        Non, annuler
-                    </QuaternaryButton>
-                </div>
-            </form>
+                    <div class="flex flex-col gap-2">
+                        <PrimaryButton
+                            :class="{ 'opacity-25': form.processing }"
+                            :disabled="form.processing"
+                        >
+                            Oui, celle là !
+                        </PrimaryButton>
+
+                        <QuaternaryButton type="button" @click="closeModal">
+                            Non, annuler
+                        </QuaternaryButton>
+                    </div>
+                </form>
+            </UseGeolocation>
         </Modal>
 
         <PigeonSentModal :show="pigeonSentModalOpened" @close="pigeonSentModalOpened=false" />
