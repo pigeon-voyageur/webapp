@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'flight_minutes' => (int) env('PIGEON_FLIGHT_MINUTES', 10),
+    'demo_flight_seconds' => env('PIGEON_DEMO_FLIGHT_SECONDS'),
 ];

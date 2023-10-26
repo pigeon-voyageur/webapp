@@ -19,7 +19,7 @@ class PigeonGetNewsController extends Controller
     {
         $userLat = $request->input('lat');
         $userLng = $request->input('lng');
-        
+
         $kmDistance = $distanceComputer
             ->from($userLat, $userLng)
             ->to($news->lat, $news->lng)
@@ -30,7 +30,7 @@ class PigeonGetNewsController extends Controller
             ->getDurationInMinutes();
 
         $request->user()->pigeon->news()->attach($news, [
-            'arrival_date' => now()->addMinutes($timeInMinutes),
+            'arrival_date' => config('pigeon.demo_flight_seconds') ? now()->addSeconds(config('pigeon.demo_flight_seconds')) : now()->addMinutes($timeInMinutes),
         ]);
 
         return redirect()->route('news.index');
