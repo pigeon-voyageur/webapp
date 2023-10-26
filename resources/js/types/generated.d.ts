@@ -34,6 +34,7 @@ created_at: string;
 updated_at: string;
 news: Array<App.Data.NewsData>;
 isTravelling: boolean;
+secondsToArrive: number;
 };
 export type PigeonMessageData = {
 id: number;

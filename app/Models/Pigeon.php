@@ -42,6 +42,17 @@ class Pigeon extends Model
         return $this->newsTravelling()->count();
     }
 
+    public function secondsToArrive(): float|int
+    {
+        $newsTravelling = $this->newsTravelling()->first();
+
+        if (!$newsTravelling) {
+            return 0;
+        }
+
+        return now()->diffInSeconds($newsTravelling->message->arrival_date);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
