@@ -31,8 +31,7 @@ const parentElementSize = useElementSize(parentElement);
 let newsStatePollingInterval: number;
 
 onMounted(() => {
-    // dirty but poc
-    newsStatePollingInterval = setInterval(() => router.reload({only: ['news', 'pigeon']}), 1_000);
+    newsStatePollingInterval = setInterval(() => router.reload({only: ['news', 'pigeon']}), 10_000);
 })
 
 onUnmounted(() => {
