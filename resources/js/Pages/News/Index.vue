@@ -41,6 +41,7 @@ const features = computed(() => props.news.map(news => {
         geometry: new Point(fromLonLat([news.lng, news.lat])),
         data: {
             newsId: news.id,
+            newsUserId: news.user_id,
         },
     })
     e.setStyle(getNewsStyle(news, props.pigeon))
@@ -50,9 +51,11 @@ const features = computed(() => props.news.map(news => {
 function handleClickFeature(feature: Feature): void {
     const newsId = feature.get('data').newsId;
 
+    const newsUserId = feature.get('data').newsUserId;
+
     const arrivedNews = props.pigeon.news.find((pigeonNews) => pigeonNews.id === newsId);
 
-    if (arrivedNews?.message?.is_arrived) {
+    if (arrivedNews?.message?.is_arrived || newsUserId === props.pigeon.user_id ) {
         router.visit(route('news.show', newsId));
         return;
     }

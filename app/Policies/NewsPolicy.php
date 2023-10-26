@@ -20,6 +20,10 @@ class NewsPolicy
      */
     public function view(User $user, News $news): bool
     {
+        if ($user->id === $news->user_id) {
+            return true;
+        } 
+
         return $user->pigeon
             ->newsInChest()
             ->pluck('news.id')
