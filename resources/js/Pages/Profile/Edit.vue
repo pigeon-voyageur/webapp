@@ -49,7 +49,7 @@ defineProps<{
                         <div class="flex flex-col gap-2">
                             <Link :href="route('informations.legal-notice')">Mentions légales</Link>
                             <Link :href="route('informations.cgu')">CGU</Link>
-                            <Link :href="route('informations.credits')">Crédits</Link>
+                            <Link :href="route('informations.about')">À propos</Link>
                             <Link :href="route('informations.editorial-charter')">Charte éditoriale</Link>
                         </div>
                     </section>

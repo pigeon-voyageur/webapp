@@ -31,9 +31,9 @@ Route::get('/informations/legal-notice', static function () {
     return Inertia::render('Informations/LegalNotice');
 })->name('informations.legal-notice');
 
-Route::get('/informations/credits', static function () {
-    return Inertia::render('Informations/Credits');
-})->name('informations.credits');
+Route::get('/informations/about', static function () {
+    return Inertia::render('Informations/About');
+})->name('informations.about');
 
 Route::get('/informations/editorial-charter', static function () {
     return Inertia::render('Informations/EditorialCharter');
