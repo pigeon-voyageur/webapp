@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class PigeonMessage extends Pivot
@@ -24,5 +26,25 @@ class PigeonMessage extends Pivot
     public function isArrived(): bool
     {
         return $this->arrival_date <= now();
+    }
+
+    public function pigeon(): BelongsTo
+    {
+        return $this->belongsTo(Pigeon::class);
+    }
+
+    public function news(): BelongsTo
+    {
+        return $this->belongsTo(News::class);
+    }
+
+    public function scopeArrived(Builder $query): void
+    {
+        $query->where('arrival_date', '<=', now());
+    }
+
+    public function scopeRecentlyArrived(Builder $query): void
+    {
+        $query->arrived()->where('arrival_date', '>=', now()->subMinute());
     }
 }
