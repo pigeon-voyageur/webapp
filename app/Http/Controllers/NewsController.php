@@ -52,6 +52,7 @@ class NewsController extends Controller
         News::create([
             'title' => $request->input('title'),
             'news_category_id' => $request->input('news_category_id'),
+            'user_id' => $request->user()->id(),
             'summary' => $request->input('summary'),
             'lng' => $request->input('lng'),
             'lat' => $request->input('lat'),

@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class News extends Model
@@ -14,6 +15,7 @@ class News extends Model
     public $fillable = [
         'title',
         'news_category_id',
+        'user_id',
         'summary',
         'lat',
         'lng',
@@ -26,6 +28,11 @@ class News extends Model
         'resources' => 'array',
     ];
 
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+    
     public function pigeon(): BelongsToMany
     {
         return $this->belongsToMany(Pigeon::class, 'pigeon_messages')
