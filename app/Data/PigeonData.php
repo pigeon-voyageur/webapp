@@ -20,6 +20,7 @@ class PigeonData extends Data
         #[DataCollectionOf(NewsData::class)]
         public DataCollection $news,
         public bool $isTravelling,
+        public float|int $secondsToArrive,
     ) {
     }
 
@@ -32,6 +33,7 @@ class PigeonData extends Data
             $pigeon->updated_at,
             NewsData::collection($pigeon->news),
             $pigeon->isTravelling(),
+            $pigeon->secondsToArrive(),
         );
     }
 }
