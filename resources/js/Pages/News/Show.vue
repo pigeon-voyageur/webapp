@@ -40,7 +40,8 @@ defineProps<{
                     <H2 class="mt-7 mb-4">Sources</H2>
                     <ul class="list-disc list-inside">
                         <li v-for="(source, index) in news.sources" :key="index">
-                            <a :href="source.url" target="_blank" rel="noreferrer" class="text-black text-body">{{ source.label }}</a>
+                            <a :href="source.url" target="_blank" rel="noreferrer" class="text-black text-body">{{
+                                source.label }}</a>
                         </li>
                         <li v-if="!news.sources?.length">
                             Aucune source pour l'instant.
@@ -51,7 +52,8 @@ defineProps<{
                     <H2 class="mt-7 mb-4">Pour aller plus loin</H2>
                     <ul>
                         <li v-for="(resource, index) in news.resources" :key="index">
-                            <a :href="resource.url" target="_blank" rel="noreferrer" class="text-black text-body">{{ resource.label }}</a>
+                            <a :href="resource.url" target="_blank" rel="noreferrer" class="text-black text-body">{{
+                                resource.label }}</a>
                         </li>
                         <li v-if="!news.resources?.length">
                             Aucune ressource pour l'instant.
@@ -62,10 +64,10 @@ defineProps<{
                     <H2 class="mt-7 mb-4">Éditer</H2>
                     <p>Ne t'envole pas tout de suite ! Tu as une une idée à jeter en piqué, une ressource à
                         partager ? À ta plume !</p>
-                    <SecondaryButton class="mt-6">Éditer</SecondaryButton>
 
+                    <Link :href="route('news.edit', news)"><SecondaryButton class=" mt-6 ">Éditer</SecondaryButton> </Link>
+                    </div>
                 </div>
             </div>
-        </div>
-    </AuthenticatedLayout>
+        </AuthenticatedLayout>
 </template>
