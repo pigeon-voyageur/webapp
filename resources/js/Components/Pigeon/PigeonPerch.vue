@@ -59,7 +59,9 @@ onUnmounted(() => {
 })
 
 const timeLeft = computed(() => {
-    return DateTime.fromISO("2017-05-15T00:00:00").plus({second: secondsLeft.value}).toLocaleString(DateTime.TIME_24_WITH_SECONDS);
+    return DateTime.fromISO("2017-05-15T00:00:00")
+        .plus({second: secondsLeft.value > 0 ? secondsLeft.value : 0})
+        .toLocaleString(DateTime.TIME_24_WITH_SECONDS);
 })
 
 </script>
