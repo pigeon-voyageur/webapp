@@ -34,7 +34,7 @@ const emit = defineEmits<{
             </div>
             <div class="flex gap-2 items-start">
                 <img src="/assets/images/MapPoint_PinkLosange.png" class="w-7">
-                <p class="text-meta self-center">Tu as écrit cette news</p>
+                <p class="text-meta self-center">Tu as écrit cette information</p>
             </div>
             </div>
 

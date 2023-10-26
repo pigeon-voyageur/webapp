@@ -129,8 +129,8 @@ function getLegend(){
     </Head>
 
     <AuthenticatedLayout>
-        <button class="absolute m-3 z-50 h-8 w-8 bg-pink border flex justify-center content-center rounded-full" @click="getLegend" >
-            <span class="not-sr-only text-button p-0.5">?</span>
+        <button class="absolute m-3 z-50 h-9 w-9 bg-pink border flex justify-center content-center rounded-full" @click="getLegend" >
+            <span class="not-sr-only text-button p-1">?</span>
             <span class="sr-only">Voir la légende de la carte</span>
         </button>
         <MapLegend :show="legendModalOpened" @close="legendModalOpened=false" />
