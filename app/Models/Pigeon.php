@@ -28,7 +28,7 @@ class Pigeon extends Model
     public function newsInChest(): BelongsToMany
     {
         return $this->news()
-            ->wherePivot('arrival_date', '<=', now());
+                    ->wherePivot('arrival_date', '<=', now());
     }
 
     public function newsTravelling(): BelongsToMany

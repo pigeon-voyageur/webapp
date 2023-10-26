@@ -1,11 +1,15 @@
 import {Circle, Fill, Icon, Stroke, Style} from "ol/style";
-import NewsData = App.Data.NewsData;
+import LightNewsData = App.Data.LightNewsData;
 import PigeonData = App.Data.PigeonData;
 
 const size = 32;
 
-export function getNewsStyle(news: NewsData, pigeon: PigeonData): Style {
+export function getNewsStyle(news: LightNewsData, pigeon: PigeonData): Style {
     const message = pigeon.news.find((pigeonNews) => pigeonNews.id === news.id)?.message;
+
+    if (news?.user_id === pigeon?.user_id) {
+        return newsBelongToUserStyle;
+    }
 
     if (message?.is_arrived) {
         return newsArrivedStyle;
@@ -20,6 +24,7 @@ export function getNewsStyle(news: NewsData, pigeon: PigeonData): Style {
         return newsDisabledStyle;
     }
 
+
     return newsTravellingStyle;
 }
 
@@ -27,12 +32,8 @@ export const newsArrivedStyle: Style = new Style({
     image: new Circle({
         radius: size / 3,
         fill: new Fill({
-            color: "#F5CEE9",
+            color: "#779DFF",
         }),
-        stroke: new Stroke({
-            color: "#FFFFFF",
-            width: size / 4
-        })
     }),
     zIndex: Infinity,
 });
@@ -52,10 +53,6 @@ export const newsToGetStyle: Style = new Style({
         fill: new Fill({
             color: "#322FCD",
         }),
-        stroke: new Stroke({
-            color: "#FFFFFF",
-            width: size / 4
-        })
     }),
     zIndex: Infinity,
 });
@@ -66,10 +63,16 @@ export const newsDisabledStyle: Style = new Style({
         fill: new Fill({
             color: "#625F5F",
         }),
-        stroke: new Stroke({
-            color: "#ABABAB",
-            width: size / 4
-        })
+    }),
+    zIndex: Infinity,
+});
+
+export const newsBelongToUserStyle: Style = new Style({
+    image: new Circle({
+        radius: size / 3,
+        fill: new Fill({
+            color: "#F0B9DF",
+        }),
     }),
     zIndex: Infinity,
 });

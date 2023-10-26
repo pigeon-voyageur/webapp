@@ -22,7 +22,12 @@ class PigeonTest extends TestCase
 
     public function test_a_pigeon_cannot_get_a_news_if_guest(): void
     {
-        $news = News::factory()->create();
+        $user = User::factory()->create();
+        $news = News::factory(
+            [
+                'user_id' => $user->id,
+            ]
+        )->create();
 
         $response = $this
             ->post(route('pigeon.get-news', $news));
@@ -32,24 +37,39 @@ class PigeonTest extends TestCase
 
     public function test_a_pigeon_cannot_get_a_news_if_travelling(): void
     {
-        $newsA = News::factory()->create();
-        $newsB = News::factory()->create();
+
         $user = User::factory()->create();
-        $user->pigeon->news()->attach($newsA, ['arrival_date' => now()->addYear()]);
+        $user2 = User::factory()->create();
+        $news1 = News::factory(
+            [
+                'user_id' => $user2->id,
+            ]
+        )->create();
+        $news2 = News::factory()->create(
+            [
+                'user_id' => $user2->id,
+            ]
+        );
+        $user->pigeon->news()->attach($news1, ['arrival_date' => now()->addYear()]);
 
         $this->assertTrue($user->pigeon->isTravelling());
 
         $response = $this
             ->actingAs($user)
-            ->post(route('pigeon.get-news', $newsB));
+            ->post(route('pigeon.get-news', $news2));
 
         $response->assertForbidden();
     }
 
     public function test_a_pigeon_can_get_a_news_if_not_travelling(): void
     {
-        $news = News::factory()->create();
         $user = User::factory()->create();
+        $user2 = User::factory()->create();
+        $news = News::factory(
+            [
+                'user_id' => $user2->id,
+            ]
+        )->create();
 
         $response = $this
             ->actingAs($user)

@@ -27,6 +27,7 @@ class NewsCreationTest extends TestCase
 
         $response = $this->actingAs($user)->post(route('news.store'), [
             'title' => 'Lorem',
+            'user_id' => $user->id,
             'summary' => 'LOrem ipsum',
             'news_category_id' => $newsCategory->id,
             'sources' => [

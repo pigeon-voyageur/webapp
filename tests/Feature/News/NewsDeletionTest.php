@@ -14,7 +14,12 @@ class NewsDeletionTest extends TestCase
 
     public function test_cannot_delete_when_guest(): void
     {
-        $news = News::factory()->create();
+        $user = User::factory()->create();
+        $news = News::factory(
+            [
+                'user_id' => $user->id,
+            ]
+        )->create();
 
         $response = $this->delete(route('news.destroy', $news), []);
 
@@ -25,7 +30,11 @@ class NewsDeletionTest extends TestCase
     public function test_cannot_delete_even_logged(): void
     {
         $user = User::factory()->create();
-        $news = News::factory()->create();
+        $news = News::factory(
+            [
+                'user_id' => $user->id,
+            ]
+        )->create();
 
         $response = $this->actingAs($user)->delete(route('news.destroy', $news));
 

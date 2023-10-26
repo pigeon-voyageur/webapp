@@ -12,9 +12,14 @@ class NewsEditionTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_cannot_edit_when_quest(): void
+    public function test_cannot_edit_when_guest(): void
     {
-        $news = News::factory()->create();
+        $user = User::factory()->create();
+        $news = News::factory(
+            [
+                'user_id' => $user->id,
+            ]
+        )->create();
         $newsSummary = $news->summary;
 
         $response = $this->patch(route('news.update', $news), []);
@@ -27,9 +32,13 @@ class NewsEditionTest extends TestCase
     public function test_can_edit_when_logged(): void
     {
         $user = User::factory()->create();
-        $news = News::factory()->create();
         $newsCategory = NewsCategory::factory()->create();
 
+        $news = News::factory(
+            [
+                'user_id' => $user->id,
+            ]
+        )->create();
         $newNewsData = [
             'title' => 'Lorem',
             'summary' => 'LOrem ipsum that should be stored',
