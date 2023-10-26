@@ -8,12 +8,12 @@
     <meta name="robots" content="all" />
     <meta name="target" content="all" />
 
-    <meta name="author" content="Pige" />
-    <meta name="owner" content="Pige" />
+    <meta name="author" content="Pigeon" />
+    <meta name="owner" content="Pigeon" />
 
-    <meta name="url" content="https://pige.arthaud.ovh" />
-    <meta name="identifier-URL" content="https://pige.arthaud.ovh" />
-    <link rel="canonical" href="https://pige.arthaud.ovh" />
+    <meta name="url" content="{{ config('app.url') }}" />
+    <meta name="identifier-URL" content="{{ config('app.url') }}" />
+    <link rel="canonical" href="{{ config('app.url') }}" />
 
     <meta
         name="description"
@@ -21,7 +21,7 @@
     />
 
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-title" content="Pige" />
+    <meta name="apple-mobile-web-app-title" content="Pigeon" />
     <meta name="apple-mobile-web-app-status-bar-style" content="#ffffff" />
     <meta name="theme-color" content="#ffffff" />
 
