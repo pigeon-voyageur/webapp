@@ -40,6 +40,7 @@ id: number;
 pigeon_id: number;
 news_id: number;
 arrival_date: string;
+is_read: boolean;
 is_arrived: boolean;
 };
 export type UserData = {

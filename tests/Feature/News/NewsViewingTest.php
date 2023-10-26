@@ -42,8 +42,7 @@ class NewsViewingTest extends TestCase
         $response->assertRedirect(route('login'));
     }
 
-    public function test_user_cannot_view_the_news_if_the_pigeon_didnt_came_back(): void
-
+    public function test_user_cannot_view_the_news_if_the_pigeon_didnt_arrived(): void
     {
         $user = User::factory()->create();
         $user2 = User::factory()->create();
@@ -70,7 +69,9 @@ class NewsViewingTest extends TestCase
         $user->pigeon->news()->attach($news, ['arrival_date' => now()->subSecond()]);
 
         $response = $this->actingAs($user)->get(route('news.show', $news));
+        $user->refresh();
 
         $response->assertStatus(Response::HTTP_OK);
+        $this->assertTrue($user->pigeon->news()->find($news)->message->is_read);
     }
 }

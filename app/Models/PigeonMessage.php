@@ -15,10 +15,12 @@ class PigeonMessage extends Pivot
 
     public $fillable = [
         'arrival_date',
+        'is_read',
     ];
 
     protected $casts = [
         'arrival_date' => 'datetime',
+        'is_read' => 'boolean',
     ];
 
     public $incrementing = true;
