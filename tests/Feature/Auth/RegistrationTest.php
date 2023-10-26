@@ -17,6 +17,18 @@ class RegistrationTest extends TestCase
         $response->assertStatus(200);
     }
 
+    public function test_register_need_accept_tos(): void
+    {
+        $response = $this->post('/register', [
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+            'password' => 'password',
+            'password_confirmation' => 'password',
+        ]);
+
+        $response->assertSessionHasErrors(['accept_tos']);
+    }
+
     public function test_new_users_can_register(): void
     {
         $response = $this->post('/register', [
@@ -24,6 +36,7 @@ class RegistrationTest extends TestCase
             'email' => 'test@example.com',
             'password' => 'password',
             'password_confirmation' => 'password',
+            'accept_tos' => true,
         ]);
 
         $this->assertAuthenticated();

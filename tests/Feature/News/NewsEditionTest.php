@@ -3,6 +3,7 @@
 namespace Tests\Feature\News;
 
 use App\Models\News;
+use App\Models\NewsCategory;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -16,15 +17,7 @@ class NewsEditionTest extends TestCase
         $news = News::factory()->create();
         $newsSummary = $news->summary;
 
-        $response = $this->patch(route('news.update', $news), [
-            'title' => 'Lorem',
-            'summary' => 'LOrem ipsum that should not be stored',
-            'sources' => [
-                'https://example.com',
-            ],
-            'lat' => 0.1,
-            'lng' => 0.1,
-        ]);
+        $response = $this->patch(route('news.update', $news), []);
         $news->refresh();
 
         $response->assertRedirect(route('login'));
@@ -35,11 +28,17 @@ class NewsEditionTest extends TestCase
     {
         $user = User::factory()->create();
         $news = News::factory()->create();
+        $newsCategory = NewsCategory::factory()->create();
+
         $newNewsData = [
             'title' => 'Lorem',
             'summary' => 'LOrem ipsum that should be stored',
+            'news_category_id' => $newsCategory->id,
             'sources' => [
-                'https://example.com',
+                [
+                    'label' => 'Example',
+                    'url' => 'https://example.com',
+                ],
             ],
             'lat' => 0.1,
             'lng' => 0.1,

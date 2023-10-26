@@ -3,6 +3,7 @@
 namespace Tests\Feature\News;
 
 use App\Models\News;
+use App\Models\NewsCategory;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -22,12 +23,17 @@ class NewsCreationTest extends TestCase
     public function test_can_create_when_logged(): void
     {
         $user = User::factory()->create();
+        $newsCategory = NewsCategory::factory()->create();
 
         $response = $this->actingAs($user)->post(route('news.store'), [
             'title' => 'Lorem',
             'summary' => 'LOrem ipsum',
+            'news_category_id' => $newsCategory->id,
             'sources' => [
-                'https://example.com',
+                [
+                    'label' => 'Example',
+                    'url' => 'https://example.com',
+                ],
             ],
             'lat' => 0.1,
             'lng' => 0.1,
