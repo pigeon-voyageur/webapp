@@ -2,7 +2,7 @@ import {Circle, Fill, Icon, Stroke, Style} from "ol/style";
 import LightNewsData = App.Data.LightNewsData;
 import PigeonData = App.Data.PigeonData;
 
-const size = 32;
+const size = 30;
 
 export function getNewsStyle(news: LightNewsData, pigeon: PigeonData): Style {
     const message = pigeon.news.find((pigeonNews) => pigeonNews.id === news.id)?.message;
@@ -29,11 +29,10 @@ export function getNewsStyle(news: LightNewsData, pigeon: PigeonData): Style {
 }
 
 export const newsArrivedStyle: Style = new Style({
-    image: new Circle({
-        radius: size / 3,
-        fill: new Fill({
-            color: "#779DFF",
-        }),
+    image: new Icon({
+        width: size,
+        height: size,
+        src: '/assets/images/MapPoint_Checked.png'
     }),
     zIndex: Infinity,
 });
@@ -48,31 +47,28 @@ export const newsTravellingStyle: Style = new Style({
 });
 
 export const newsToGetStyle: Style = new Style({
-    image: new Circle({
-        radius: size / 3,
-        fill: new Fill({
-            color: "#322FCD",
-        }),
+    image: new Icon({
+        width: size,
+        height: size,
+        src: '/assets/images/MapPoint_Blue.png'
     }),
     zIndex: Infinity,
 });
 
 export const newsDisabledStyle: Style = new Style({
-    image: new Circle({
-        radius: size / 3,
-        fill: new Fill({
-            color: "#625F5F",
-        }),
+    image: new Icon({
+        width: size,
+        height: size,
+        src: '/assets/images/MapPoint_Disabled.png'
     }),
     zIndex: Infinity,
 });
 
 export const newsBelongToUserStyle: Style = new Style({
-    image: new Circle({
-        radius: size / 3,
-        fill: new Fill({
-            color: "#F0B9DF",
-        }),
+    image: new Icon({
+        width: size,
+        height: size,
+        src: '/assets/images/MapPoint_PinkLosange.png'
     }),
     zIndex: Infinity,
 });
