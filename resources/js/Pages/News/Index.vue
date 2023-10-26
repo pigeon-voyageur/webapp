@@ -14,6 +14,7 @@ import QuaternaryButton from "@/Components/Primitives/QuaternaryButton.vue";
 import {getNewsStyle} from "@/Components/Map/Styles/news.style";
 import H3 from "@/Components/Primitives/H3.vue";
 import PigeonSentModal from "@/Components/Pigeon/PigeonSentModal.vue";
+import MapLegend from "@/Components/Map/MapLegend.vue";
 import NewsData = App.Data.NewsData;
 import PigeonData = App.Data.PigeonData;
 
@@ -77,6 +78,7 @@ function handleClickFeature(feature: Feature): void {
 
 const newsToGet = ref<NewsData | null>(null);
 const pigeonSentModalOpened = ref<boolean>(false);
+const legendModalOpened = ref<boolean>(false);
 const form = useForm({});
 
 function confirmGetNews(news: NewsData) {
@@ -114,6 +116,11 @@ function handlePerchClick() {
     }
 }
 
+function getLegend(){
+    legendModalOpened.value = true
+    
+}
+
 </script>
 
 <template>
@@ -122,6 +129,12 @@ function handlePerchClick() {
     </Head>
 
     <AuthenticatedLayout>
+        <button class="absolute m-3 z-50 h-8 w-8 bg-pink border flex justify-center content-center rounded-full" @click="getLegend" >
+            <span class="not-sr-only text-button p-0.5">?</span>
+            <span class="sr-only">Voir la légende de la carte</span>
+        </button>
+        <MapLegend :show="legendModalOpened" @close="legendModalOpened=false" />
+
         <MapContainer
             ref="map"
             class="h-full"
