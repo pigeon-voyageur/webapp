@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import H1 from '@/Components/Primitives/H1.vue';
 import InformationsLayout from "@/Layouts/InformationsLayout.vue";
-import H2 from "@/Components/Primitives/H2.vue";</script>
+import H2 from "@/Components/Primitives/H2.vue";
+import {Link} from "@inertiajs/vue3";</script>
+
 <template>
     <InformationsLayout>
         <H1>Conditions générales d'utilisation</H1>
@@ -24,7 +26,8 @@ import H2 from "@/Components/Primitives/H2.vue";</script>
             </p>
             <p>
                 Lors de l'inscription sur le site via le Formulaire d’inscription, chaque Utilisateur accepte expressément les
-                présentes CGU en cochant la case précédant le texte suivant : «Je reconnais avoir lu et compris les CGU et je les accepte ».
+                présentes CGU en cochant la case précédant le texte suivant : «Je reconnais avoir lu et compris les Conditions Générales d'Utilisation
+                et je les accepte ».
             </p>
             <p>
                 En cas de non-acceptation des CGU stipulées dans le présent contrat, l'Utilisateur se doit de renoncer à l'accès des services proposés
@@ -83,22 +86,7 @@ import H2 from "@/Components/Primitives/H2.vue";</script>
         <div>
             <H2>ARTICLE 3 : COLLECTE DES DONNÉES</H2>
             <p>
-                Le site assure à l'Utilisateur une collecte et un traitement d'informations personnelles dans le respect de la vie privée conformément
-                à la loi n°78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés. En vertu de la loi Informatique et
-                Libertés, en date du 6 janvier 1978, l'Utilisateur dispose d'un droit d'accès, de rectification, de suppression et d'opposition de ses
-                données personnelles. L'Utilisateur exerce ce droit : · via son espace personnel ou en contactant le DPO Arthaud Proust :
-                pro@arthaudproust.fr.
-            </p>
-            <p>
-                Le site et le DPO ne sont pas encore déclarés à la CNIL.
-            </p>
-            <p>
-
-                Nous tenons à souligner que Pigeon ne stocke pas les données de géolocalisation de ses Utilisateurs. Toutes les informations fournies
-                pour déterminer la localisation d'un Utilisateur sont utilisées uniquement à des fins d'affichage et d'interactivité sur la
-                plateforme. La géolocalisation est utilisée afin de calculer le temps de voyage du pigeon entre la position de l’Utilisateur et la
-                position de l’information à aller chercher. Seule la durée du voyage est conservée. Il n'y a aucune conservation de données sensibles
-                de localisation.
+                <Link :href="route('informations.gdpr')">Voir le Règlement Général de la Protection des données</Link>
             </p>
         </div>
 
@@ -201,7 +189,7 @@ import H2 from "@/Components/Primitives/H2.vue";</script>
                 tribunaux français seront seuls compétents pour en connaître.
             </p>
         </div>
-        
+
         <p>CGU réalisées par Safiya Seddiki</p>
     </InformationsLayout>
 </template>

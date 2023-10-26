@@ -15,7 +15,7 @@ defineProps<{
 const form = useForm({
     email: '',
     password: '',
-    remember: false,
+    remember: true,
 });
 
 const submit = () => {
@@ -49,14 +49,13 @@ const submit = () => {
                     <TextInput
                         id="email"
                         type="email"
-                        class="mt-1 block w-full"
                         v-model="form.email"
                         required
                         autofocus
                         autocomplete="username"
                     />
 
-                    <InputError class="mt-2" :message="form.errors.email" />
+                    <InputError :message="form.errors.email" />
                 </div>
 
                 <div class="mt-4">
@@ -65,7 +64,6 @@ const submit = () => {
                     <TextInput
                         id="password"
                         type="password"
-                        class="mt-1 block w-full"
                         v-model="form.password"
                         required
                         autocomplete="current-password"
@@ -79,7 +77,7 @@ const submit = () => {
                         Mot de passe oublié ?
                     </Link>
 
-                    <InputError class="mt-2" :message="form.errors.password" />
+                    <InputError :message="form.errors.password" />
                 </div>
 
                 <div class="block mt-8">
