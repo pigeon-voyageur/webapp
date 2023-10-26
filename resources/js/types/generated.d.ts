@@ -3,6 +3,7 @@ export type LightNewsData = {
 id: number;
 lat: number;
 lng: number;
+user_id: number;
 };
 export type LinkRowData = {
 label: string;
@@ -17,6 +18,7 @@ export type NewsData = {
 id: number;
 title: string;
 news_category_id: number;
+user_id: number;
 category: App.Data.NewsCategoryData;
 summary: string;
 lat: number;

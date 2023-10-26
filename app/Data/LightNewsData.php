@@ -13,6 +13,7 @@ class LightNewsData extends Data
         public int $id,
         public float $lat,
         public float $lng,
+        public int $user_id
     ) {
     }
 
@@ -22,6 +23,7 @@ class LightNewsData extends Data
             $news->id,
             $news->lat,
             $news->lng,
+            $news->user_id,
         );
     }
 }

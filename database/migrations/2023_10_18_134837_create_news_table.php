@@ -13,13 +13,13 @@ return new class extends Migration {
     {
         Schema::create('news', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(User::class)->nullOnDelete();
             $table->string('title');
             $table->mediumText('summary');
             $table->double('lat');
             $table->double('lng');
             $table->json('sources')->nullable();
             $table->json('resources')->nullable();
-            $table->foreignIdFor(User::class)->nullOnDelete();
             $table->timestamps();
         });
     }

@@ -29,7 +29,6 @@ class StoreNewsRequest extends FormRequest
                 'required',
                 Rule::exists(NewsCategory::class, 'id'),
             ],
-            'user_id' => 'required|exists:users,id',
             'summary' => 'required|string',
             'lat' => 'required|numeric',
             'lng' => 'required|numeric',
