@@ -66,8 +66,10 @@ class NewsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(News $news): Response
+    public function show(Request $request, News $news): Response
     {
+        $request->user()->pigeon->news()->updateExistingPivot($news->id, ['is_read' => true]);
+
         return Inertia::render('News/Show', [
             'news' => NewsData::from($news),
         ]);

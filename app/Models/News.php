@@ -2,10 +2,9 @@
 
 namespace App\Models;
 
-use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class News extends Model
@@ -32,12 +31,12 @@ class News extends Model
     {
         return $this->belongsTo(User::class);
     }
-    
+
     public function pigeon(): BelongsToMany
     {
         return $this->belongsToMany(Pigeon::class, 'pigeon_messages')
             ->as('message')
-            ->withPivot(['id', 'arrival_date'])
+            ->withPivot(['id', 'arrival_date', 'is_read'])
             ->using(PigeonMessage::class);
     }
 

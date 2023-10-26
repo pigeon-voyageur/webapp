@@ -30,13 +30,8 @@ function handlePerchClick() {
     router.visit(route('news.show', props.pigeon.news[0]))
 }
 
-const newsCount = computed<number>(() => {
-    if (props.pigeon.isTravelling) {
-        return 0
-    }
+const hasMessage = computed(() => !props.pigeon.news[0]?.message?.is_read)
 
-    return props.pigeon.news.length === 0 ? 0 : 1
-})
 </script>
 <template>
     <div class="relative w-14 h-14">
@@ -44,14 +39,9 @@ const newsCount = computed<number>(() => {
              class="h-full w-full"
              src="/assets/images/pigeon-icon-travelling.svg"
              alt="" />
+
         <template v-else>
-
-            <img v-if="pigeon.news.length === 0"
-                 class="h-full w-full"
-                 src="/assets/images/pigeon-icon-no-message.svg"
-                 alt="" />
-
-            <template v-else>
+            <template v-if="hasMessage">
                 <img
                     class="h-full w-full"
                     src="/assets/images/pigeon-icon-message.svg"
@@ -59,15 +49,19 @@ const newsCount = computed<number>(() => {
 
                 <div class="absolute -top-2.5 -right-2.5 flex items-center justify-center h-8 w-8 bg-red rounded-full">
                     <span class="text-button text-white -mb-1">
-                        {{ newsCount }}
+                        1
                     </span>
                 </div>
             </template>
+            <img v-else
+                 class="h-full w-full"
+                 src="/assets/images/pigeon-icon-no-message.svg"
+                 alt="" />
         </template>
 
         <button @click="handlePerchClick" class="absolute top-0 left-0 h-full w-full pointer-events-auto">
             <span class="sr-only">
-            {{ pigeon.isTravelling ? 'Voir le perchoir' : 'Voir le pigeon' }}
+            {{ pigeon.isTravelling ? 'Voir le pigeon' : (hasMessage ? 'Voir le message' : 'Voir le dernier message') }}
             </span>
         </button>
 

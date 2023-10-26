@@ -20,7 +20,7 @@ class Pigeon extends Model
     {
         return $this->belongsToMany(News::class, 'pigeon_messages')
             ->as('message')
-            ->withPivot(['id', 'arrival_date'])
+            ->withPivot(['id', 'arrival_date', 'is_read'])
             ->orderByPivot('arrival_date', 'desc')
             ->using(PigeonMessage::class);
     }
@@ -28,7 +28,7 @@ class Pigeon extends Model
     public function newsInChest(): BelongsToMany
     {
         return $this->news()
-                    ->wherePivot('arrival_date', '<=', now());
+            ->wherePivot('arrival_date', '<=', now());
     }
 
     public function newsTravelling(): BelongsToMany
