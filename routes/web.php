@@ -1,10 +1,10 @@
 <?php
 
-use Inertia\Inertia;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Pigeon\PigeonGetNewsController;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +19,25 @@ use App\Http\Controllers\Pigeon\PigeonGetNewsController;
 
 Route::redirect('/', '/news');
 
-Route::get('/example', function () {
+Route::get('/example', static function () {
     return Inertia::render('Example');
 })->name('example');
+
+Route::get('/informations/cgu', static function () {
+    return Inertia::render('Informations/Cgu');
+})->name('informations.cgu');
+
+Route::get('/informations/legal-notice', static function () {
+    return Inertia::render('Informations/LegalNotice');
+})->name('informations.legal-notice');
+
+Route::get('/informations/credits', static function () {
+    return Inertia::render('Informations/Credits');
+})->name('informations.credits');
+
+Route::get('/informations/editorial-charter', static function () {
+    return Inertia::render('Informations/EditorialCharter');
+})->name('informations.editorial-charter');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -31,7 +47,5 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::post('/pigeon/get/{news}', PigeonGetNewsController::class)->name('pigeon.get-news');
 });
-
-
 
 require __DIR__ . '/auth.php';
