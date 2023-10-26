@@ -30,7 +30,12 @@ class NewsViewingTest extends TestCase
 
     public function test_cannot_view_when_guest(): void
     {
-        $news = News::factory()->create();
+        $user = User::factory()->create();
+        $news = News::factory(
+            [
+                'user_id' => $user->id,
+            ]
+        )->create();
 
         $response = $this->get(route('news.show', $news));
 
@@ -40,8 +45,13 @@ class NewsViewingTest extends TestCase
     public function test_user_cannot_view_the_news_if_the_pigeon_didnt_came_back(): void
 
     {
-        $news = News::factory()->create();
         $user = User::factory()->create();
+        $user2 = User::factory()->create();
+        $news = News::factory(
+            [
+                'user_id' => $user2->id,
+            ]
+        )->create();
 
         $response = $this->actingAs($user)->get(route('news.show', $news));
 
@@ -50,8 +60,13 @@ class NewsViewingTest extends TestCase
 
     public function test_can_view_when_logged_and_pigeon_got_the_news(): void
     {
-        $news = News::factory()->create();
         $user = User::factory()->create();
+        $user2 = User::factory()->create();
+        $news = News::factory(
+            [
+                'user_id' => $user2->id,
+            ]
+        )->create();
         $user->pigeon->news()->attach($news, ['arrival_date' => now()->subSecond()]);
 
         $response = $this->actingAs($user)->get(route('news.show', $news));
