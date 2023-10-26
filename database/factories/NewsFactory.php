@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
 use App\Models\NewsCategory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -24,7 +24,7 @@ class NewsFactory extends Factory
             'user_id' => User::inRandomOrder()->first()->id,
             'summary' => fake()->paragraph(),
             'lat' => fake()->latitude(),
-            'lng' => fake()->longitude(),
+            'lng' => fake()->longitude(-150, 150),
             'sources' => [
                 [
                     'url' => fake()->url(),

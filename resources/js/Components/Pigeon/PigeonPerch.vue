@@ -30,7 +30,13 @@ function handlePerchClick() {
     router.visit(route('news.show', props.pigeon.news[0]))
 }
 
-const hasMessage = computed(() => !props.pigeon.news[0]?.message?.is_read)
+const hasMessage = computed<boolean>(() => {
+    if (!props.pigeon.news.length) {
+        return false
+    }
+
+    return !props.pigeon.news[0]?.message?.is_read
+})
 
 </script>
 <template>
