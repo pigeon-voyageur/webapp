@@ -24,7 +24,8 @@ import H2 from "@/Components/Primitives/H2.vue";</script>
             </p>
             <p>
                 Lors de l'inscription sur le site via le Formulaire d’inscription, chaque Utilisateur accepte expressément les
-                présentes CGU en cochant la case précédant le texte suivant : «Je reconnais avoir lu et compris les CGU et je les accepte ».
+                présentes CGU en cochant la case précédant le texte suivant : «Je reconnais avoir lu et compris les Conditions Générales d'Utilisation
+                et je les accepte ».
             </p>
             <p>
                 En cas de non-acceptation des CGU stipulées dans le présent contrat, l'Utilisateur se doit de renoncer à l'accès des services proposés
@@ -201,7 +202,7 @@ import H2 from "@/Components/Primitives/H2.vue";</script>
                 tribunaux français seront seuls compétents pour en connaître.
             </p>
         </div>
-        
+
         <p>CGU réalisées par Safiya Seddiki</p>
     </InformationsLayout>
 </template>

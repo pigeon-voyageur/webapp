@@ -27,6 +27,16 @@ class RegisterRequest extends FormRequest
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:' . User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'accept_cgu' => 'accepted',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'accept_cgu' => [
+                'accepted' => 'Vous devez acceptez les CGU',
+            ],
         ];
     }
 }

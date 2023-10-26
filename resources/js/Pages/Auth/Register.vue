@@ -6,6 +6,7 @@ import PrimaryButton from '@/Components/Primitives/PrimaryButton.vue';
 import TextInput from '@/Components/Form/TextInput.vue';
 import {Head, Link, useForm} from '@inertiajs/vue3';
 import {computed, ref} from "vue";
+import Checkbox from "@/Components/Form/Checkbox.vue";
 
 const step = ref<1 | 2>(1);
 const form = useForm({
@@ -13,6 +14,7 @@ const form = useForm({
     email: '',
     password: '',
     password_confirmation: '',
+    accept_cgu: false,
 });
 
 const canGoStep2 = computed(() => form.name && form.email)
@@ -55,7 +57,6 @@ const submit = () => {
                         <TextInput
                             id="name"
                             type="text"
-                            class="mt-1 block w-full"
                             v-model="form.name"
                             required
                             autofocus
@@ -63,7 +64,7 @@ const submit = () => {
                             autocomplete="name"
                         />
 
-                        <InputError class="mt-2" :message="form.errors.name" />
+                        <InputError :message="form.errors.name" />
                     </div>
 
                     <div class="mt-4">
@@ -72,14 +73,13 @@ const submit = () => {
                         <TextInput
                             id="email"
                             type="email"
-                            class="mt-1 block w-full"
                             v-model="form.email"
                             required
                             placeholder="Ex: jean.dujardin@email.com"
                             autocomplete="username"
                         />
 
-                        <InputError class="mt-2" :message="form.errors.email" />
+                        <InputError :message="form.errors.email" />
                     </div>
 
                     <PrimaryButton :disabled="!canGoStep2" class="mt-8" type="button" @click="step=2">
@@ -94,13 +94,12 @@ const submit = () => {
                         <TextInput
                             id="password"
                             type="password"
-                            class="mt-1 block w-full"
                             v-model="form.password"
                             required
                             autocomplete="new-password"
                         />
 
-                        <InputError class="mt-2" :message="form.errors.password" />
+                        <InputError :message="form.errors.password" />
                     </div>
 
                     <div class="mt-4">
@@ -109,19 +108,28 @@ const submit = () => {
                         <TextInput
                             id="password_confirmation"
                             type="password"
-                            class="mt-1 block w-full"
                             v-model="form.password_confirmation"
                             required
                             autocomplete="new-password"
                         />
 
-                        <InputError class="mt-2" :message="form.errors.password_confirmation" />
+                        <InputError :message="form.errors.password_confirmation" />
                     </div>
 
-                    <p class="text-meta mt-8">
-                        En vous inscrivant vous acceptez nos
-                        <a href="/#" target="_blank" class="text-meta-link">Conditions générales d’utilisation</a>
-                    </p>
+                    <div class="block mt-8">
+                        <label class="flex items-start">
+                            <Checkbox name="accept_cgu" required class="mt-1.5" v-model:checked="form.accept_cgu" />
+                            <span class="ml-2">
+                                Je reconnais avoir lu et compris les
+                                <a :href="route('informations.cgu')" target="_blank" class="">
+                                    Conditions Générales d'Utilisation
+                                </a>
+                                et je les accepte.
+                            </span>
+
+                        </label>
+                        <InputError :message="form.errors.accept_cgu" />
+                    </div>
 
                     <PrimaryButton class="mt-8" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                         M'inscrire
