@@ -84,8 +84,8 @@ const form = useForm<{
     lat: number | null,
     lng: number | null,
 }>({
-    lat: null,
-    lng: null,
+    lat: 44.836151,
+    lng: -0.580816,
 });
 const {coords, locatedAt, error} = useGeolocation()
 
@@ -98,8 +98,13 @@ function getNews() {
         return;
     }
 
-    form.lng = coords.value.longitude;
-    form.lat = coords.value.latitude;
+    if (coords.value.latitude && coords.value.latitude !== Infinity) {
+        form.lat = coords.value.latitude;
+    }
+
+    if (coords.value.longitude && coords.value.longitude !== Infinity) {
+        form.lng = coords.value.longitude;
+    }
 
     form.post(route('pigeon.get-news', newsToGet.value?.id), {
         preserveScroll: true,
