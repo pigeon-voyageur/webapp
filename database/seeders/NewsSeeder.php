@@ -18,6 +18,54 @@ class NewsSeeder extends Seeder
         $pigeonUser = User::factory()->create();
 
         News::create([
+            'user_id' => $pigeonUser->id,
+            'news_category_id' => NewsCategory::firstWhere('name', 'unusual')->id,
+            'title' => "Come back des pigeons ?",
+            'summary' => "Les pigeons voyageurs, ça te parle ?
+            Pigeon, c’est l’application qui te permet d’envoyer ton pigeon voyageur métaphorique récupérer des informations journalistiques aux quatre coins du monde.
+
+            Dans une société où l’information surabonde et l’anxiété liée aux médias ne cesse de grandir, nous avons besoin de retourner à une consommation saine d’information.
+            Mais par quel moyen ?
+
+            Je te laisse te renseigner sur la fatigue informationnelle et sur l’application Pigeon grâce aux ressources disponibles juste en dessous :)
+            ",
+            'lat' => 44.836151,
+            'lng' => -0.580816,
+            'sources' => [
+                [
+                    'label' => 'L’information est devenue un puits sans fond',
+                    'url' => 'https://www.ouest-france.fr/medias/ouest-france/le-grand-entretien/entretien-linformation-est-devenue-un-puits-sans-fond-et-ca-genere-de-langoisse-3358539c-c426-11ed-9add-012db42d5c37',
+                ],
+            ],
+            'resources' => [
+                [
+                    'label' => 'Plus sur la fatigue informationnelle',
+                    'url' => 'https://www.radiofrance.fr/franceinter/podcasts/zoom-zoom-zen/zoom-zoom-zen-du-mardi-13-septembre-2022-2200476',
+                ],
+                [
+                    'label' => "D'où ça sort la “la fatigue informationnelle” ?",
+                    'url' => 'https://www.youtube.com/watch?v=8RYkszr5NIc',
+                ],
+                [
+                    'label' => 'Les médias sociaux et la santé mentale',
+                    'url' => 'https://www.youtube.com/watch?v=K8IAoPk2-Ik',
+                ],
+                [
+                    'label' => 'Réseaux sociaux et démocratie',
+                    'url' => 'https://www.youtube.com/watch?v=pnFw2nYt7lw',
+                ],
+                [
+                    'label' => 'Le manque d’intérêt pour l’information',
+                    'url' => 'https://la-rem.eu/2022/12/le-manque-dinteret-pour-linformation-un-autre-defi-a-relever-pour-les-journalistes/',
+                ],
+                [
+                    'label' => 'Activation du “mode moine”',
+                    'url' => 'https://www.bbc.com/afrique/articles/c807dldl157o',
+                ],
+            ],
+        ]);
+
+        News::create([
             'user_id' => $exampleUser->id,
             'news_category_id' => NewsCategory::firstWhere('name', 'geopolitics')->id,
             'title' => 'Cop28 à Dubaï',
