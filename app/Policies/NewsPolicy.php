@@ -51,7 +51,13 @@ class NewsPolicy
      */
     public function delete(User $user, News $news): bool
     {
-        return false;
+
+        if ($user->id === $news->user_id) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
     /**

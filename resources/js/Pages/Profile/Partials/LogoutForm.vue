@@ -1,4 +1,5 @@
-<script setup lang="ts">import {router} from '@inertiajs/vue3';
+<script setup lang="ts">
+import {router} from '@inertiajs/vue3';
 import TertiaryButton from "@/Components/Primitives/TertiaryButton.vue";
 import Modal from '@/Components/Modal.vue';
 import QuaternaryButton from "@/Components/Primitives/QuaternaryButton.vue";
