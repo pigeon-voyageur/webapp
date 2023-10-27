@@ -27,12 +27,28 @@ class NewsDeletionTest extends TestCase
         $this->assertDatabaseCount(News::class, 1);
     }
 
-    public function test_cannot_delete_even_logged(): void
+    public function test_can_delete_if_author_of_the_news(): void
     {
         $user = User::factory()->create();
         $news = News::factory(
             [
                 'user_id' => $user->id,
+            ]
+        )->create();
+
+        $response = $this->actingAs($user)->delete(route('news.destroy', $news));
+
+        $response->assertStatus(Response::HTTP_FOUND);
+        $this->assertDatabaseCount(News::class, 0);
+    }
+
+    public function test_cannot_delete_if_author_of_the_news(): void
+    {
+        $user = User::factory()->create();
+        $user2 = User::factory()->create();
+        $news = News::factory(
+            [
+                'user_id' => $user2->id,
             ]
         )->create();
 

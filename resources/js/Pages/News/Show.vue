@@ -1,16 +1,20 @@
 <script setup lang="ts">
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, Link } from '@inertiajs/vue3';
+import { Head, Link, usePage } from '@inertiajs/vue3';
 import H1 from "@/Components/Primitives/H1.vue";
 import H2 from "@/Components/Primitives/H2.vue";
-import H3 from "@/Components/Primitives/H3.vue";
 import SecondaryButton from '@/Components/Primitives/SecondaryButton.vue';
 import { ChevronLeftIcon } from '@heroicons/vue/24/outline';
+
+import DeleteNewsForm from './Partials/DeleteNewsForm.vue';
 import NewsData = App.Data.NewsData;
 
 defineProps<{
     news: NewsData;
 }>();
+
+const user = usePage().props.auth.user;
+
 
 </script>
 
@@ -50,7 +54,7 @@ defineProps<{
                     </ul>
 
                     <H2 class="mt-7 mb-4">Pour aller plus loin</H2>
-                    <ul>
+                    <ul class="list-disc list-inside">
                         <li v-for="(resource, index) in news.resources" :key="index">
                             <a :href="resource.url" target="_blank" rel="noreferrer" class="text-black text-body">{{
                                 resource.label }}</a>
@@ -61,13 +65,17 @@ defineProps<{
                         </li>
                     </ul>
 
-                    <H2 class="mt-7 mb-4">Éditer</H2>
-                    <p>Ne t'envole pas tout de suite ! Tu as une une idée à jeter en piqué, une ressource à
+                    <H2 class="mt-7 mb-4">Ne t'envole pas tout de suite ! </H2>
+                    <p>Tu as une une idée à jeter en piqué, une ressource à
                         partager ? À ta plume !</p>
 
-                    <Link :href="route('news.edit', news)"><SecondaryButton class=" mt-6 ">Éditer</SecondaryButton> </Link>
+                    <Link :href="route('news.edit', news)">
+                    <SecondaryButton class=" mt-6 ">Éditer</SecondaryButton>
+                    </Link>
+                    <div v-if="news.user_id === user.id">
+                        <DeleteNewsForm :news="news" class="mt-3"/>
                     </div>
                 </div>
             </div>
-        </AuthenticatedLayout>
-</template>
+        </div>
+    </AuthenticatedLayout></template>
