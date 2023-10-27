@@ -3,7 +3,7 @@ import {Link} from '@inertiajs/vue3';
 import {HomeIcon, PencilIcon, UserIcon} from '@heroicons/vue/24/outline';</script>
 
 <template>
-    <div class="relative min-h-screen z-0 flex flex-col bg-white">
+    <div class="max-w-mobile mx-auto relative min-h-screen z-0 flex flex-col bg-white">
         <header v-if="$slots.header" class="container">
             <slot name="header" />
         </header>
@@ -12,7 +12,7 @@ import {HomeIcon, PencilIcon, UserIcon} from '@heroicons/vue/24/outline';</scrip
             <slot />
         </main>
 
-        <nav class="fixed bottom-0 w-full h-20 bg-white border-t flex p-4 items-center justify-evenly">
+        <nav class="max-w-mobile fixed bottom-0 w-full h-20 bg-white border-t flex p-4 items-center justify-evenly">
             <Link :href="route('news.index')" class="aspect-square p-1 h-full">
                 <span class="sr-only">Accueil</span>
                 <HomeIcon class="text-black h-full mx-auto" />

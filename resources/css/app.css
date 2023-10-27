@@ -5,6 +5,14 @@
 @tailwind utilities;
 
 @layer base {
+    body {
+        @apply bg-gray-dark;
+    }
+
+    .max-w-mobile {
+        @apply !max-w-md;
+    }
+
     .text-logo {
         @apply font-display text-6xl font-black;
     }

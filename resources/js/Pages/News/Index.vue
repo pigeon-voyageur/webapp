@@ -154,7 +154,7 @@ function getLegend() {
             @clickFeature="handleClickFeature"
         />
 
-        <div class="absolute right-4 bottom-24 pointer-events-none">
+        <div class="fixed max-w-mobile w-full bottom-20 pointer-events-none flex justify-end p-4">
             <PigeonPerch :pigeon="pigeon" @click="handlePerchClick" />
         </div>
 

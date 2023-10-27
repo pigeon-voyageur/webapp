@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::factory()
+        User::factory()
             ->create([
                 'name' => 'Testman',
                 'email' => 'test@example.com',
@@ -23,9 +23,5 @@ class DatabaseSeeder extends Seeder
         $this->call([
             NewsSeeder::class,
         ]);
-
-        //        $news = News::all();
-        //        $user->pigeon->news()->attach($news[3], ['arrival_date' => now()->subDay()]);
-        //        $user->pigeon->news()->attach($news[4], ['arrival_date' => now()->subYear()]);
     }
 }
