@@ -14,7 +14,7 @@ return new class extends Migration {
     {
         Schema::create('pigeon_messages', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(News::class)->constrained();
+            $table->foreignIdFor(News::class)->constrained()->onDelete('cascade');
             $table->foreignIdFor(Pigeon::class)->constrained()->onDelete('cascade');
             $table->timestamp('arrival_date')->nullable();
             $table->boolean('is_read')->default(false);

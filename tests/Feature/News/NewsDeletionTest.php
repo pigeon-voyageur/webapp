@@ -30,11 +30,13 @@ class NewsDeletionTest extends TestCase
     public function test_can_delete_if_author_of_the_news(): void
     {
         $user = User::factory()->create();
+        $user2 = User::factory()->create();
         $news = News::factory(
             [
                 'user_id' => $user->id,
             ]
         )->create();
+        $user2->pigeon->news()->attach($news, ['arrival_date' => now()]);
 
         $response = $this->actingAs($user)->delete(route('news.destroy', $news));
 
@@ -42,7 +44,7 @@ class NewsDeletionTest extends TestCase
         $this->assertDatabaseCount(News::class, 0);
     }
 
-    public function test_cannot_delete_if_author_of_the_news(): void
+    public function test_cannot_delete_if_not_author_of_the_news(): void
     {
         $user = User::factory()->create();
         $user2 = User::factory()->create();
