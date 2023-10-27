@@ -23,6 +23,7 @@ class News extends Model
     ];
 
     protected $casts = [
+        'user_id' => 'int',
         'sources' => 'array',
         'resources' => 'array',
     ];
