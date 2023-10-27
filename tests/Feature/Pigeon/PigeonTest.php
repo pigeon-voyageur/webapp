@@ -37,7 +37,6 @@ class PigeonTest extends TestCase
 
     public function test_a_pigeon_cannot_get_a_news_if_travelling(): void
     {
-
         $user = User::factory()->create();
         $user2 = User::factory()->create();
         $news1 = News::factory(
@@ -61,7 +60,7 @@ class PigeonTest extends TestCase
         $response->assertForbidden();
     }
 
-    public function test_a_pigeon_can_get_a_news_if_not_travelling(): void
+    public function test_a_pigeon_cannot_get_a_news_without_user_coords(): void
     {
         $user = User::factory()->create();
         $user2 = User::factory()->create();
@@ -74,6 +73,26 @@ class PigeonTest extends TestCase
         $response = $this
             ->actingAs($user)
             ->post(route('pigeon.get-news', $news));
+
+        $response->assertSessionHasErrors(['lat', 'lng']);
+    }
+
+    public function test_a_pigeon_can_get_a_news_if_not_travelling(): void
+    {
+        $user = User::factory()->create();
+        $user2 = User::factory()->create();
+        $news = News::factory(
+            [
+                'user_id' => $user2->id,
+            ]
+        )->create();
+
+        $response = $this
+            ->actingAs($user)
+            ->post(route('pigeon.get-news', $news), [
+                'lat' => 0,
+                'lng' => 0,
+            ]);
 
         $response->assertRedirect(route('news.index'));
         $this->assertTrue($user->pigeon->isTravelling());

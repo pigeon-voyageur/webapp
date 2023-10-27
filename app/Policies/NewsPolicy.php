@@ -22,7 +22,7 @@ class NewsPolicy
     {
         if ($user->id === $news->user_id) {
             return true;
-        } 
+        }
 
         return $user->pigeon
             ->newsInChest()
@@ -51,13 +51,7 @@ class NewsPolicy
      */
     public function delete(User $user, News $news): bool
     {
-
-        if ($user->id === $news->user_id) {
-            return true;
-        } else {
-            return false;
-        }
-
+        return $user->id === $news->user_id;
     }
 
     /**

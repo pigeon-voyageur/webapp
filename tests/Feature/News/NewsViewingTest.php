@@ -74,4 +74,18 @@ class NewsViewingTest extends TestCase
         $response->assertStatus(Response::HTTP_OK);
         $this->assertTrue($user->pigeon->news()->find($news)->message->is_read);
     }
+
+    public function test_can_view_when_logged_and_author_of_the_news(): void
+    {
+        $user = User::factory()->create();
+        $news = News::factory(
+            [
+                'user_id' => $user->id,
+            ]
+        )->create();
+
+        $response = $this->actingAs($user)->get(route('news.show', $news));
+
+        $response->assertStatus(Response::HTTP_OK);
+    }
 }
