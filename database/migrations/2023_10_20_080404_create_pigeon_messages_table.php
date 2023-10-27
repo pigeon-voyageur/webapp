@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignIdFor(News::class)->constrained();
             $table->foreignIdFor(Pigeon::class)->constrained()->onDelete('cascade');
-            $table->timestamp('arrival_date');
+            $table->timestamp('arrival_date')->nullable();
             $table->boolean('is_read')->default(false);
             $table->timestamps();
         });

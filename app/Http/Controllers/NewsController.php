@@ -68,7 +68,7 @@ class NewsController extends Controller
      */
     public function show(Request $request, News $news): Response
     {
-        $request->user()->pigeon->news()->updateExistingPivot($news->id, ['is_read' => true]);
+        $request->user()->pigeon->news()->updateExistingPivot($news->id, ['is_read' => true], false);
 
         return Inertia::render('News/Show', [
             'news' => NewsData::from($news),
