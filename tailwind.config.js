@@ -19,6 +19,7 @@ export default {
                 dark: '#252525',
                 DEFAULT: '#625F5F',
                 light: '#ABABAB',
+                ultraLight: '#E0E0E0'
             },
             'white': '#FFFFFF',
             'pink': '#F5CEE9',

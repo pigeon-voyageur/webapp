@@ -101,6 +101,10 @@
 
 @layer components {
     .input-field {
-        @apply h-11 p-2 mt-2 border border-black text-meta w-full bg-white;
+        @apply h-11 p-2 mt-2 border border-black text-meta w-full bg-white ;
+    }
+
+    .input-field:disabled {
+        @apply text-gray bg-gray-ultraLight ;
     }
 }

@@ -4,7 +4,7 @@ import NewsCategoryData = App.Data.NewsCategoryData;
 import InputError from '@/Components/Form/InputError.vue';
 import InputLabel from '@/Components/Form/InputLabel.vue';
 import TextInput from '@/Components/Form/TextInput.vue';
-import {useForm} from "@inertiajs/vue3";
+import {useForm, usePage} from "@inertiajs/vue3";
 import PrimaryButton from '@/Components/Primitives/PrimaryButton.vue';
 import TextareaInput from "@/Components/Form/TextareaInput.vue";
 import MapContainer from "@/Components/Map/MapContainer.vue";
@@ -23,6 +23,8 @@ const props = defineProps<{
     news?: NewsData;
     newsCategories: Array<NewsCategoryData>;
 }>();
+
+const user = usePage().props.auth.user;
 
 const form = useForm({
     title: props.news?.title ?? '',
@@ -70,6 +72,10 @@ function handleSubmit() {
     form.post(route('news.store'));
 }
 
+const canEdit = computed(()=>{
+    return  !props.news || (props.news && user.id === props.news.user_id)
+})
+
 </script>
 
 <template>
@@ -86,6 +92,7 @@ function handleSubmit() {
                 v-model="form.title"
                 required
                 autofocus
+                :disabled="!canEdit"
             />
 
             <InputError :message="form.errors.title" />
@@ -99,6 +106,7 @@ function handleSubmit() {
                 v-model="form.news_category_id"
                 required
                 :lines="newsCategoriesLines"
+                :disabled="!canEdit"
             />
 
             <InputError :message="form.errors.title" />
