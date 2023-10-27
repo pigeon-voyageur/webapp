@@ -1,0 +1,1 @@
+import{_ as o}from"./_plugin-vue_export-helper-c27b6911.js";import{o as t,g as r,m as s}from"./app-1f9e1dec.js";const c={},n={class:"max-w-mobile relative min-h-screen z-0 flex flex-col container py-10 bg-white"};function a(e,l){return t(),r("div",n,[s(e.$slots,"default")])}const _=o(c,[["render",a]]);export{_ as G};
