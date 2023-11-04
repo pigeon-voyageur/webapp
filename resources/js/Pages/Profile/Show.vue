@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import DeleteUserForm from './Partials/DeleteUserForm.vue';
-import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
-import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';
-import {Head, Link} from '@inertiajs/vue3';
+import {Head, Link, router} from '@inertiajs/vue3';
+import LogoutForm from "@/Pages/Profile/Partials/LogoutForm.vue";
 import H1 from "@/Components/Primitives/H1.vue";
 import H2 from "@/Components/Primitives/H2.vue";
+import SecondaryButton from "@/Components/Primitives/SecondaryButton.vue";
 
 defineProps<{
     mustVerifyEmail?: boolean;
@@ -15,26 +14,34 @@ defineProps<{
 
 <template>
     <Head>
-        <title>Modifier mon profil</title>
+        <title>Mon profil</title>
     </Head>
 
     <AuthenticatedLayout>
         <div class="container pt-8">
-            <H1>Modifier mon profil</H1>
+            <H1>Mon profil</H1>
 
             <div class="py-12 space-y-24">
-                <UpdateProfileInformationForm
-                    :must-verify-email="mustVerifyEmail"
-                    :status="status"
-                />
+                <section class="space-y-2">
+                    <header>
+                        <H2>Mon village</H2>
+                    </header>
 
-                <UpdatePasswordForm />
+                    <SecondaryButton type="button" @click="router.visit(route('town.show'))">
+                        Voir mon village
+                    </SecondaryButton>
+                </section>
 
                 <section class="space-y-2">
                     <header>
-                        <H2>Supprimer le compte</H2>
+                        <H2>Gestion du profil</H2>
                     </header>
-                    <DeleteUserForm />
+
+                    <SecondaryButton type="button" @click="router.visit(route('profile.edit'))">
+                        Modifier mon profil
+                    </SecondaryButton>
+
+                    <LogoutForm />
                 </section>
 
                 <section class="space-y-2">

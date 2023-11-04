@@ -21,7 +21,7 @@ import {HomeIcon, PencilIcon, UserIcon} from '@heroicons/vue/24/outline';</scrip
                 <span class="sr-only">Publier une information</span>
                 <PencilIcon class="text-black h-full mx-auto" />
             </Link>
-            <Link :href="route('profile.edit')" class="aspect-square p-1 h-full">
+            <Link :href="route('profile.show')" class="aspect-square p-1 h-full">
                 <span class="sr-only">Profil</span>
                 <UserIcon class="text-black h-full mx-auto" />
             </Link>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\Pigeon\PigeonGetNewsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TownController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -44,8 +45,9 @@ Route::get('/informations/editorial-charter', static function () {
 })->name('informations.editorial-charter');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile/edit', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('news', NewsController::class);
 
