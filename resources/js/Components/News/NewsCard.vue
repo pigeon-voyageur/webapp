@@ -8,7 +8,7 @@ const props = defineProps<{
 </script>
 
 <template>
-    <article class="p-6 text-gray-900">
+    <article>
         <Link :href="route('news.show', news)">
             <h2 class="text-lg font-medium text-gray-900 hover:underline">{{ news.title }}</h2>
         </Link>

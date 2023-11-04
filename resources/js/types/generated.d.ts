@@ -44,6 +44,10 @@ arrival_date: string;
 is_read: boolean;
 is_arrived: boolean;
 };
+export type TownData = {
+id: number;
+users: Array<App.Data.UserData>;
+};
 export type UserData = {
 id: number;
 name: string;
