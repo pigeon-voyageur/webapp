@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import {usePage} from "@inertiajs/vue3";
+import {Link, usePage} from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 
-const user = usePage().props.auth.user;
+const user = usePage().props.auth?.user;
 </script>
 
 <template>
@@ -13,7 +13,10 @@ const user = usePage().props.auth.user;
         </div>
     </AuthenticatedLayout>
     <GuestLayout v-else>
-        <div class="space-y-16 [&_p]:mb-4">
+        <Link :href="route('news.index')">
+            Aller à l'accueil
+        </Link>
+        <div class="mt-4 space-y-16 [&_p]:mb-4">
             <slot />
         </div>
     </GuestLayout>

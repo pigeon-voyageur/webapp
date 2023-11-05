@@ -13,6 +13,7 @@ class TownData extends Data
 {
     public function __construct(
         public int $id,
+        public string $join_code,
         #[DataCollectionOf(UserData::class)]
         public DataCollection $users,
     ) {
@@ -22,6 +23,7 @@ class TownData extends Data
     {
         return new self(
             $town->id,
+            $town->join_code,
             UserData::collection($town->users),
         );
     }

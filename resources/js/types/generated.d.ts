@@ -46,6 +46,7 @@ is_arrived: boolean;
 };
 export type TownData = {
 id: number;
+join_code: string;
 users: Array<App.Data.UserData>;
 };
 export type UserData = {

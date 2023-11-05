@@ -12,6 +12,7 @@ return new class extends Migration {
     {
         Schema::create('towns', function (Blueprint $table) {
             $table->id();
+            $table->string('join_code')->nullable();
         });
     }
 

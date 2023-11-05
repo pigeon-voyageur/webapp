@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\Town;
 use App\Models\User;
+use Illuminate\Auth\Access\Response;
 
 class TownPolicy
 {
@@ -12,9 +13,17 @@ class TownPolicy
         return !$user->town;
     }
 
-    public function join(User $user, Town $town): bool
+    public function join(User $user, Town $town, string $join_code): bool|Response
     {
-        return !$user->town && $town->users->count() < config('town.max_citizen');
+        if ($join_code !== $town->join_code) {
+            return Response::deny("Code d'invitation incorrect");
+        }
+
+        if ($user->town) {
+            return $user->town->id === $town->id ? true : Response::deny("Vous êtes déjà dans un village.");
+        }
+
+        return $town->users->count() < config('town.max_citizen') ? true : Response::deny('Le village est complet.');
     }
 
     public function leave(User $user): bool

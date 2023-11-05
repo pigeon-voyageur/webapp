@@ -15,7 +15,7 @@ class TownJoiningTest extends TestCase
     {
         $town = Town::factory()->create();
 
-        $response = $this->get(route('town.join', $town));
+        $response = $this->get(route('town.join', ['town' => $town, 'join_code' => $town->join_code]));
 
         $response->assertRedirect(route('login'));
         $this->assertDatabaseCount(Town::class, 1);
@@ -28,7 +28,7 @@ class TownJoiningTest extends TestCase
             ->create();
         $anotherTown = Town::factory()->create();
 
-        $response = $this->actingAs($user)->get(route('town.join', $anotherTown));
+        $response = $this->actingAs($user)->get(route('town.join', ['town' => $anotherTown, 'join_code' => $anotherTown->join_code]));
 
         $this->assertDatabaseCount(Town::class, 2);
         $this->assertNotNull($user->town);
@@ -42,7 +42,7 @@ class TownJoiningTest extends TestCase
             ->create();
         $user = User::factory()->create();
 
-        $response = $this->actingAs($user)->get(route('town.join', $fullTown));
+        $response = $this->actingAs($user)->get(route('town.join', ['town' => $fullTown, 'join_code' => $fullTown->join_code]));
 
         $this->assertDatabaseCount(Town::class, 1);
         $this->assertNull($user->town);
@@ -54,7 +54,22 @@ class TownJoiningTest extends TestCase
         $town = Town::factory()->create();
         $user = User::factory()->create();
 
-        $response = $this->actingAs($user)->get(route('town.join', $town));
+        $response = $this->actingAs($user)->get(route('town.join', ['town' => $town, 'join_code' => $town->join_code]));
+        $user->refresh();
+
+        $this->assertDatabaseCount(Town::class, 1);
+        $this->assertNotNull($user->town);
+        $response->assertRedirect(route('town.show'));
+    }
+
+    public function test_can_join_actual_town(): void
+    {
+        $town = Town::factory()->create();
+        $user = User::factory()
+            ->for($town)
+            ->create();
+
+        $response = $this->actingAs($user)->get(route('town.join', ['town' => $town, 'join_code' => $town->join_code]));
         $user->refresh();
 
         $this->assertDatabaseCount(Town::class, 1);

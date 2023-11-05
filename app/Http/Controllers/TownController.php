@@ -42,9 +42,9 @@ class TownController extends Controller
     /**
      * @throws AuthorizationException
      */
-    public function join(Request $request, Town $town): RedirectResponse
+    public function join(Request $request, Town $town, string $join_code): RedirectResponse
     {
-        $this->authorize('join', $town);
+        $this->authorize('join', [$town, $join_code]);
 
         $request->user()->update([
             'town_id' => $town->id,
@@ -61,6 +61,7 @@ class TownController extends Controller
 
         return Inertia::render('Town/Show', [
             'town' => TownData::from($town),
+            'maxCitizen' => config('town.max_citizen'),
         ]);
     }
 

@@ -57,7 +57,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/town/create', [TownController::class, 'create'])->name('town.create');
     Route::post('/town', [TownController::class, 'store'])->name('town.store');
     Route::get('/town', [TownController::class, 'show'])->name('town.show');
-    Route::get('/town/{town}/join', [TownController::class, 'join'])->name('town.join');
+    Route::get('/town/join/{town}/{join_code}', [TownController::class, 'join'])->name('town.join');
 });
 
 require __DIR__ . '/auth.php';
