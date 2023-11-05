@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import {Link} from '@inertiajs/vue3';
-import {HomeIcon, PencilIcon, UserIcon} from '@heroicons/vue/24/outline';</script>
+import TheNavigation from "@/Components/TheNavigation.vue";</script>
 
 <template>
     <div class="max-w-mobile mx-auto relative min-h-screen z-0 flex flex-col bg-white">
@@ -12,19 +11,6 @@ import {HomeIcon, PencilIcon, UserIcon} from '@heroicons/vue/24/outline';</scrip
             <slot />
         </main>
 
-        <nav class="max-w-mobile fixed bottom-0 w-full h-20 bg-white border-t flex p-4 items-center justify-evenly">
-            <Link :href="route('news.index')" class="aspect-square p-1 h-full">
-                <span class="sr-only">Accueil</span>
-                <HomeIcon class="text-black h-full mx-auto" />
-            </Link>
-            <Link :href="route('news.create')" class="aspect-square p-1 h-full">
-                <span class="sr-only">Publier une information</span>
-                <PencilIcon class="text-black h-full mx-auto" />
-            </Link>
-            <Link :href="route('profile.show')" class="aspect-square p-1 h-full">
-                <span class="sr-only">Profil</span>
-                <UserIcon class="text-black h-full mx-auto" />
-            </Link>
-        </nav>
+        <TheNavigation class="fixed bottom-0" />
     </div>
 </template>

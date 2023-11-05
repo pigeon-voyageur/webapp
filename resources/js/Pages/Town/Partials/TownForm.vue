@@ -13,11 +13,9 @@ function handleSubmit() {
 </script>
 
 <template>
-    <form @submit.prevent="handleSubmit" class="relative z-0 space-y-6 bg-yellow -m-3 p-3 rounded-xl">
-        <img src="/assets/images/bg.png" alt="" height="719" width="1000" class="absolute h-full w-full top-0 left-0 -z-10 rounded-xl" />
-
+    <form @submit.prevent="handleSubmit" class="relative z-0 space-y-6">
         <div class="flex items-center gap-4">
-            <PrimaryButton :disabled="form.processing">Créer un village</PrimaryButton>
+            <PrimaryButton :disabled="form.processing">Créer mon village</PrimaryButton>
 
             <Transition
                 enter-active-class="transition ease-in-out"
@@ -28,5 +26,7 @@ function handleSubmit() {
                 <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">Village créé.</p>
             </Transition>
         </div>
+
+        <p>ou rejoignez-un village en demandant le lien d'invitation à un de ses membres.</p>
     </form>
 </template>

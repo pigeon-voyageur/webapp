@@ -24,16 +24,6 @@ defineProps<{
             <div class="py-12 space-y-24">
                 <section class="space-y-2">
                     <header>
-                        <H2>Mon village</H2>
-                    </header>
-
-                    <SecondaryButton type="button" @click="router.visit(route('town.show'))">
-                        Voir mon village
-                    </SecondaryButton>
-                </section>
-
-                <section class="space-y-2">
-                    <header>
                         <H2>Gestion du profil</H2>
                     </header>
 

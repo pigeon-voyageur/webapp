@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import {router} from '@inertiajs/vue3';
-import TertiaryButton from "@/Components/Primitives/TertiaryButton.vue";
 import Modal from '@/Components/Modal.vue';
 import QuaternaryButton from "@/Components/Primitives/QuaternaryButton.vue";
 import {ref} from "vue";
+import DangerButton from "@/Components/Primitives/DangerButton.vue";
 
 const confirmingLeave = ref<boolean>(false);
 
@@ -21,23 +21,25 @@ const closeModal = () => {
 </script>
 <template>
     <section>
-        <TertiaryButton @click="confirmLeave">Quitter le village</TertiaryButton>
+        <DangerButton @click="confirmLeave">Quitter le village</DangerButton>
 
         <Modal :show="confirmingLeave" @close="closeModal">
             <template #header>
-                Quitter vos amis ?
+                Quitter le village ?
             </template>
+
+            <p>Vous pourrez toujours revenir avec le lien d'invitation, s'il reste de la place.</p>
 
             <div class="mt-6 space-y-2">
                 <QuaternaryButton
                     class="text-red"
                     type="button" @click="leave"
                 >
-                    Oui, laissez-moi seul
+                    Quitter le village
                 </QuaternaryButton>
 
                 <QuaternaryButton type="button" @click="closeModal">
-                    Non, annuler
+                    Annuler
                 </QuaternaryButton>
             </div>
         </Modal>
