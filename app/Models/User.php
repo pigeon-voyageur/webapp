@@ -5,7 +5,6 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -61,9 +60,9 @@ class User extends Authenticatable
         return $this->hasOne(Pigeon::class);
     }
 
-    public function news(): HasMany
+    public function news(): News
     {
-        return $this->hasMany(News::class);
+        return $this->pigeon->news();
     }
 
     public function town(): BelongsTo

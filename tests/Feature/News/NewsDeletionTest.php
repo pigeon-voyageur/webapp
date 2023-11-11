@@ -5,7 +5,6 @@ namespace Tests\Feature\News;
 use App\Models\News;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class NewsDeletionTest extends TestCase
@@ -40,23 +39,23 @@ class NewsDeletionTest extends TestCase
 
         $response = $this->actingAs($user)->delete(route('news.destroy', $news));
 
-        $response->assertStatus(Response::HTTP_FOUND);
+        $response->assertFound();
         $this->assertDatabaseCount(News::class, 0);
     }
 
     public function test_cannot_delete_if_not_author_of_the_news(): void
     {
         $user = User::factory()->create();
-        $user2 = User::factory()->create();
+        $author = User::factory()->create();
         $news = News::factory(
             [
-                'user_id' => $user2->id,
+                'user_id' => $author->id,
             ]
         )->create();
 
         $response = $this->actingAs($user)->delete(route('news.destroy', $news));
 
-        $response->assertStatus(Response::HTTP_FORBIDDEN);
+        $response->assertForbidden();
         $this->assertDatabaseCount(News::class, 1);
     }
 }

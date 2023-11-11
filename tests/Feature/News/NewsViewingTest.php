@@ -3,9 +3,9 @@
 namespace Tests\Feature\News;
 
 use App\Models\News;
+use App\Models\Town;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class NewsViewingTest extends TestCase
@@ -25,7 +25,7 @@ class NewsViewingTest extends TestCase
 
         $response = $this->actingAs($user)->get(route('news.index'));
 
-        $response->assertStatus(Response::HTTP_OK);
+        $response->assertOk();
     }
 
     public function test_cannot_view_when_guest(): void
@@ -42,7 +42,7 @@ class NewsViewingTest extends TestCase
         $response->assertRedirect(route('login'));
     }
 
-    public function test_user_cannot_view_the_news_if_the_pigeon_didnt_arrived(): void
+    public function test_user_cannot_view_the_news_if_the_pigeon_didnt_arrived_with(): void
     {
         $user = User::factory()->create();
         $user2 = User::factory()->create();
@@ -54,10 +54,10 @@ class NewsViewingTest extends TestCase
 
         $response = $this->actingAs($user)->get(route('news.show', $news));
 
-        $response->assertStatus(Response::HTTP_FORBIDDEN);
+        $response->assertForbidden();
     }
 
-    public function test_can_view_when_logged_and_pigeon_got_the_news(): void
+    public function test_can_view_pigeon_bring_the_news(): void
     {
         $user = User::factory()->create();
         $user2 = User::factory()->create();
@@ -71,11 +71,11 @@ class NewsViewingTest extends TestCase
         $response = $this->actingAs($user)->get(route('news.show', $news));
         $user->refresh();
 
-        $response->assertStatus(Response::HTTP_OK);
+        $response->assertOk();
         $this->assertTrue($user->pigeon->news()->find($news)->message->is_read);
     }
 
-    public function test_can_view_when_logged_and_author_of_the_news(): void
+    public function test_can_view_when_author_of_the_news(): void
     {
         $user = User::factory()->create();
         $news = News::factory(
@@ -86,6 +86,22 @@ class NewsViewingTest extends TestCase
 
         $response = $this->actingAs($user)->get(route('news.show', $news));
 
-        $response->assertStatus(Response::HTTP_OK);
+        $response->assertOk();
+    }
+
+    public function test_can_view_when_author_of_the_news_is_in_same_town(): void
+    {
+        $town = Town::factory()->create();
+        $author = User::factory()->for($town)->create();
+        $news = News::factory(
+            [
+                'user_id' => $author->id,
+            ]
+        )->create();
+        $user = User::factory()->for($town)->create();
+
+        $response = $this->actingAs($user)->get(route('news.show', $news));
+
+        $response->assertOk();
     }
 }

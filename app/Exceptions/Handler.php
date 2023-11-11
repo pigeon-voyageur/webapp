@@ -3,8 +3,6 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Inertia\Inertia;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -24,10 +22,5 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
-        $this->renderable(function (HttpException $e) {
-            return Inertia::render('Error/Error', [
-                'message' => $e->getMessage(),
-            ]);
-        });
     }
 }
